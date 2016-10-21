@@ -1,0 +1,345 @@
+\chapter{Асимптотические свойства критериев}
+
+В этой главе пусть $X^{(n)}=(X_1, \dots , X_n)^T$ -- вектор с распределением $\mathcal{P}^n=\{P_\vartheta^n \mid \vartheta \in \Theta\}$. Также, пусть функция
+\[ \varphi_n :
+\left \{
+\begin{array}{ccl}
+\mathcal{X}_n & \rightarrow & [0, 1] \\
+x^{(n)} & \mapsto & \varphi_n(x^{(n)})  
+\end{array}
+\right.
+\]
+будет критерием для:
+\[H: \vartheta \in \Theta_H \quad \text{против} \quad K: \vartheta \in \Theta_K. \]
+ 
+\begin{defn} \
+	\begin{enumerate}
+		\item Последовательность $(\varphi_n)$ имеет \textbf{\textit{асимптотический уровень значимости $\alpha$}}, если 
+		\[ \lim_{n \rightarrow \infty} \sup_{\vartheta \in \Theta_H} \beta_{\varphi_n}(\vartheta) \leq \alpha. \]
+		\item Последовательность $(\varphi_n)$ называется \textbf{\textit{состоятельной}}, если
+		\[ \lim_{n \rightarrow \infty} \beta_{\varphi_n}(\vartheta) =1 \quad \forall \vartheta \in \Theta_K. \]
+	\end{enumerate}
+\end{defn}
+
+\begin{rmrk}
+	Чтобы критерий имел смысл, оба свойства должны соблюдаться: уровень значимости должен быть по меньшей мере асимптотическим и с возрастанием объема выборки вероятность ошибки второго рода должна уменьшаться.
+\end{rmrk}
+
+\begin{exmp}
+	Пусть $X_1, \dots , X_m$ i.i.d. $\sim \mathcal{N}(\mu_1, \sigma^2)$ и $Y_1, \dots , Y_n$ i.i.d. $\sim \mathcal{N}(\mu_2, \tau^2)$ -- две независимые выборки. Мы хотим проверить гипотезы:
+	\[H: \mu_1 \leq \mu_2 \quad \text{против} \quad K: \mu_1 > \mu_2. \]
+	Мы принимаем $K$, если $\overline{Y}_n$ ``намного меньше'', чем $\overline{X}_m$.
+	\begin{enumerate}
+		\item Допустим, $\sigma^2=\tau^2$, но дисперсия неизвестна. Из Леммы \ref{Distribution of estimators of Normal distribution} мы знаем, что:
+		\[ \overline{X}_m - \overline{Y}_n=\mathcal{N}\bigg(\mu_1-\mu_2, \sigma^2\bigg( \frac{1}{m}+\frac{1}{n} \bigg)\bigg) \]
+		и
+		\[ \hat{\sigma}_{m,n}^2=\frac{1}{m+n-2}\Big( \sum_{i=1}^{m}(X_i-\overline{X}_m)^2+\sum_{i=1}^{n}(Y_i-\overline{Y}_n)^2 \Big) \sim \frac{\sigma^2}{m+n-2} \chi_{m+n-2}^2. \]	
+		Если $\mu_1=\mu_2$, то 
+		\[ T_{m,n}=\sqrt{\frac{mn}{m+n}}\frac{\overline{X}_m-\overline{Y}_n}{\hat{\sigma}_{m,n}^2} \sim t_{m+n-2}, \]	
+		таким образом критерий уровня значимости $\alpha$:
+		\[ \varphi_{m,n}(x)=1_{\{T_{m,n} > t_{m+n-2, 1-\alpha}\}}. \]
+		Такой критерий называется \textbf{\textit{двухвыборочным t-критерием}}.
+		\item Допустим, $\sigma^2 \neq \tau^2$. Тогда:
+		\[ \overline{X}_m - \overline{Y}_n=\mathcal{N}\bigg(\mu_1-\mu_2, \frac{\sigma^2}{m}+\frac{\tau^2}{n} \bigg). \]
+		Оценка дисперсии:
+		\[ \hat{s}_{m,n}^2=\frac{1}{m}\frac{1}{m-1}\sum_{i=1}^{m}(X_i-\overline{X}_m)^2+\frac{1}{n}\frac{1}{n-1}\sum_{i=1}^{n}(Y_i-\overline{Y}_n)^2. \]
+		Распределение случайной величины
+		\[ T_{m,n}^*=\frac{\overline{X}_m-\overline{Y}_n}{\hat{s}_{m,n}} \]
+		неизвестно (проблема Беренса-Фишера). Из ЦПТ мы знаем, что
+		\[ \frac{\overline{X}_m-\overline{Y}_n - (\mu_1-\mu_2)}{\hat{s}_{m,n}} \convdistr \mathcal{N}(0,1), \]
+		если $m \rightarrow \infty$, $n \rightarrow \infty$ и $\frac{m}{n}\rightarrow \lambda \in (0, \infty)$. Пусть
+		\[ \varphi_{m,n}^*(x)=1_{\{T_{m,n}^* > u_{1-\alpha}\}}, \]
+		тогда:
+		\[ \begin{aligned}
+		 \beta_{\varphi_{m,n}^*}(\mu_1, \mu_2) & =P_{\mu_1, \mu_2}(T_{m,n}^* > u_{1-\alpha})=P_{\mu_1, \mu_2}\Big(\frac{\overline{X}_m-\overline{Y}_n - (\mu_1-\mu_2)}{\hat{s}_{m,n}} >\frac{- (\mu_1-\mu_2)}{\hat{s}_{m,n}}+ u_{1-\alpha}\Big) \\
+		  & \xrightarrow[m \rightarrow \infty,\ n \rightarrow \infty,\ \frac{m}{n}\rightarrow \lambda]{}
+		 \left \{
+		 \begin{array}{cl}
+		 0, & \mu_1 < \mu_2, \\
+		  \alpha, & \mu_1=\mu_2, \\
+		  1, & \mu_1>\mu_2.
+		 \end{array}
+		 \right.
+		 \end{aligned} \]
+		 Мы видим, что $\varphi_{m,n}^*$ состоятельная и имеет асимптотический уровень значимости $\alpha$.
+	\end{enumerate}
+\end{exmp}
+
+\begin{rmrk}
+	Общий принцип построения критериев для
+	\[ H:\vartheta \in \Theta_H \quad \text{против} \quad K:\vartheta \in \Theta_K \]
+	-- это \textbf{\textit{метод отношения правдоподобия}}. Допустим, $f_n(x^{(n)},\vartheta)$ -- плотность $P_\vartheta^n$ по некоторой мере $\mu$. Тогда \textbf{\textit{отношение правдоподобия}}:
+	\[ \lambda(x^{(n)})=\frac{\sup_{\vartheta \in \Theta_H}f_n(x^{(n)},\vartheta)}{\sup_{\vartheta \in \Theta}f_n(x^{(n)},\vartheta)} \]
+	и \textbf{\textit{критерий отношения правдоподобия}}:
+	\[ \varphi_n(x^{(n)})=1_{\{\lambda(x^{(n)})<c \}}. \]
+	Как правило, $c$ выбирается таким образом, чтобы:
+	\[ \sup_{\vartheta \in \Theta_H} P_\vartheta(\lambda(X^{(n)})<c) \leq \alpha. \]
+	Распределение $\lambda(X^{(n)})$, тем не менее, может быть оценено лишь асимптотически.
+\end{rmrk}
+
+\begin{cond} \label{Conditions LR} \
+	\begin{enumerate}
+		\item Допустим $\Theta \subset \MR^d$ и существуют $\Delta \subset \MR^c$ и $h:\Delta \rightarrow \Theta$, такие что
+		\begin{enumerate}
+			\item $\Theta_H = h(\Delta),$
+			\item $h \in C^2(\Delta, \Theta),$
+			\item Матрица Якоби $h$ -- матрица полного ранга.
+		\end{enumerate}
+		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim P_\vartheta$ и в обоих семействах $\mathcal{P}_\vartheta = \{ P_\vartheta\ |\ \vartheta \in \Theta \}$ и $\mathcal{P}_h = \{P_{h(\eta)}\ |\ \eta \in \Delta\}$ условия Теоремы \ref{Asymptotic efficiency ML estimators} соблюдаются.
+    \end{enumerate}
+\end{cond}
+
+\begin{exmp} \label{exmp7.6}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(\mu_1, \sigma^2)$ и $Y_1, \dots, Y_n$ i.i.d. $\sim \mathcal{N}(\mu_2, \sigma^2)$ -- независимые выборки. Допустим, мы хотим проверить эквивалентность математических ожиданий:
+	\[ H: \mu_1 = \mu_2 \quad \text{против} \quad K:\mu_1 \neq \mu_2. \]
+	Тогда $\Theta \in \MR^2 \times \MR^+$, $\Delta = \MR \times \MR^+$ и
+	\[ h :
+	\left \{
+	\begin{array}{ccl}
+	\Delta & \rightarrow & \Theta \\
+	(\mu, \sigma^2)^T & \mapsto & (\mu, \mu, \sigma^2)^T.
+	\end{array}
+	\right.
+	\]
+	Матрица Якоби $h$:
+	\[D = \begin{pmatrix}
+	1 & 0 \\
+	1 & 0 \\
+	0 & 1
+	\end{pmatrix} \]
+	-- матрица полного ранга.
+\end{exmp}
+
+\begin{thm} \label{thm7.7}
+	Если условия \ref{Conditions LR} соблюдены, то
+	\[ T_n=-2\log \lambda(X^{(n)})=2(\log f_n(X^{(n)}, \hat{\theta}_n)-\log f_n(X^{(n)}, h(\hat{\eta}_n))) \convdistr \chi_{d-c}^2, \]
+	если $\vartheta \in \Theta_H$.
+\end{thm}
+\begin{proof}
+	Как и прежде пусть
+	\[ \ell(x, \vartheta) = \log f(x, \vartheta), \]
+	где $f$ -- функция плотности $X_1$. Сначала рассмотрим:
+	\[
+	\begin{aligned}
+	    T_n^{(1)} & = 2(\log f_n(X^{(n)}, \hat{\theta}_n)-\log f_n(X^{(n)}, \vartheta)) \\
+	    & = 2\sum_{i=1}^{n}\Big(\ell(X_i, \hat{\theta}_n) - \ell(X_i, \vartheta)\Big) \\
+	    & = 2(\hat{\theta}_n - \vartheta)^T \sum_{i=1}^{n} \dot{\ell}(X_i, \vartheta) +(\hat{\theta}_n - \vartheta)^T \sum_{i=1}^{n} \ddot{\ell}(X_i, \widetilde{\vartheta}_n)(\hat{\theta}_n - \vartheta)   \\
+	    & = 2 (\hat{\theta}_n - \vartheta)^T \Big( \sum_{i=1}^{n} \dot{\ell}(X_i, \vartheta) + \sum_{i=1}^{n} \ddot{\ell}(X_i, \widetilde{\vartheta}_n)(\hat{\theta}_n - \vartheta) \Big) - (\hat{\theta}_n - \vartheta)^T\sum_{i=1}^{n}\ddot{\ell}(X_i, \widetilde{\vartheta}_n)(\hat{\theta}_n - \vartheta)
+	\end{aligned}
+	 \]
+	 для некоторой $\widetilde{\theta}_n$ между $\hat{\theta}_n$ и $\vartheta$. Используя обозначения из Теоремы \ref{Asymptotic efficiency ML estimators}, запишем первое слагаемое в виде
+	 \[ 
+	 \begin{aligned}
+	 2n(\hat{\theta}_n - \vartheta)^T& \underbrace{(\dot{L}_n(\vartheta) - \ddot{L}_n(\vartheta)(\hat{\theta}_n - \vartheta))} \\
+	 & \qquad \qquad\ = 0
+	 \end{aligned}
+	 \]
+	 Также по Теореме \ref{Asymptotic efficiency ML estimators}:
+	 \[
+	 T_n^{(1)} = -\sqrt{n}(\hat{\theta}_n - \vartheta)^T \ddot{L}_n(\widetilde{\vartheta}_n) \sqrt{n}(\hat{\theta}_n - \vartheta),
+	 \]
+	 где 
+	 \[
+	 \begin{aligned}
+	 \sqrt{n}(\hat{\theta}_n - \vartheta)^T & \convdistr \mathcal{N}(0, I^{-1}(f(\cdot, \vartheta))), \\
+	 \ddot{L}_n(\widetilde{\vartheta}_n)& \convprob -I(f(\cdot, \vartheta)), \\
+	 \sqrt{n}(\hat{\theta}_n - \vartheta) &\convdistr \mathcal{N}(0, I^{-1}(f(\cdot, \vartheta))).
+	 \end{aligned}
+	  \]
+	  Если $X \sim \mathcal{N}_d(0, \Sigma)$ и $\Sigma > 0$, то
+	  \[ X^T \Sigma X ~ \sim \mathcal{X}_d^2. \]
+	  Следовательно, $T_n^{(1)} \convdistr A = \mathcal{X}_d^2$. Таким же образом,
+	  \[ T_n^{(2)} = 2 (\log f_n(X^{(n)}, h(\hat{\eta}_n) ) - \log f_n(X^{(n)},h(\eta))) \convdistr B = \mathcal{X}_c^2.  \]
+	  Если выполняется $H$, то $\vartheta = h(\eta)$ и
+	  \[ T_n = T_n^{(1)} - T_n^{(2)} \convdistr A-B = \mathcal{X}_{d-c}^2, \]
+	  так как $A$ и $B$ независимы.
+\end{proof}
+
+\begin{rmrk} \
+	\begin{enumerate}
+		\item Теорема \ref{thm7.7} показывает, что
+		\[ \varphi_n (X^{(n)}) =
+		\left \{
+		\begin{array}{cl}
+		1, & -2\log\lambda(X^{(n)}) > \mathcal{X}_{d-c, 1-\alpha}^2, \\
+		0, & \text{иначе}
+		\end{array}
+		\right.
+		\]
+		является критерием с асимптотическим уровнем $\alpha$ для
+		\[H:\vartheta \in \Theta_H \quad \text{против} \quad K:\vartheta \in \Theta_K. \]
+		\item Последовательность $(\vartheta_n)$ состоятельная, так как
+		\[ 
+		\begin{aligned}
+		-\frac{2}{n} \log (\lambda(X^{(n)})) & = \frac{2}{n} \sum_{i=1}^{n} \Big( \ell(X_i, \hat{\theta}_n) - \ell(X_i, h(\hat{\eta}_n)) \Big) \\
+		& \xrightarrow{Q_\vartheta} 2 \ME_\vartheta[\ell(X,\vartheta) - \ell(X, h(\eta))] \\
+		& = 2 KL(\vartheta | h(\eta)) > 0,
+		\end{aligned}
+		\]
+		если $\vartheta \neq h(\eta)$ (если $\vartheta \in \Theta_K$). Следовательно,
+		\[ -2\log(\lambda(X^{(n)}))\xrightarrow{Q_\vartheta} \infty.  \]
+	\end{enumerate}
+\end{rmrk}
+
+\begin{exmp}[\textbf{Критерий Бартлетта}]
+	Пусть $X_{ij} \sim \mathcal{N}(\mu_i, \sigma_i^2)$, $i = 1, \dots, r$ и $j = 1, \dots, n_i$, где $n_i \rightarrow \infty$ с одинаковой скоростью. Мы проверяем равенство дисперсий:
+	\[ H: \sigma_1^2 = \dots = \sigma_r^2 \quad \text{против} \quad K: \sigma_i^2 \neq \sigma_j^2 \text{ для некоторых } i \neq j. \]
+	Здесь $\Theta = \MR^r \times (\MR^+)^r$, $\Delta = \MR^r \times \MR^+$ и 
+	\[h((x_1, \dots, x_r, y)^T) = (x_1, \dots, x_r, y, \dots, y)^T.\]
+	Оценка максимального правдоподобия:
+	\[ \hat{\theta}_n = (\mu_1, \dots, \mu_r, \hat{s}_1^2, \dots, \hat{s}_r^2),  \]
+	где $\mu_i = \frac{1}{n_i} \sum_{j=1}^{n_i}X_{ij} =: \overline{X}_{i \cdot} $ и $\hat{s}_i^2 = \frac{1}{n_i}\sum_{j=1}^{n_i}(X_{ij} -\overline{X}_{i \cdot})^2. $ 
+	В этом случае
+	\[ f_n(X^{(n)}, \hat{\vartheta}_n) = \prod_{i=1}^{r} (2 \pi e \hat{s}_i^2)^{-\frac{n_i}{2}}. \]
+	Если нулевая гипотеза верна, то оценка МП максимизирует
+	\[ f_n(X^{(n)}, \hat{\eta}_n) = \prod_{i=1}^{r} (2 \pi \sigma^2)^{-\frac{n_i}{2}} \exp \Big\{ -\frac{1}{2\sigma^2} \sum_{j=1}^{n_i} (X_{ij} - \overline{X}_{i \cdot})^2 \Big \}. \]
+	Задав $n = \sum_{i=1}^{r}n_i$, получаем
+	\[ \hat{\sigma}^2 = \frac{1}{n}\sum_{i=1}^{r} \sum_{j=1}^{n_i} (X_{ij}-X_{i \cdot})^2 = \sum_{i=1}^r \frac{n_i}{n}\hat{s}_i^2. \]
+	Тогда
+	\[f_n(X^{(n)}, \hat{\eta}_n) = \prod_{i=1}^{r}(2\pi e\hat{\sigma}^2)^{-\frac{n_i}{2}} = (2\pi e \hat{\sigma}^2)^{-\frac{n}{2}} \]
+	и тестовая статистика:
+	\[T_n = -2\log \lambda(X^{(n)}) = n \log \hat{\sigma}^2 - \sum_{i=1}^{r} n_i \log \hat{s}_i^2.  \]
+	Критерий Бартлетта:
+	\[ \varphi_n(X^{(n)}) =
+	\left \{
+	\begin{array}{cl}
+	1, & T_n > \mathcal{X}_{r-1, 1-\alpha}^2, \\
+	0, & \text{иначе}. 
+	\end{array}
+	\right.
+	\]
+\end{exmp}
+
+\begin{exmp}[\textbf{Критерий независимости}]
+	Даны две статистические характеристики $A$ и $B$ (пол, возраст, образование, доход), где $A$ состоит из $r$ факторов и $B$ -- из $s$ факторов. Всего наблюдается $n$ лиц.
+	\begin{center}
+		\qquad\qquad  Фактор $B$ \\
+		Фактор $A$
+		\begin{tabular}{|c | c | c | c| c |}
+			\hline
+			& 1 & $\cdots$ & s & Сумма \\
+			\hline
+			1 & $X_{11}$ & $\cdots$ & $X_{1s}$ & $X_{1\cdot} = \sum_{j=1}^{s}X_{1j} $ \\
+			\hline
+			$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
+			\hline
+			$r$ & $X_{r1}$ & $\cdots$ & $X_{rs}$ & $X_{r\cdot}$ \\
+			\hline
+			Сумма & $X_{\cdot 1}$ & $\cdots$ & $X_{\cdot s}$ & $n$ \\
+			\hline
+		\end{tabular}
+    \end{center}
+    Модель: мультиномиальное распределение
+    \[(X_1, \dots, X_n)^T \sim \mathcal{M}(n,p_{11}, \dots, p_{rs}), \]
+    где $\sum_{ij} p_{ij} = 1$. Плотность распределения:
+    \[ f_n(x^{(n)}, p) = P_p(X_{ij}=x_{ij}) = \frac{n!}{\prod_{i,j=1}^{r,s} x_{ij}!} \prod_{i,j=1}^{r,s} (p_{ij})^{x_{ij}}, \]
+    где $x_{ij} = \{0, \cdots, n\}$ и $\sum_{i,j=1}^{r,s} x_{ij} = n$. Оценка максимального правдоподобия:
+    \[\hat{p}_{ij} = \frac{X_{ij}}{n}\]
+    (по аналогии с биномиальным распределением) и
+    \[ f_n(X^{(n)}, \hat{p}) = \frac{n!}{\prod_{i,j=1}^{r,s} X_{ij}!} \prod_{i,j=1}^{r,s} \Big(\frac{X_{ij}}{n}\Big)^{X_{ij}}.  \]
+    Допустим, мы хотим проверить независимость между характеристиками:
+    \[H:p_{ij} = p_i q_j \ \forall i,j \quad \text{против} \quad K: p_{ij} \neq p_i q_j \text{ для некоторых } i \neq j, \]
+    где $p_i = p_{i \cdot} = \sum_{j=1}^{s}p_{ij}$ и $q_j = p_{\cdot, j} = \sum_{i=1}^{r}p_{ij}$. Здесь $d = rs-1$, $c = r + s - 2$ и $d-c = (r-1)(s-1)$. Если нулевая гипотеза выполняется, то
+    \[ f_n(X^{(n)}, p, q) = \frac{n!}{\prod_{i,j=1}^{r,s} X_{ij}!} \prod_{i,j=1}^{r,s} (p_i q _j)^{X_{ij}} = \frac{n!}{\prod_{i,j=1}^{r,s} X_{ij}!} \prod_{i}^{r} p_i^{X_{i \cdot}} \prod_{j=1}^{s} q_j ^ {X_{\cdot j}}.   \]
+    МП оценки:
+    \[ \hat{p}_i = \frac{X_{i \cdot}}{n} \quad \text{и} \quad \hat{q}_j = \frac{X_{\cdot j}}{n} \]
+    и функция правдоподобия:
+    \[ f_n(X^{(n)}, \hat{p}, \hat{q}) = \frac{n!}{\prod_{i,j=1}^{r,s} X_{ij}!} \prod_{i,j=1}^{r,s} \Big( \frac{X_{i \cdot} X_{\cdot j}}{n^2} \Big)^{X_{ij}}. \]
+    Мы получаем:
+    \[T_n = -2 \log \lambda(X^{(n)}) = 2 \sum_{i=1}^r  \sum_{j=1}^s X_{ij} \log \Big( \frac{X_{ij}}{X_{i \cdot} X_{\cdot j}} \Big)  \]
+    и \textbf{\textit{критерий независимости $\mathcal{X}^2$}}:
+   	\[ \varphi_n(X^{(n)}) =
+   	\left \{
+   	\begin{array}{cl}
+   	1, & T_n > \mathcal{X}_{(r-1)(s-1), 1-\alpha}^2, \\
+   	0, & \text{иначе}. 
+   	\end{array}
+   	\right.
+   	\]
+   	Используя разложение Тейлора (до второго порядка) и Закон Больших Чисел, получаем асимптотический эквивалент:
+   	\[\widetilde{T}_n = \sum_{i=1}^{r} \sum_{j=1}^s \frac{\Big(X_{ij} -\frac{X_{i \cdot} X_{\cdot j}}{n}\Big)^2}{X_{i \cdot} X_{\cdot j}} n.  \]
+   	Обычно
+   	\[ V_n^2 = \frac{\widetilde{T}_n}{n (\min(r, s) - 1)} \convprob \frac{\sum_{i=1}^{r} \sum_{j=1}^s \frac{(p_{ij} - p_{i \cdot}p_{\cdot j} )}{p_{i \cdot}p_{\cdot j}}}{\min(r, s) - 1} \]
+   	используется в качестве меры зависимости между $A$ и $B$. Например, рассмотрим следующие характеристики:
+	\begin{center}
+		\qquad\qquad\qquad\qquad  Годовой доход \\
+		Число детей
+		\begin{tabular}{| c | c  c  c  c | c |}
+			\hline
+			& 1 & 2 & 3 & 4 & Сумма \\
+			\hline
+			0 & 2161 & 3577 & 2184 & 1636 & 9558 \\
+			1 & 2755 & 5081 & 2222 & 1052 & 11110 \\
+			2 & 936 & 1753 & 640 & 306 & 3635 \\
+			3 & 225 & 419 & 96 & 38 & 778 \\
+			4 & 39 & 98 & 31 & 14 & 182 \\
+			\hline
+			Сумма & 6116 & 10928 & 5173 & 3046 & 25263 \\
+			\hline
+		\end{tabular}
+	\end{center}
+   	Тогда 
+   	\[ \widetilde{T}_n  = 568.566 \quad \text{и} \quad \mathcal{X}_{12, 0.95}^2 = 21.026 \]
+   	и гипотеза о независимости принимается с уровнем значимости $5\%$. Тем не менее, $V_n = 0.087$, что показывает слабую зависимость.
+\end{exmp}
+
+\raggedbottom
+\pagebreak
+
+\section*{Упражнения}
+\begin{exc}
+	Пусть $X_1, \dots, X_n$ -- i.i.d. случайные величины с распределением Бернулли: $X_i \sim Bin(1, p)$. Мы проверяем гипотезы
+	\[ H: p \leq p_0 \quad \text{против} \quad K: p > p_0, \]
+	где $p_0 \in (0, 1)$.
+	\begin{enumerate}
+		\item Докажите, что последовательность критериев с уровнем значимости $\alpha \in (0, 1)$, полученных из аппроксимации нормальным распределением:
+		\[ \varphi_n(x) = 1 \quad \Leftrightarrow \quad \overline{x}_n > p_0 \sqrt{\frac{p_0(1-p_0)}{n}} u_{1-\alpha}, \]
+		имеет асимптотический уровень значимости $\alpha$.
+		\item Покажите, что последовательность $(\varphi_n)$ -- состоятельная.
+	\end{enumerate}
+\end{exc}
+
+\begin{exc}
+	В Примере \ref{exmp7.6}.
+	\begin{enumerate}
+		\item Найдите оценку максимального правдоподобия для $\Delta$ и $\Theta$.
+		\item Рассчитайте $T = -2\log \lambda(Z)$, где $Z = (X_1,\dots, X_m, Y_1, \dots, Y_n)$
+	\end{enumerate}
+\end{exc}
+
+\begin{exc}
+	Пусть $Y_1, \dots Y_n$ независимые случайные величины, такие что
+	\[ Y_i = a x_i + \varepsilon_i, \]
+	где $a$ -- неизвестный параметр, $x_1, \dots, x_n$ фиксированы, $\varepsilon_1, \dots, \varepsilon_n$ -- i.i.d. и $\varepsilon_i \sim \mathcal{N}(0, 1)$. 
+	\begin{enumerate}
+		\item Найдите оценку максимального правдоподобия $\hat{a}$ для $a$.
+		\item Найдите критерий отношения правдоподобия для 
+		\[ H:a = 0 \quad \text{против} \quad K: a \neq 0. \]
+	\end{enumerate}
+\end{exc}
+
+\begin{exc}
+	Пусть $X_1, \dots, X_n$ -- i.i.d. случайные величины с гамма-распределением: $X_i \sim \Gamma(\alpha, \beta)$, т.е. их плотность:
+	\[ f_{\alpha, \beta}(x) = \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}, \]
+	где $\alpha, \beta > 0$.
+	\begin{enumerate}
+		\item Найдите оценку максимального правдоподобия $\hat{b}$ для $b$.
+		\item Найдите критерий отношения правдоподобия для 
+		\[ H:b = b_0 \quad \text{против} \quad K: b \neq b_0. \]
+	\end{enumerate}
+\end{exc}
+
+\begin{exc}
+	Пусть $(X_i)_{i \in \MN}$ -- последовательность i.i.d. случайных величин с неизвестной плотностью $p$. Мы хотим протестировать
+    \[ H:p = p_0 \quad \text{против} \quad K: p = p_1, \]
+    где $\{x\in \MR\ |\ p_1(x) > 0 \} \subset \{x \in \MR\ |\ p_0(x) > 0 \} $. Используя лемму Неймана-Пирсона, UMP-критерий с уровнем значимости $\alpha$ определяется критической областью $\prod_{i=1}^n r(X_i) \geq C_n(\alpha)$, где $r(x) = p_1(x) / p_0(x)$ и $C_n(\alpha)$ -- константа, зависящая от $n$ и $\alpha$.
+    \begin{enumerate}
+        \item Докажите, что критическая область может быть записана в виде:
+        \[ \frac{1}{\sqrt{n}}\Big( \sum_{i=1}^{n} \log r(X_i) - \ME_{p_0}[\log r(X_i)] \Big) \geq k_n(\alpha)  \]
+        для подходящей $k_n(\alpha)$.
+        \item Покажите, что
+        \[ k_n \rightarrow \sqrt{\Var_{p_0}(\log r(X_i))}u_{1-\alpha}.  \]
+        \item Используя Лемму \ref{Non-negativity of KL}, покажите, что последовательность критериев состоятельная для $p_1 \neq p_0$.
+    \end{enumerate} 
+\end{exc}
+

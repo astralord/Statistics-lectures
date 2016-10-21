@@ -1,0 +1,37 @@
+\begin{thebibliography}{1}
+\def\selectlanguageifdefined#1{
+\expandafter\ifx\csname date#1\endcsname\relax
+\else\language\csname l@#1\endcsname\fi}
+\ifx\undefined\url\def\url#1{{\small #1}}\else\fi
+\ifx\undefined\BibUrl\def\BibUrl#1{\url{#1}}\else\fi
+\ifx\undefined\BibAnnote\long\def\BibAnnote#1{(#1)}\else\fi
+\ifx\undefined\BibEmph\def\BibEmph#1{\emph{#1}}\else\fi
+
+\bibitem{Bauer}
+\selectlanguageifdefined{russian}
+Bauer~H. Ma\ss- und Integrationstheorie.
+\newblock Berlin: Walter de Gruyter \& Co., 1992.
+
+\bibitem{Tripathi}
+\selectlanguageifdefined{russian}
+Tripathi~G. A matrix extension of the Cauchy-Schwarz inequality. Econom. Lett.
+  63 (1), 1 -- 3.
+\newblock 1999.
+
+\bibitem{BickelDoksum}
+\selectlanguageifdefined{russian}
+Bickel~P.~J., Doksum~K.~A. Mathematical statistics.
+\newblock San Francisco, Calif.-D{\"u}sseldorf-Johannesburg: Holden-Day, Inc.,
+  2001.
+
+\bibitem{LehmannRomano}
+\selectlanguageifdefined{russian}
+Lehmann~E.~L., Romano~J.~P. Testing statistical hypotheses.
+\newblock New York: Springer, 2005.
+
+\bibitem{WittingMuller}
+\selectlanguageifdefined{russian}
+Witting~H., M{\"u}ller-Funk~U. Mathematische Statistik. II.
+\newblock Stuttgart: B. G. Teubner, 2001.
+
+\end{thebibliography}

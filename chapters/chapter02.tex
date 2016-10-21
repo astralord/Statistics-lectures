@@ -1,0 +1,611 @@
+\graphicspath{{./chapters/chapter02/}}
+\chapter{Основы точечного оценивания}
+
+\begin{exmp}
+	Перед введением лекарства в производство проводятся опыты на животных для оценки его качества в зависимости от дозирования. Обследуется животное и проверяется, выздоровело ли оно или нет, приняв дозу $X$. Модель:
+	\[Y \sim Bin(1, p(X)),\]
+	где $p(X)$ - вероятность выздоровления животного, принявшего дозу $X$.
+	Как правило, обследуется несколько животных: $Y_1, \dots, Y_n$. Предположим, что эти случайные величины независимы. Подбираем различные дозы $X_1, \dots, X_n$ таким образом, что:
+	\[Y_i \sim Bin(1,p(X_i)). \]
+	Цель: оценить функцию $p: \left[0, \infty \right) \rightarrow [0, 1]$. Упрощение: "параметрическая модель". Типичный пример: \[p(x)=1-e^{-\beta x}, \quad \beta>0 .\]
+	Следовательно, оценка функции $p(x)$ эквивалентна оценке параметра $\beta$.
+\end{exmp}
+
+\begin{asmp}
+	Пусть $(\Omega, \mathcal{A}, \mathbb{P})$ -- вероятностное пространство, $(\mathcal{X}, \mathcal{B})$ -- измеримое пространство и $X:(\Omega, \mathcal{A}, \mathbb{P}) \rightarrow (\mathcal{X}, \mathcal{B})$ -- случайная величина. Зададим
+	\[P(B)=\mathbb{P}^X(B)=\mathbb{P}(X^{-1}(B)), \quad B \in \mathcal{B}.  \]
+	Тогда $(\mathcal{X}, \mathcal{B}, P)$ является вероятностным пространством, $\mathcal{X}$ называется \textbf{\textit{выборочным пространством}}, а $x=X(\omega)$ -- \textbf{\textit{выборкой}}. 
+\end{asmp}
+
+\begin{defn}
+	Пусть $X \neq \emptyset$, $\mathcal{B}$ -- $\sigma$-алгебра на $\mathcal{X}$ и $\mathcal{P}=\{P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер на $(\mathcal{X}, \mathcal{B})$, в котором $|\Theta| \geq 2$ и $P_\vartheta \neq P_{\vartheta'}$ для любых $\vartheta \neq \vartheta'$. Тогда $\Theta$ называется \textbf{\textit{вероятностным пространством}} и $(\mathcal{X}, \mathcal{B}, \mathcal{P})$ называется \textbf{\textit{статистическим экспериментом}}.
+\end{defn}
+
+\begin{rmrk}
+	Интерпретация: мы заинтересованы в реальном распределении $P \in \mathcal{P}$ случайной величины $X:\Omega \rightarrow \mathcal{X}.$ На основе выборки $x=X(\omega)$ принимаем решение о неизвестном распределениии $P$. Идентифицируя $\mathcal{P}$ с параметрическим пространством $\Theta$, выбор $P$ эквивалентен выбору $\vartheta$.
+	
+\end{rmrk}
+
+\begin{exmp}
+	Пусть $Y_1, \dots, Y_n$ независимы и имеют распределение:
+	\[Y_i \sim Bin(1, p(X_i))=Bin(1, 1-\exp(-\beta X_i))=P_i^{\beta}.\]
+	Формально, составляющие статистического эксперимента:
+	\[ \mathcal{X}=\{ 0, 1 \}^n, \quad \mathcal{B}=\mathcal{P(X)}, \quad \mathcal{P}=\{\otimes_{i=1}^nP_i^{\beta} \mid \beta>0 \}, \quad \Theta=\left[0, \infty\right).  \]
+\end{exmp}
+
+\begin{defn}
+	Пусть $(\Gamma, \mathcal{A}_\Gamma)$ -- измеримое пространство и $\gamma: \Theta \rightarrow \Gamma$ -- отображение. Измеримая функция
+	\[g:(\mathcal{X}, \mathcal{B}) \rightarrow \Gamma(\mathcal{A}_\Gamma)  \]
+	называется \textbf{\textit{(точечной) оценкой}} $\gamma(\vartheta)$.
+\end{defn}
+
+\begin{exmp} \label{exmp2.7}\
+	
+	\begin{enumerate}
+		\item Пусть $X_1, \dots , X_n$ i.i.d. $\sim \mathcal{N}(\mu, \sigma^2)=P_{\mu, \sigma^2}$, $X=(X_1, \dots , X_n)^T$ и
+		\[\mathcal{X}=\MR^n, \quad \mathcal{B}=\mathcal{B}^n, \quad \mathcal{P}=\{\otimes_{i=1}^nP_{\mu, \sigma^2} \mid \mu \in \MR, \sigma^2>0 \}, \quad \Theta=\MR \times \left[0, \infty\right).\]
+		Типичная оценка для параметра $\gamma(\vartheta)=\vartheta=(\mu, \sigma^2)$:
+		\[ g :
+		\left \{
+		\begin{array}{ccl}
+		\MR^n & \rightarrow & \Theta \\
+		x & \mapsto &\begin{pmatrix} \overline{x}_n \\ \hat{s}_n^2 \end{pmatrix} = \begin{pmatrix} \frac{1}{n} \sum_{i=1}^n x_i \\ \frac{1}{n} \sum_{i=1}^n (x_i-\overline{x}_n)^2 \end{pmatrix}
+		\end{array}
+		\right.
+		\]
+		\item Пусть $X_1, \dots , X_n$ i.i.d. $\sim F$, где $F(x)=\mathbb{P}(X_i \leq x)$ -- неизвестная функция распределения. В этом случае $\Theta$ -- бесконечномерное семейство всех функций распределения. Если мы заинтересованы в значении функции только в одной точке:
+		\[ \gamma :
+		\left \{
+		\begin{array}{ccl}
+		\Theta & \rightarrow & \Gamma=\left[0,1\right] \\
+		F & \mapsto & F(0)=\mathbb{P}(X_i \leq 0),
+		\end{array}
+		\right.
+		\]
+		то точечная оценка будет:
+		\[ g :
+		\left \{
+		\begin{array}{ccl}
+		\MR^n & \rightarrow & \Gamma \\
+		x & \mapsto & \frac{1}{n} \sum_{i=1}^n 1_{\{X_i \leq 0\}}.
+		\end{array}
+		\right.
+		\]
+	\end{enumerate}
+\end{exmp}
+
+\begin{rmrk}
+	Из предыдущего примера становится ясно, зачем нужно вводить отображение $\gamma: \Theta \rightarrow \Gamma$, поскольку мы не всегда заинтересованы в значении самого параметра $\vartheta$, но в подходящем функционале.
+\end{rmrk}
+
+\begin{defn}
+	Измеримая функция $L: \Gamma \times \Gamma \rightarrow \left[0, \infty \right)$ называется \textbf{\textit{функцией потерь}}. Для точечной оценки $g:\mathcal{X} \rightarrow \Gamma$ функция
+	\[ R(\cdot, g) :
+	\left \{
+	\begin{array}{ccl}
+	\Theta & \rightarrow & \left[0, \infty\right) \\
+	\vartheta & \mapsto & \ME[L(\gamma(\vartheta), g(X))]=\int_{\mathcal{X}}L(\gamma(\vartheta), g(x))P_\vartheta(dx)
+	\end{array}
+	\right.
+	\]
+	называется \textbf{\textit{риском}} g от L.
+\end{defn}
+
+\begin{rmrk}
+	Если $\vartheta$ -- истинный параметр, а $g(x)$ -- оценка, то функция $L(\gamma(\vartheta), g(x))$ измеряет соответствующие потери. Если $\Gamma$ -- измеримое пространство, то, как правило, функции потерь зависят от дистанции между $\gamma(\vartheta)$ и $g(x)$, например квадратичная функция потерь $L(x, y) = (x-y)^2$ для $\Gamma = \MR$. Тогда риск -- это ожидаемые потери.
+\end{rmrk}
+
+\begin{defn}
+	Пусть $L$ -- функция потерь и $\gamma(\vartheta)$ -- оцениваемый параметр. Если $\mathcal{K}$ -- множество всех точечных оценок $\gamma(\vartheta)$, то $g^* \in \mathcal{K}$ называется \textbf{\textit{равномерно лучшей оценкой}}, если
+	\[R(\vartheta, g^*)=\inf_{g \in \mathcal{K}} R(\vartheta, g) \quad \forall \vartheta \in \Theta. \]
+\end{defn}
+
+\begin{exmp}
+	Как правило, не существует равномерно лучших оценок, как и не существует оценки, которая была бы равномерно лучше другой. Например, пусть
+	\[\mathcal{X} = \MR, \quad \mathcal{P}=\{P_\mu = \mathcal{N}(\mu, 1) \mid \mu \in \MR\}, \quad \gamma(\mu)=\mu   \]
+	и функция потерь квадратичная. Возьмем тривиальную оценку $g_\nu(x)=\nu$. Тогда риск:
+	\[R(\mu, g_\nu )=\mathbb{E_\mu}[(\mu - \nu)^2]=(\mu - \nu)^2.  \]
+	В частности, $R(\nu, g_\nu)=0$. Таким образом, никакая оценка $g_\nu$ не является равномерно лучшей, чем некоторая $g_\mu$. Также, чтобы получить равномерно лучшую оценку равенство
+	\[ 
+	\ME_\mu[(g^*(X)-\mu)^2]=0 \quad \forall \mu \in \MR \quad \Longleftrightarrow \quad g^*(x)=\mu \ P_\mu\text{-п.н.} \quad \forall \mu \in \MR
+	\]
+	должно выполняться, что приводит к противоречию.
+\end{exmp}
+
+\begin{rmrk}
+	Для того, чтобы всё же найти "оптимальную"\ оценку, можно выбрать две опции:
+	\begin{enumerate}
+		\item ограничиться подклассами $\overline{\mathcal{K}} \subset \mathcal{K}$
+		\item выбрать иной критерий, нежели равномерно меньший риск
+	\end{enumerate}
+\end{rmrk}
+
+\begin{defn} \
+	\begin{enumerate}
+		\item Оценка $g^* \in \mathcal{K}$ называется \textbf{\textit{допустимой}}, если не существует такой оценки $g \in \mathcal{K}$, что
+		 \[R(\vartheta, g) \leq R(\vartheta, g^*) \quad \forall \vartheta \in \Theta \]
+		 и хотя бы для одного значения $\vartheta^* \in \Theta$
+		 \[ R(\vartheta^*, g) < R(\vartheta^*, g^*).\]
+		\item Класс $\tilde{\mathcal{K}} \subset \mathcal{K}$ называется \textbf{\textit{полным}}, если для любой оценки $g \in \mathcal{K} \backslash \tilde{\mathcal{K}}$ существует такая оценка $\tilde{g} \in \tilde{\mathcal{K}}$, что
+		\[ R(\vartheta, \tilde{g}) \leq R(\vartheta, g) \quad \forall \vartheta \in \Theta. \]
+		Если класс $\tilde{\mathcal{K}}$ не содержит полного подкласса, то $\tilde{\mathcal{K}}$ называется \textbf{\textit{минимальным полным}} классом.
+	\end{enumerate}
+\end{defn}
+
+\begin{rmrk}
+	Оценки наподобие $g_\nu(x)=\nu$ являются допустимыми, так что даже априори плохие оценки допустимые или принадлежат полным классам. Как следствие, мы нуждаемся в больших ограничениях.
+\end{rmrk}
+
+\begin{defn} \
+	\begin{enumerate}
+		\item Пусть $g$ -- оценка функции $\gamma: \Theta \rightarrow \Gamma$. Тогда,
+		\[ B_\vartheta(g)=\ME_\vartheta[g(X)]-\gamma(\vartheta) \]
+		называется \textbf{\textit{смещением}} $g$. Оценка $g$ называется \textbf{\textit{несмещенной}}, если
+		 \[B_\vartheta(g)=0 \quad  \forall \vartheta \in \Theta.\]
+		\item Оценка $g^*$ называется \textbf{\textit{несмещенной с равномерно минимальной дисперсией (UMVU)}}, если 
+		\[g^* \in \mathcal{E}_\gamma = \{ g \mid g \text{ несмещенная и } g \in L^2(P_\vartheta) \}\]
+		и
+		\begin{equation} \label{eq2.1} 
+		\Var_\vartheta(g^*(X))=\ME[(g^*(X) - \gamma(\vartheta))^2]=\inf_{g \in \mathcal{E}_\gamma} \Var(g(X)) \quad \forall \vartheta \in \Theta.
+		\end{equation}
+	\end{enumerate}
+\end{defn}
+
+\begin{rmrk} \
+	\begin{enumerate}
+		\item Оценки, удовлетворяющие равенству \eqref{eq2.1} лишь для одного значения $\vartheta \in \Theta$ называются локально оптимальными. Так как истинное значение $\vartheta$ неизвестно, то на практике это неприменимо. 
+		\item Если в качестве функции потерь мы выбираем $L(x,y)=(x-y)^2$, то для любой оценки $g \in L^2(P_\vartheta)$ величина
+		\[ MSE_\vartheta(g) = R(\vartheta, g)=\ME_\vartheta[(g(X)-\gamma(\vartheta))^2]=Var_\vartheta(g(X))+B_\vartheta^2(g) \]
+		называется \textbf{\textit{среднеквадратической ошибкой}}. Если $g$ несмещенная, то
+		\[MSE_\vartheta(g)=\Var_\vartheta(g(X)). \]
+		\item Аналогичное определение для несмещенных оценок $g$, если $\gamma: \Theta \rightarrow \MR^d$.
+	\end{enumerate}
+\end{rmrk}
+
+\begin{defn} \
+	\begin{enumerate}
+		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(0,1)$. Тогда случайная величина $Z=\sum_{i=1}^n X_i^2$ имеет \textbf{\textit{распределение хи-квадрат}} с $n$ степенями свободы. Обозначение: $Z \sim \chi_n^2 $. Плотность распределения $Z$:
+		\[ f_{\chi_n^2}(x)=\frac{x^{\frac{n}{2}-1}e^{-\frac{x}{2}}}{2^\frac{n}{2}\Gamma(\frac{n}{2})}1_{(0, \infty )}(x), \]
+		где $\Gamma(\cdot)$ в знаменателе обозначает гамма-функцию:
+		\[ \Gamma(\alpha)=\int_{0}^{\infty}x^{\alpha-1}e^{-x}dx, \quad \alpha >0. \]
+	    
+   		\begin{figure}[!ht]
+   			\begin{overpic}[width=\linewidth, center]{chisq137}
+   				\put (14,54) {$\displaystyle f_{\chi_1^2}(x)$}
+   				\put (11,51) {\large $\swarrow$}
+   				\put (30,30) {$\displaystyle f_{\chi_3^2}(x)$}
+   				\put (27,27) {\large $\swarrow$}
+   				\put (62,22) {$\displaystyle f_{\chi_7^2}(x)$}
+   			    \put (59,19) {\large $\swarrow$}
+   			\end{overpic}
+   			\captionsetup{labelformat=empty}
+   		\end{figure}
+	    
+		
+		\item Пусть $Y \sim \mathcal{N}(0,1)$ и $Z \sim \chi_n^2$ независимы. Тогда, случайная величина
+		\[ T=\frac{Y}{\sqrt{Z / n}} \]
+		имеет \textbf{\textit{t-распределение}} c $n$ степенями свободы. Обозначение: $T \sim t_n$. Плотность распределения:
+		\[ f_{t_n}(x)=\frac{\Gamma(\frac{n+1}{2})}{\sqrt{n\pi}\Gamma(\frac{n}{2})} \Big(1+\frac{x^2}{n} \Big)^{-\frac{n+1}{2}} . \]
+		
+		\begin{figure}[!ht]
+			\begin{overpic}[width=\linewidth, center]{stu110}
+				\put (50,53) {$\displaystyle f_{t_{10}}(x)$}
+				\put (47,50) {\large $\swarrow$}
+				\put (67,12) {$\displaystyle f_{t_{1}}(x)$}
+				\put (64,9) {\large $\swarrow$}
+			\end{overpic}
+			\captionsetup{labelformat=empty}
+		\end{figure}
+		
+		
+	\end{enumerate}
+\end{defn}
+
+\begin{rmrk}
+	Если $Z \sim \chi_n^2$, то	
+	\[ \ME[Z]=\sum_{i=1}^n\ME[ X_i^2]=n\]
+	и
+	\[ \Var(Z)=\sum_{i=1}^n \Var(X_i^2)=n\Big(\ME[X_1^4]-(\ME[X_1^2])^2\Big)=2n.  \]
+\end{rmrk}
+
+\begin{lmm} \label{Distribution of estimators of Normal distribution}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(\mu,\sigma^2)$. Тогда
+	\[ \overline{X}_n=\frac{1}{n}\sum_{i=1}^n X_i \sim \mathcal{N}\Big(\mu,\frac{\sigma^2}{n}\Big) \]
+	и
+	\[ \hat{s}_n^2(X)=\frac{1}{n}\sum(X_i-\overline{X}_n)^2 \sim \frac{\sigma^2}{n}\chi_{n-1}^2,  \]
+	и обе оценки независимые.
+\end{lmm}
+\begin{proof}
+	Распределение $\overline{X}_n$ следует из свойства нормального распределения. Зададим
+	\[ Y_i=\frac{X_i-\mu}{\sigma} \sim \mathcal{N}(0,1) \]
+	и $Y=(Y_1, \dots, Y_n)^T$. Выберем такую ортогональную матрицу $A$, что её последняя строчка:
+	\[\bigg(\frac{1}{\sqrt{n}} \dots \frac{1}{\sqrt{n}}\bigg) = v^T.\]
+	Тогда для $Z=AY$ имеет место равенство:
+	\[ \|Z\|_2^2=\sum_{i=1}^nZ_i^2=Z^TZ=Y^TA^TAY=Y^Y=\sum_{i=1}^nY_i^2=\|Y\|_2^2.\]
+	Так как $\Cov(Z)=A^TA=\mathbb{I}_n$, то $Z \sim \mathcal{N}(0, \mathbb{I}_n)$. Также:
+	\[ \sqrt{n}\overline{X}_n=\frac{1}{\sqrt{n}}\sum_{i=1}^n(\sigma Y_i + \mu)=\sigma v^TY+\sqrt{n}\mu=\sigma Z_n+\sqrt{n}\mu \]
+	и
+	\[ \begin{aligned}
+	n\hat{s}_n^2(X) & =\sum_{i=1}^n(X_i-\overline{X}_n)^2=\sigma^2\sum_{i=1}^n(Y_i-\overline{Y}_n)^2 \\
+	& = \sigma^2\Big(\sum_{i=1}^nY_i^2-n\overline{Y}_n^2\Big) = \sigma^2 \Big(\sum_{i=1}^nY_i^2 - \Big( \frac{1}{\sqrt{n}}\sum_{i=1}^nY_i \Big)^2 \Big) \\
+	& = \sigma^2\Big(\sum_{i=1}^n  Z_i^2-Z_n^2 \Big) = \sigma^2 \sum_{i=1}^{n-1} Z_i^2 \sim \sigma^2 \chi_{n-1}^2.
+	\end{aligned} \] 
+	Обе оценки независимы как функции от $Z_n$ и $Z_1, \dots, Z_{n-1}$ соответственно.
+\end{proof}
+
+\begin{crlr} \label{crlr2.21}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(\mu,\sigma^2)$. Тогда
+	\[ T=\frac{\sqrt{n}(\overline{X}_n-\mu)}{\hat{s}_n(X)} \sim t_{n-1}. \]
+\end{crlr}
+\begin{proof}
+	Представим $T$ в виде:
+	\[ T= \frac{\sqrt{n}(\overline{X}_n-\mu)}{\sigma} \sqrt{\frac{\sigma^2 n}{n \hat{s}_n(X)}}\]
+	и используем предыдущую лемму.
+\end{proof}
+
+\begin{exmp} \label{Biasedness of estimators for normal distribution}
+	Проверим, какие оценки из Примера \ref{exmp2.7} являются несмещенными. Мы знаем, что $\overline{X}_n \sim \mathcal{N}\Big(\mu, \frac{\sigma^2}{n}\Big)$, значит оценка $\overline{X}_n$ несмещенная. С другой стороны, используя Лемму \ref{Distribution of estimators of Normal distribution} мы получаем:
+	\[ \ME_\vartheta[\hat{s}_n^2(X)]=\frac{\sigma^2}{n}(n-1) \neq \sigma^2. \]
+	Стоит также заметить, что 
+	\[ MSE_\vartheta(\overline{X}_n)=\Var_\vartheta(\overline{X}_n)=\frac{\sigma^2}{n} \xrightarrow[n \rightarrow \infty]{} 0\]
+	и
+	\[ MSE_\vartheta(\hat{s}_n^2(X))=\Var_\vartheta(\hat{s}_n^2(X))+B_\vartheta^2(\hat{s}_n^2(X))=\frac{\sigma^4}{n^2}2(n-1)+\frac{\sigma^4}{n^2}=\frac{2n-1}{n^2}\sigma^4 \xrightarrow[n \rightarrow \infty]{} 0
+	\]
+\end{exmp}
+
+\begin{thm}[\textbf{Неравенство Рао-Крамера}] \label{Cramer-Rao inequality} 
+	Пусть $\mu$ -- $\sigma$-конечная мера и $P_\vartheta \ll \mu$ с $\mu$-плотностью $f(\cdot, \vartheta)$. Пусть также $\Theta \subset \MR$ -- открытое пространство и $g:\mathcal{X} \rightarrow \MR$ -- оценка.
+	Дальнейшие предположения (условия регулярности):
+	\begin{enumerate}
+		\item Множество $M_f=\{ x \in \mathcal{X} \mid f(x, \vartheta) > 0 \}$ не зависит от параметра $\vartheta$.
+		\item Частная производная $ \frac{\partial}{\partial \vartheta} f(x, \vartheta)$ существует $\forall x \in \mathcal{X}$.
+		\item 
+		\begin{enumerate}
+		\item $\ME_\vartheta \big[\frac{\partial}{\partial \vartheta} \log f(X, \vartheta)\big] = 0,$
+		\item $\ME_\vartheta \big[g(X) \frac{\partial}{\partial \vartheta} \log f(X, \vartheta)\big] = \frac{\partial}{\partial \vartheta} \ME_\vartheta[g(X)].$
+	    \end{enumerate}
+		\item $0<I(f(\cdot, \vartheta))=\ME_\vartheta \big[\big(\frac{\partial}{\partial \vartheta} \log f(X, \vartheta)\big)^2\big]<\infty$
+	\end{enumerate}
+	Тогда:
+	\begin{equation} \label{eq2.2}
+	\Var_\vartheta(g(X)) \geq \frac{\big(\frac{\partial}{\partial \vartheta} \ME_\vartheta[g(X)]\big)^2}{I(f(\cdot, \vartheta))} \quad \forall \vartheta \in \Theta
+	\end{equation}
+\end{thm}
+\begin{proof}
+	Зададим функцию:
+	\[ U_\vartheta(x)=
+	\left\{
+	\begin{array}{ll}
+	0, & \text{если } x \notin M_f, \\
+	\frac{\partial}{\partial \vartheta} \log f(x, \vartheta), & \text{иначе.}
+	\end{array}
+	\right.
+	\]
+	Из условия (iii)(a) мы знаем, что $\ME[U_\vartheta(X)]=0$ и
+	\[ \Var_\vartheta(U_\vartheta(X))=\ME[(U_\vartheta(X))^2]=I(f(\cdot, \vartheta)). \]
+	Тогда используя неравенство Коши-Шварца мы получаем:
+	\[
+	\begin{aligned}
+	\Big( \frac{\partial}{\partial \vartheta} \ME_\vartheta[g(X)] \Big)^2 = \Big( \ME_\vartheta[g(X) \cdot U_\vartheta(X)] \Big)^2  & = \Big(\Cov_\vartheta(g(X), U_\vartheta(X)) \Big)^2 \\
+	& \leq \Var_\vartheta(g(X))\cdot \Var_\vartheta(U_\vartheta(X))=
+	I(f(\cdot, \vartheta))\cdot \Var_\vartheta(g(X)).
+	\end{aligned}
+	  \]
+\end{proof}
+
+\begin{defn} \
+	\begin{enumerate}
+		\item $I(f(\cdot, \vartheta))$ называется \textbf{\textit{информацией Фишера}} семейства $\mathcal{P}= \{P_\vartheta \mid \vartheta \in \Theta \}$.
+		\item Если оценка $g$ такая, что неравенство \eqref{eq2.2} превращается в равенство, то такая оценка называется \textbf{\textit{эффективной}} для $\gamma(\vartheta)=\ME_\vartheta[g(X)]$.
+	\end{enumerate}
+\end{defn}
+
+\begin{rmrk} \label{rmrk2.25} \
+	\begin{enumerate}
+		\item Запишем эквивалентные версии равенств в условии (iii):
+		\begin{enumerate}
+			\item $\int_\mathcal{X} \frac{\partial}{\partial \vartheta} \log f(x, \vartheta) f(x, \vartheta) d \mu(x) = \int_\mathcal{X} \frac{\partial}{\partial \vartheta} f(x, \vartheta) d \mu(x)=\frac{\partial}{\partial \vartheta}\int_\mathcal{X} f(x, \vartheta) d \mu(x) =0, $
+			\item $\int_\mathcal{X} g(x) \frac{\partial}{\partial \vartheta} f(x, \vartheta) d\mu(x) = \frac{\partial}{\partial \vartheta} \int_\mathcal{X} g(x) f(x,\vartheta) d\mu(x).$
+		\end{enumerate}
+		В обоих случаях условие (iii) означает, что можно менять местами интегралы и производные.
+		\item Теорема \ref{Cramer-Rao inequality} дает нижнюю границу для дисперсии оценки $\gamma(\vartheta) = \ME[g(X)]$ и может быть использована для получения UMVU-оценок. Если условия регулярности соблюдены, то любая эффективная и несмещенная оценка является UMVU.
+		\item Если $X_1, \dots, X_n$ i.i.d. $\sim P_\vartheta^1 \ll \mu^1$ и $X=(X_1, \dots, X_n)^T$, то $P_\vartheta = \otimes_{i=1}^nP_\vartheta^1 \ll \otimes_{i=1}^n\mu^1$ и $f(x,\vartheta)=\prod_{i=1}^n f^1(x_i, \vartheta)$, где $f^1(\cdot, \vartheta)$ -- $\mu^1$-плотность $P_\vartheta^1$. Несложно увидеть, что в данном случае:
+		\[ I(f(\cdot, \vartheta))=nI(f^1(\cdot, \vartheta)).\]
+	\end{enumerate}
+\end{rmrk}
+
+\begin{exmp}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(\mu, 1)$ с плотностью
+	\[ f^1(x,\vartheta)=\frac{1}{\sqrt{2\pi}} \exp\Big\{ -\frac{(x-\mu)^2}{2}\Big\} .\]
+	Тогда
+	\[ I(f^1(\cdot, \mu))=\ME\bigg[ \Big( \frac{\partial}{\partial \mu} \log f^1(X_1, \mu) \Big)^2 \bigg] =\ME[(X-\mu)^2]=1. \]
+	В частности, информация Фишера для $X=(X_1, \dots, X_n)^T$: $I(f(\cdot, \vartheta),\mu)=n$ и тогда неравенство Рао-Крамера для несмещенных оценок:
+	\[ \Var_\mu(g(X)) \geq \frac{1}{n} \Big( \frac{\partial}{\partial \mu} \ME_\mu[g(X)] \Big)^2 = \frac{1}{n}. \]
+	Как следствие, $g(x) = \overline{x}_n$ -- UMVU-оценка.
+\end{exmp}
+
+\begin{defn}
+	Пусть
+	\[SYM(k) = \{A \in \MR^{k \times k} \mid A \text{ симметричная} \} .\]
+	Для $A, B \in SYM(k)$ будем использовать обозначения:
+	\[
+	\begin{aligned}
+	 A \geq 0 & \Longleftrightarrow A \text{ положительно полуопределенная}, \\
+	 A \geq B & \Longleftrightarrow A - B \geq 0.
+	\end{aligned}
+	 \]
+	Частичное упорядочение определенное знаком $\geq$ называется \textbf{\textit{упорядочением Левнера}} на $SYM(k)$. Также зададим множества:
+	\[ NND(k)= \{ A \in SYM(k) \mid A \geq 0 \}, \]
+	\[ PD(k) = \{ A \in NND(k) \mid \det(A) \neq 0 \}. \]
+\end{defn}
+
+\begin{thm}[\textbf{Многомерное неравенство Рао-Крамера}]
+	Пусть $\mu$ -- $\sigma$-конечная мера и $P_\vartheta \ll \mu$ $\forall\vartheta \in \Theta \subset \MR$. Предположим, что $\Theta$ -- открытое множество и $g: \mathcal{X} \rightarrow \MR^k$ -- оценка. Зададим функцию
+	\[ G(\vartheta)=\Big( \frac{\partial}{\partial \vartheta_j} \mathbb{E}_\vartheta[g_i(X)] \Big)_{i,j} \in \MR^{k \times d}. \]
+	Тогда при условиях регулярности, схожими с условиями в Теореме \ref{Cramer-Rao inequality} имеет место неравенство:
+	\[ \Cov_\vartheta(g(X)) \geq G(\vartheta) I^{-1}(f(\cdot, \vartheta))G^T(\vartheta) \in \MR^{k \times k} \]
+	в понимании упорядочения Левнера. Информация Фишера в данном случае:
+	\[ I(f(\cdot, \vartheta))=\Big( \ME\Big[\frac{\partial}{\partial \vartheta_i} \log f(X, \vartheta) \cdot \frac{\partial}{\partial \vartheta_j} \log f(X, \vartheta) \Big]  \Big)_{i,j=1}^d \in \MR^{d \times d}. \]
+\end{thm}
+
+\begin{proof}
+	Для доказательства можно использовать многомерное неравенство Коши-Шварца (см. \cite{Tripathi}) для $Y \in \MR^k$ и $Z \in \MR^d$:
+	\[ \ME[YY^T] \geq \ME[YZ^T] (\ME[ZZ^T])^{-1} \ME[ZY^T], \]
+	и подставить:
+	\[ Y = g(X)-\ME_\vartheta[g(X)] \]
+	и
+	\[ Z = \nabla_\vartheta \log f(X, \vartheta) = 
+	\begin{pmatrix}
+	\frac{\partial}{\partial \vartheta_1} \log f(X,\vartheta) \\
+	\vdots \\
+	\frac{\partial}{\partial \vartheta_d} \log f(X,\vartheta)
+	\end{pmatrix}.  \]
+\end{proof}
+
+\begin{exmp} \label{exmp2.29}
+	В Примере \ref{Biasedness of estimators for normal distribution}:
+	\[ f^1(x,\vartheta)=\frac{1}{\sqrt{2\pi \sigma^2}} \exp\Big \{-\frac{(x-\mu)^2}{2\sigma^2}\Big \}. \]
+	Тогда:
+	\[U_\vartheta = \Big(\frac{\partial}{\partial \mu} \log f^1(X_1,\vartheta), \frac{\partial}{\partial \sigma^2} \log f^1(X_1,\vartheta)\Big)^T = 
+	\begin{pmatrix}
+	(X_1-\mu)/\sigma^2 \\
+	-\frac{1}{2\sigma^2}+\frac{1}{\sigma^4}(X_1-\mu)^2
+	\end{pmatrix}  \]
+	и информация Фишера:
+	\[ I(f^1(\cdot, \vartheta))=\ME[U_\vartheta, U_\vartheta^T]=
+	\begin{pmatrix}
+	\sigma^{-2} & 0 \\
+	0 & \frac{1}{2}\sigma^{-4}
+	\end{pmatrix}
+	= \frac{1}{n}I(f(\cdot, \vartheta)).
+	 \]
+	 Если оценка $g(X)$ несмещенная, то $G(\vartheta)$ -- едичная матрица и граница Рао-Крамера:
+	 \[ \Cov_\vartheta(g(X)) \geq G(\vartheta) \  I^{-1} (f(\cdot, \vartheta)) \   G^T(\vartheta)=I^{-1}(f(\cdot, \vartheta))=
+	 \begin{pmatrix}
+	 \frac{\sigma^{2}}{n} & 0 \\
+	 0 & \frac{\sigma^{4}}{n}
+	 \end{pmatrix}. \]
+	 В частности для оценки
+	 \[ \widetilde{g}(X)=\Big(\overline{X}_n, \frac{1}{n-1} \sum_{i=1}^n(X_j-\overline{X}_n)^2 \Big)^T \]
+	 имеет место
+	 \[ \Cov_\vartheta(\widetilde{g}(X)) = 
+	 \begin{pmatrix}
+	 \frac{\sigma^{2}}{n} & 0 \\
+      0 & \frac{\sigma^{4}}{n-1}
+	 \end{pmatrix} \geq I(f(\cdot, \vartheta)), \]
+	 то есть оценка $\widetilde{g}$ не является эффективной.
+\end{exmp}
+
+\begin{rmrk}
+	В предыдущих примерах мы бездоказательно считали, что все условия регулярности для неравенства Рао-Крамера соблюдены. В дальнейшем мы обсудим семейство распределений, для которых неравенство Рао-Крамера превращается в равенство.
+\end{rmrk}
+
+\begin{prps} \label{prps2.31}
+	Пусть $\mu$ -- $\sigma$-конечная мера и $P_\vartheta \ll \mu$ с $\mu$-плотностью:
+	\[f(x, \vartheta) = c(\vartheta) h(x) \exp(\vartheta T(x)) \quad \forall \vartheta \in \Theta. \]
+	Тогда равенство в \eqref{eq2.2} достигается при оценке $g(x)=T(x)$.
+\end{prps}
+\begin{proof}
+	В одной из дальнейших теорем мы докажем, что функция $c$ бесконечно дифференцируема ($c \in C^{\infty}(\Theta)$) и что производные и интегралы могут быть поменяны местами. Сначала, заметим, что так как $\int_{\mathcal{X}}f(x)\mu(dx) = 1 \; \; \forall \vartheta \in \Theta$, то
+	\[ c(\vartheta)=\Big( \int_{\mathcal{X}} h(x)\exp \{ \vartheta T(x) \} \mu(dx) \Big)^{-1}. \]
+	и
+	\[ 
+	\begin{aligned}
+	0 & = \frac{\partial}{\partial \vartheta} \int_{\mathcal{X}} c(\vartheta) h(x) \exp \{ \vartheta T(x) \} \\
+	& = \int_{\mathcal{X}} (c'(\vartheta)+c(\vartheta)T(x)) h(x) \exp \{ \vartheta T(x) \} \mu(dx).
+	\end{aligned}
+	 \]
+	 Используя эти два равенства получаем:
+	 \[ 
+	 \begin{aligned}
+	 \ME_\vartheta[T(X)] & = c(\vartheta) \int_{\mathcal{X}} h(x) T(x) \exp \{ \vartheta T(x) \}\mu(dx) \\
+	 & = -c'(\vartheta) \int_{\mathcal{X}}h(x) \exp \{ \vartheta T(x) \}\mu(dx) \\
+	 & = -\frac{c'(\vartheta)}{c(\vartheta)}=(-\log c(\vartheta))'.
+	 \end{aligned}
+	 \]
+	 Информация Фишера:
+	 \[ 
+	 I(f(\cdot, \vartheta)) = \ME_\vartheta\Big[\Big( \frac{\partial}{\partial \vartheta} \log f(X, \vartheta) \Big)^2\Big]=\ME_\vartheta[(T(X)+(\log c(\vartheta))')^2]=\Var_\vartheta(T(X)).
+	 \]
+	 Также:
+	 \[
+	 \begin{aligned}
+	 \frac{\partial}{\partial \vartheta} \ME_\vartheta[T(X)] & =\int_{\mathcal{X}} c'(\vartheta) h(x) T(x) \exp \{ \vartheta T(x) \} \mu(dx) + \int_{\mathcal{X}} c(\vartheta) h(x) T^2(x) \exp \{ \vartheta T(x) \} \mu(dx) \\
+	 & = \frac{c'(\vartheta)}{c(\vartheta)} \int_{\mathcal{X}} c(\vartheta) h(x) T(x) \exp \{ \vartheta T(x) \} \mu(dx) + \ME_\vartheta[(T(X))^2] \\
+	 & = \ME_\vartheta[(T(X))^2] - (\ME_\vartheta[T(X)])^2.
+	 \end{aligned}
+	 \]
+	 Из этого следует:
+	 \[ \frac{\Big(\frac{\partial}{\partial\vartheta}\ME_\vartheta[T(X)] \Big)^2}{I(f(\cdot, \vartheta))}= \Var_\vartheta(T(X)). \] 
+\end{proof}
+
+\begin{defn} \
+	\begin{enumerate}
+		\item Семейство $\mathcal{P}= \{ P_\vartheta \mid \vartheta \in \Theta \}$ называется \textbf{\textit{экспоненциальным семейством}}, если существуют такие вещественнозначные $c, Q_1, \dots, Q_k : \Theta \rightarrow \MR$ и измеримые функции $h, T_1, \dots, T_k: \mathcal{X} \rightarrow \MR$, что $\mu$-плотность $P_\vartheta$:
+		\[ f(x, \vartheta)=c(\vartheta)h(x)\exp \Big\{ \sum_{j=1}^{k}Q_j(\vartheta)T_j(x) \Big\} \]
+		для $\sigma$-конечной меры $\mu$.
+		\item $\mathcal{P}$ называется \textbf{\textit{$k$-параметрическим экспоненциальным семейством}}, если функции $1,Q_1, \dots, Q_k$ и $1,T_1, \dots, T_k$ линейно независимы ($\mu$-почти наверное).
+	\end{enumerate}
+\end{defn}
+
+\begin{rmrk}\
+	\begin{enumerate}
+		\item В экспоненциальных семействах равенство в Теореме Рао-Крамера достигается при оценке $(T_1,\dots,T_k)^T$. С другой стороны, это свойство и характеризует экспоненциальные семейства (Теорема 3.42 в \cite{BickelDoksum})
+		\item Без ограничения общности можно считать, что $h(x) = 1$, в другом случае можно использовать меру:
+		\[ \mu'(dx)=h(x)\mu(dx). \]
+		\item С этого момента мы обсуждаем только $k$-параметрические экспоненциальные семейства.
+	\end{enumerate}
+\end{rmrk}
+
+\begin{exmp}\label{exmp2.34} \
+	\begin{enumerate}
+		\item Если $X \sim Bin(n, \vartheta)$, то плотность по счетной мере:
+		\[ f(k, \vartheta)=\binom{n}{x} \vartheta^x(1-\vartheta)^{n-x}=(1-\vartheta)^n \binom{n}{x} \exp\Big\{x \log\Big(\frac{\vartheta}{1-\vartheta}\Big) \Big\},  \]
+		где $c(\vartheta) = (1 - \vartheta)^n$, $h(x)=\binom{n}{x}$, $T_1(x) = x$ и $Q_1(\vartheta) = \log\Big(\frac{\vartheta}{1-\vartheta}\Big)$.
+		\item Если $X \sim \mathcal{N}(\mu, \sigma^2)$, то $\vartheta=(\mu, \sigma^2)^T$ и плотность:
+		\[ 
+		\begin{aligned}
+		f(x,\vartheta)&=\frac{1}{\sqrt{2 \pi \sigma^2}} \exp\Big\{ \frac{(x-\mu)^2}{2\sigma^2} \Big\} \\
+		& = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \Big \{ -\frac{\mu^2}{2\sigma^2} \Big\}  \exp\Big \{ -\frac{x^2}{2\sigma^2} +\frac{\mu x}{\sigma^2} \Big\} \\
+		& = c(\vartheta) \exp \Big\{ Q_1(\vartheta) T_1(x) + Q_2(\vartheta) T_2(x)  \Big \} .
+		\end{aligned}  \]
+		
+		\item Если $X \sim Po(\lambda)$, то
+
+		\[ f(x, \lambda) = \frac{\lambda^x e^{-\lambda}}{x!}=e^{-\lambda} \frac{1}{x!} \exp\{x \log \lambda \}. \]
+    \end{enumerate}
+\end{exmp}
+
+\begin{rmrk}\
+	\begin{enumerate}
+		\item Если $\mathcal{P} = \{P_\vartheta \mid \vartheta \in \Theta \}$ -- экспоненциальное семейство, то $\mathcal{P}^{(n)}=\{ \otimes_{j=1}^n P_\vartheta \mid \vartheta \in \Theta \}$ -- также экспоненциальное семейство.
+		\item Используя обозначение $Q(\vartheta) = (Q_1(\vartheta), \dots, Q_k(\vartheta))^T$, мы получаем новое параметрическое пространство $Q(\Theta)$, которое ныне обозначается $\Theta$. В таком случае $\mu$-плотность:
+		\[f(x,\vartheta)=c(\vartheta) \exp \Big\{ \sum_{j=1}^k \vartheta_j T_j(x) \Big\}, \quad \vartheta \in \Theta, \]
+		и множество
+		\[ \Theta^* = \{ \vartheta \in \MR^k \mid f(\cdot, \vartheta) \in L^1(\vartheta) \} \]
+		называется \textbf{\textit{естественным параметрическим пространством}}.
+	\end{enumerate}
+\end{rmrk}
+
+\begin{exmp}
+	В предыдущем примере естественное параметрическое пространство:
+	\begin{enumerate}
+		\item $X \sim Bin(n, \vartheta): \Theta^* = \{\log\big(\frac{\vartheta}{1-\vartheta}\big) \mid \vartheta \in (0, 1) \} = \MR.$
+		\item $X \sim \mathcal{N}(\mu, \sigma^2): \Theta^* = \{\big(\frac{\mu}{\sigma^2}, -\frac{1}{2\sigma^2}\big) \mid \mu \in \MR, \sigma^2 \in \MR^+ \} = \MR \times \MR^+.$
+		\item $X \sim Po(\lambda): \Theta^* = \{\log \lambda \mid \lambda \in \MR^+ \} = \MR.$
+	\end{enumerate}
+\end{exmp}
+
+\begin{thm}
+	Естественное параметрическое пространство $\Theta^*$ $k$-параметрического экспоненциального семейства выпуклое и с непустой внутренней частью.
+\end{thm}
+\begin{proof}
+	Непустая внутренняя часть следует из линейной независимости. Выпуклость: пусть $\vartheta = (\vartheta_1, \dots, \vartheta_k)^T$ и $\vartheta' = (\vartheta_1', \dots, \vartheta_k')^T$ -- элементы $\Theta^*$. Тогда для $\alpha \in (0, 1)$ имеет место
+	\[ \begin{aligned}
+	  \int \exp \Big \{ \sum_{j = 1}^{k} (\alpha \vartheta_j + (1-\alpha) & \vartheta_j') T_j(x) \Big\}\mu'(dx) = \int \Big(\exp \Big \{\sum_{j = 1}^{k} \vartheta_j T_j(x) \Big\}\Big)^\alpha \Big(\exp \Big \{\sum_{j = 1}^{k} \vartheta_j' T_j(x) \Big\}\Big)^{1-\alpha} \mu'(dx) \\
+	  \begin{aligned}\text{неравенство Гельдера} \\ \Big(p = \frac{1}{\alpha}, q = \frac{1}{1 - \alpha}\Big) \end{aligned}\longrightarrow & \leq  \Bigg(\int \exp \Big \{\sum_{j = 1}^{k} \vartheta_j T_j(x) \Big\}\mu'(dx)\Bigg)^\alpha \Bigg(\int\exp \Big \{\sum_{j = 1}^{k} \vartheta_j' T_j(x) \Big\}\mu'(dx) \Bigg)^{1-\alpha} < \infty.
+	\end{aligned} \]
+	Следовательно, $\alpha \vartheta + (1-\alpha)\vartheta' \in \Theta^*$.
+\end{proof}
+
+\begin{thm} \label{thm2.38}
+	Пусть $\mathcal{P}$ -- $k$-параметрическое экспоненциальное семейство с плотностями
+	\[f(x, \vartheta) = c(\vartheta) \exp \Big \{ \sum_{j = 1}^k \vartheta_j T_j(x) \Big \}.   \]
+	Пусть также $\Theta^{**} \subset \Theta^{*}$ открытое множество и $\varphi \in L^1(P_\vartheta) \ \forall \vartheta \in \Theta^{**}$. Тогда функция
+	\[ \beta :
+	\left \{
+	\begin{array}{ccl}
+	\Theta^{**} & \rightarrow & \MR \\
+	\vartheta & \mapsto & \beta(\vartheta) := \int \varphi(x) \exp \Big \{ \sum_{j = 1}^k \vartheta_j T_j(x) \Big\} \mu(dx)
+	\end{array}
+	\right.
+	\]
+	бесконечно дифференцируемая, и её производные:
+	\[ \Big(\frac{\partial}{\partial \vartheta_1}\Big)^{l_1} \dots \Big(\frac{\partial}{\partial \vartheta_k}\Big)^{l_k} \beta(\vartheta) = \int \varphi(x) T_1^{l_1}(x) \dots T_k^{l_k}(x) \exp \Big \{ \sum_{j = 1}^k \vartheta_j T_j(x) \Big\} \mu(dx). \]
+\end{thm}
+\begin{proof}
+	Теорема 2.71 в \cite{LehmannRomano}.
+\end{proof}
+
+\begin{rmrk}
+	Прежде чем задаваться вопросом о качестве, необходимы методы получения хорошей или хотя бы какой-нибудь оценки.
+	Если $\mathcal{P}$ -- экспоненциальное семейство, то оценка $T(X)=(T_1(X), \dots, T_k(X))$ является UMVU для $\ME_\vartheta[T(X)]$.
+\end{rmrk}
+
+\begin{exmp}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(\mu, \sigma^2)$, тогда совместная плотность:
+	\[ f(x, \vartheta) = c(\vartheta) \exp \Big\{ -\frac{n}{2\sigma^2}\Big( \frac{1}{n} \sum_{i=1}^n x_i^2 \Big) + \frac{n\mu}{\sigma^2}\Big( \frac{1}{n}x_i \Big) \Big\}. \]
+	Тогда оценка
+	\[ T(X)=\Big(\frac{1}{n}\sum_{i=1}^{n}X_i, \frac{1}{n}\sum_{i=1}^{n}X_i^2\Big)^T \]
+	является эффективной для $(\mu, \mu^2+\sigma^2)^T$.
+\end{exmp}
+
+\begin{rmrk} \label{rmrk2.41}
+	Если распределение не принадлежит параметрическому семейству, то для такого случая существуют два классических метода оценивания:
+	\begin{enumerate}
+		\item \textbf{\textit{Метод моментов}}: \\
+		Пусть, $X_1, \dots, X_n$ i.i.d. $\sim P_\vartheta$. Пусть также
+		 \[\gamma(\vartheta) = f(m_1, \dots, m_k),\]
+		  где $m_j = \ME[X_1^j] = \int x^j P_\vartheta(dx)$. Тогда \textbf{\textit{оценка, полученная методом моментов}} будет
+		  \[\hat\gamma(X) = f(\hat m_1, \dots, \hat m_k),\]
+		  где $\hat m_j = \frac{1}{n}\sum_{i = 1}^n X_i^j.$ Вследствие Закона Больших Чисел, при дополнительных условиях имеет место сходимость $\hat m_j\xrightarrow{\mathbb{P}} m_j$.
+		\item \textbf{\textit{Метод максимального правдоподобия}}: \\
+		Пусть $X \sim P_\vartheta \ll \mu $, $\vartheta \in \Theta \subset \MR^k$ и $\gamma(\vartheta) = \vartheta$. Тогда, оценка $\hat \theta = \hat \theta(x)$ называется \textbf{\textit{оценкой максимального правдоподобия}}, если
+		\[ f(x, \hat \theta) = \sup_{\vartheta \in \theta} f(x, \vartheta). \]
+	\end{enumerate}
+\end{rmrk}
+\begin{exmp}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(\mu, \sigma^2)$ и мы оцениваем параметр $\vartheta = (\mu, \sigma^2)^T = (m_1, m_2-m_1^2)^T$. Тогда по методу моментов:
+	\[\hat{\gamma}(\vartheta)=(\hat{m}_1, \hat{m}_2-\hat{m}_1^2)^T=(\overline{x}_n, \hat{s}_n^2)^T. \]
+	Несложно доказать, что эта оценка совпадает с оценкой, полученной по методу максимального правдоподобия.
+\end{exmp}
+
+\raggedbottom
+\pagebreak
+
+\section*{Упражнения}
+
+\begin{exc}
+	Пусть $X_1, \dots X_n$ i.i.d. $\sim Exp(\lambda)$:
+	\[ f(x) = \lambda e^{-\lambda x}  \]
+	и $X = (X_1, \dots, X_n)^T$. Покажите, что $g(X) = \overline{X}_n$ является UMVU-оценкой для $\lambda^{-1}$.
+\end{exc}
+
+\begin{exc}
+	Пусть $X = (X_1, \dots, X_n)^T$ -- вектор i.i.d. нормально распределенных случайных величин: $X_i \sim \mathcal{N}(\mu, \sigma^2)$ с известным параметром $\sigma$.
+	\begin{enumerate}
+		\item Покажите, что оценка
+		\[ g(X) = (\overline{X}_n)^2-\frac{\sigma^2}{n} \]
+		является несмещенной для $\mu^2$.
+		\item Вычислите квадратичный риск для $g(X)$.
+	    \item Найдите границу Рао-Крамера для $g(X)$. Какой можно сделать вывод?
+	\end{enumerate}
+\end{exc}
+
+\begin{exc}
+	Выясните, какие из следующих распределений образуют экспоненциальное семейство. Найдите параметр $k$, статистики $T_1, \dots T_k$ и естественное параметрическое пространство в соответствующих случаях.
+	\begin{enumerate}
+	    \item $ f_\vartheta(x) = \frac{\vartheta_2^{\vartheta_1}}{\Gamma(\vartheta_1)}x^{\vartheta_1-1}e^{-\vartheta_2x}, \ x \geq 0,\ \vartheta_1, \vartheta_2 > 0, $
+	    \item $ f_\vartheta(x) = 1_{(0, \vartheta)}(x) \exp(-2 \log \vartheta + \log(2x)), \ x \in \MR,\ \vartheta > 0,  $
+	    \item $ f_\vartheta(x) = \vartheta^{x-1}(1-\vartheta), \ x \in \MN_0,\ \vartheta \in (0, 1).$ 
+	\end{enumerate}
+\end{exc}
+
+\begin{exc}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(\mu, \sigma^2)$ и $X = (X_1, \dots, X_n)^T$. Покажите, что оценка
+	\[ g(X) = (\overline{X}_n, \hat{s}_n^2(X))^T  \]
+	является оценкой максимального правдоподобия для $\vartheta = (\mu, \sigma^2)^T$.
+\end{exc}
+
+\begin{exc}
+	Пусть $X = (X_1, \dots X_n)^T$ -- вектор i.i.d. равномерно распределенных случайных величин: $X_i \sim \mathcal{U}(0, \vartheta)$, где оцениваемый параметр $\vartheta > 0$. Рассмотрим оценку
+	\[ g(X) = \max\{ X_1, \dots, X_n \}. \]
+	\begin{enumerate}
+		\item Покажите, что $g(X)$ -- оценка максимального правдоподобия
+		\item Найдите математическое ожидание и дисперсию $g(X)$. Покажите, что
+		\[ \Var_\vartheta(g(X))=O \bigg(\frac{1}{n^2} \bigg). \]
+		\item Найдите оценку $\hat{g}$ методом моментов. Найдите её математическое ожидание и дисперсию.
+		\item Найдите границу Рао-Крамера для несмещенной оценки $\vartheta$. Применима ли здесь теорема Рао-Крамера?
+		\item Сравните дисперсии $\hat{g}$ и $\frac{n+1}{n}g$ с границей Рао-Крамера.
+	\end{enumerate}
+\end{exc}

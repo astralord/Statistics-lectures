@@ -1,0 +1,92 @@
+\documentclass[a4paper,11pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{extsizes}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{dsfont}
+\usepackage[toc,page]{appendix}
+\usepackage[export]{adjustbox}
+\usepackage[percent]{overpic}
+
+\geometry{
+	a4paper,
+	left=20mm,
+	right=20mm,
+	top=20mm,
+	bottom=20mm,
+}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Теорема}[chapter]% reset theorem numbering for each chapter
+\newtheorem{lmm}[thm]{Лемма}
+\newtheorem{crlr}[thm]{Следствие}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Определение}
+\newtheorem{exmp}[thm]{Пример}
+\newtheorem{rmrk}[thm]{Замечание}
+\newtheorem{asmp}[thm]{Предположение}
+\newtheorem{prps}[thm]{Предложение}
+\newtheorem{cond}[thm]{Условия}
+
+\newtheorem{exc}{}[chapter]
+
+\renewenvironment{proof}{{\scshape Доказательство:}}{}
+
+\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{(\theenumi)}
+
+\newcommand{\ME}{\mathbb{E}}
+\newcommand{\MR}{\mathbb{R}}
+\newcommand{\MP}{\mathbb{P}}
+\newcommand{\MN}{\mathbb{N}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\convdistr}{\xrightarrow{\mathcal{L}}}
+\newcommand{\convprob}{\xrightarrow{\MP}}
+
+
+\begin{document}
+	
+\author{Маттиас Феттер \\
+	(пер. Александр Самарин)}
+\title{Математическая статистика}
+\date{2016}
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+\include{./chapters/chapter01}
+\include{./chapters/chapter02}
+\include{./chapters/chapter03}
+\include{./chapters/chapter04}
+\include{./chapters/chapter05}
+\include{./chapters/chapter06}
+\include{./chapters/chapter07}
+\include{./chapters/chapter08}
+
+\backmatter
+
+% bibliography, glossary and index would go here.
+\addcontentsline{toc}{chapter}{Список литературы}
+\bibliographystyle{stylefile}
+\bibliography{biblio}
+
+\end{document}

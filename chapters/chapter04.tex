@@ -1,0 +1,534 @@
+\chapter{Достаточность и полнота}
+
+Теперь, пусть $(\mathcal{X}, \mathcal{B}, P)$, где $P \in \mathcal{P} = \{P_\vartheta \mid \vartheta \in \Theta \} $, -- вероятностное пространство и $(\mathcal{T}, \mathcal{D})$ -- измеримое пространство.
+
+\begin{defn}
+	$\mathcal{B}$-$\mathcal{D}$-измеримая функция $T:\mathcal{X} \rightarrow \mathcal{T}$ называется \textbf{\textit{статистикой}}.
+\end{defn}
+
+\begin{exmp} \label{exmp4.2}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim Bin(1, \vartheta)$ с совместным распределением:
+	\[ f(x, \vartheta) = \vartheta^{\sum_{i=1}^{n}x_i}(1-\vartheta)^{n-\sum_{i=1}^{n}x_i}=\vartheta^{T(x)}(1-\vartheta)^{n-T(x)}, \]
+	где $T(x)=\sum_{i=1}^{n}x_i$ -- статистика.
+	Если мы выбираем $u_1, \dots, u_n \in \{0,1\}$, то
+	\[
+		P_\vartheta(X_i=u_i \  \forall i = 1, \dots, n \mid T(X)=k)=\left \{
+		\begin{array}{cl}
+		\frac{1}{\binom{n}{k}}, & \text{если } \sum_{i=1}^{n}u_i=k \\
+		0, & \text{иначе}
+		\end{array}
+		\right.
+	\]
+	Мы видим, что в данном примере, зная значение $T(X)$, никакой дополнительной информации о $\vartheta$ не может быть получено из информации о векторе $X=X_1, \dots, X_n$.
+\end{exmp}
+
+\begin{defn} \
+	\begin{enumerate}
+		\item $\sigma$-алгебра $\mathcal{C} \subset \mathcal{B}$ называется \textbf{\textit{достаточной}} для $\vartheta$, если
+		\[ k_B=P_\vartheta(B | \mathcal{C}) \quad \forall \vartheta \in \Theta,\ \forall B \in \mathcal{B}. \]
+		Это означает, что $\mathcal{C}$-условные вероятности не зависят от $\vartheta$.
+		\item Статистика $T:\mathcal{X} \rightarrow \mathcal{T}$ называется \textbf{\textit{достаточной}} для $\vartheta$, если $\sigma(T)$ достаточна для $\vartheta$.
+	\end{enumerate}
+\end{defn}
+
+\begin{rmrk} \
+	\begin{enumerate}
+		\item Из Леммы о факторизации (Теорема \ref{Factorization lemma}) мы знаем, что $T$ достаточная для $\vartheta$ тогда и только тогда, когда $\forall B \in \mathcal{B}$ существует функция $h_B:\mathcal{T} \rightarrow \MR$, такая что:
+		\[ h_B(t)=P_\vartheta(B \mid T=t). \]
+		\item В Примере \ref{exmp4.2} статистика $T(x)=\sum_{i=1}^{n}x_i$ достаточная для $\vartheta$.
+		\item Пусть $g:\mathcal{X} \rightarrow \MR$ из $L^1(\mathcal{P}) = \bigcap_{\vartheta \in \Theta}L^1(P_\vartheta)$.
+		\begin{enumerate}
+			\item Если $\mathcal{C}$ достаточная для $\vartheta$, то существует функция
+			\[ k = \ME_\vartheta[g | \mathcal{C}], \]
+			не зависящая от $\vartheta$.
+			\item Если $T: \mathcal{X} \rightarrow \mathcal{T}$ достаточная для $\vartheta$, то существует функция
+			\[h(t)=\ME_\vartheta[g \mid T=t],\]
+			не зависящая от $\vartheta$.
+		\end{enumerate}
+	\end{enumerate}
+\end{rmrk}
+
+\begin{exmp}
+	Пусть $Q$ -- конечная группа отображений $\pi: (\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{X}, \mathcal{B})$. Система
+	\[ \mathcal{C}=\mathcal{C}(Q)=\{ B \in \mathcal{B} \mid \pi(B)=B \ \ \forall \pi \in Q \} \]
+	называется $\sigma$-алгеброй $Q$-инвариантных множеств. Если $\mathcal{P}$ инвариантна относительно $Q$, то есть:
+	\[P_\vartheta^\pi(B)=P_\vartheta(\pi^{-1}(B))=P_\vartheta(B) \quad \forall B \in \mathcal{B},\ \forall \pi \in Q,\ \forall \vartheta \in \Theta\]
+	и если $g \in L^1(\mathcal{P})$ и $q=|Q|$, то
+	\[ k(x)=\frac{1}{q} \sum_{\pi \in Q} g(\pi(x)) \]
+	является версией $\ME_\vartheta[g|\mathcal{C}]$, независимой от $\vartheta$. Как следствие, $\mathcal{C}$ -- достаточная.
+\end{exmp}
+\begin{proof}
+	Так как $Q$ является группой, то $k(x)=k(\pi(x)) \ \forall \pi \in Q$. Следовательно, 
+	\[ k^{-1}(B)=(\pi)^{-1}(k^{-1}(B)) \quad \forall B \in \mathcal{B}, \]
+	иными словами, $k$ -- $\mathcal{C}$-измерима. Пусть $C \in \mathcal{C}$, тогда:
+	\[
+	\begin{aligned}
+	    \int_{C} k(x)P_\vartheta(dx) & =\frac{1}{q}\sum_{\pi \in Q} \int_{C} g(\pi(x)) P_\vartheta(dx)=\frac{1}{q}\sum_{\pi \in Q} \int_{\pi(C)} g(x) P_\vartheta^\pi(dx) \\
+	    & = \frac{1}{q}\sum_{\pi \in Q} \int_{\pi(C)} g(x) P_\vartheta(dx) = \frac{1}{q}\sum_{\pi \in Q} \int_{C} g(x) P_\vartheta(dx)\\
+	    & = \int_{C} g(x)P_\vartheta(dx).
+	\end{aligned}
+	 \]
+\end{proof}
+
+\begin{exmp}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim F$ и 
+	\[ \mathcal{P}= \{ P \sim F^n \mid F \text{ -- функция распределения} \}, \quad F^n(x)=\prod_{i=1}^{n}F(x_i). \]
+	Также $\mathcal{X}=\mathbb{P}^n$ и $\mathcal{B}=\mathcal{B}^n$. Пусть
+	\[ Q=S_n=\{ \pi:\MR^n \rightarrow \MR^n \mid \pi \text{ -- перестановка} \}, \]
+	тогда $P^\pi = P  \quad \forall \pi \in S_n $ и таким образом $\mathcal{P}$ -- инвариантна относительно $S_n$. Следовательно, $\mathcal{C}=\mathcal{C}(S_n)$ -- достаточная.
+\end{exmp}
+
+\begin{defn}
+	Пусть $\MR_{\leq}^n = \{X \in \MR^n | X_1 \leq \dots \leq X_n \}$ и $X_{(j)}$ -- $j$-ое наименьшое число среди $X_1, \dots, X_n$. Тогда статистика
+	\[T:
+	\left \{
+	\begin{array}{ccl}
+	\MR^n & \rightarrow & \MR_{\leq}^n \\
+	X & \mapsto & X_{(\cdot)}
+	\end{array}
+	\right.
+	 \]
+	называется \textbf{\textit{порядковой статистикой}} $(X_1, \dots, X_n)^T$. 
+\end{defn}
+
+\begin{rmrk} \label{rmrk4.8} \
+	\begin{enumerate}
+		\item По определению $\sigma(T) = \mathcal{C}(S_n)$, поэтому $T$ -- достаточная статистика. Другими словами, всегда достаточно хранить упорядоченный вектор наблюдений.
+		\item Статистика
+		\[\widetilde T:
+		\left \{
+		\begin{array}{ccl}
+		\MR^n & \rightarrow & \MR^n \\
+		X & \mapsto & \big(\sum_{i=1}^n X_i, \sum_{i=1}^{n}X_i^2, \dots, \sum_{i=1}^{n}X_i^n\big)^T
+		\end{array}
+		\right.
+		\]
+		также достаточная, потому что можно показать, что $\sigma(T)=\sigma(\widetilde T)$.
+	\end{enumerate}
+\end{rmrk}
+
+\begin{defn}
+	Пусть $\mathcal{P}= \{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер. Тогда мера $\nu$ называется \textbf{\textit{эквивалентной}} $\mathcal{P}$, если
+	\[ \nu(N) = 0 \Longleftrightarrow P_\vartheta(N)=0 \quad \forall \vartheta \in \Theta. \]
+\end{defn}
+
+\begin{thm}[\textbf{Теорема Халмоса-Саважа}] \label{Halmos-Savage}
+	Пусть $\mu$ -- $\sigma$-конечная мера, $\mathcal{P}=\{P_\vartheta \mid \vartheta \in \Theta \}$ и $P_\vartheta \ll \mu \quad \forall \vartheta \in \Theta $.
+	\begin{enumerate}
+		\item Существует мера $\nu$, эквивалентная $\mathcal{P}$, вида
+		\begin{equation} \label{eq4.1}
+		\nu = \sum_{i=1}^{\infty}c_iP_{\vartheta_i},\; \text{где } c_i \geq 0 \; \forall i \text{ и } \sum_{i=1}^{\infty}c_i=1.
+		\end{equation}
+		\item $\sigma$-алгебра $\mathcal{C} \subset \mathcal{B}$ достаточная для $\vartheta$ тогда и только тогда, когда существует $\mathcal{C}$-измеримая функция $\frac{dP_\vartheta}{d\nu}$ для любого параметра $\vartheta$.
+		\item Статистика $T$ является достаточной для $\vartheta$ тогда и только тогда, когда для любого параметра $\vartheta$ существует  функция $g_\vartheta$, такая что:
+		\[ \frac{dP_\vartheta}{d\nu}(x)=g_\vartheta(T(x)). \]
+	\end{enumerate}
+\end{thm}
+\begin{proof} \
+	\begin{enumerate}
+		\item Мы докажем утверждение только для конечной меры $\mu$. Пусть
+		\[ \mathcal{J} = \{\nu\ |\ \nu \text{ -- мера вида \eqref{eq4.1}}  \} \]
+		и
+		\[ q = \frac{dQ}{d\mu}, \quad Q \in \mathcal{J}. \]
+		Достаточно показать, что существует мера $Q_0 \in \mathcal{J}$, такая что:
+		\begin{equation} \label{eq4.2}
+		Q_0(A) = 0 \Longrightarrow Q(A) = 0 \quad \forall Q \in \mathcal{J}.
+		\end{equation}
+		Тогда $P_\vartheta(A) = 0$ $\forall \vartheta$, так как $P_\vartheta \in \mathcal{J}$. Верно и обратное, если $P_\vartheta(A) = 0$ $\forall \vartheta$, то $Q_0(A) = 0$, так как $Q_0 \in \mathcal{J}$. Рассмотрим множество
+		\[ \mathcal{C}:= \{ B \in \mathcal{B}\ |\ \exists Q \in \mathcal{J}  \text{, такая что } Q(B) > 0 \text{ и } q(x) > 0 \text{ для $\mu$-почти всех }  x \in B \} \]
+		и зададим $\sup_{B \in \mathcal{C}} \mu(B) = r$. Тогда существуют $B_i \in \mathcal{C}$, такие что $\mu(B_i) \rightarrow r$. Пусть 
+		\[B_0 = \bigcup_{i \in \MN}B_i,\]
+		тогда вследствие непрерывности $\mu$ мы получаем $\mu(B_0)=r$. Пусть также $Q_i$ -- меры $Q\in\mathcal{J}$, соответствующие $B_i$, и
+		\[ Q_0 = \sum_{i=1}^{n} c_i Q_i \in \mathcal{J}, \]
+		где $c_i > 0$ и $\sum_{i=1}^{n} c_i = 1$. Тогда $\mu$-плотность $Q_0$:
+		\[ \frac{dQ_0}{d\mu}(x) = q_0(x) = \sum_{i=1}^{n} c_i q_i(x). \]
+		Очевидно, что $q_0(x) > 0$ для $\mu$-почти всех $x \in B_0$. Следовательно $Q_0(B_0) > 0$ и $B_0 \in \mathcal{C}$. Докажем \eqref{eq4.2}. Допустим, $Q_0(A) = 0$ и пусть $Q \in \mathcal{J}$ -- произвольная мера. Пусть $q$ -- плотность $Q$ и
+		\[ B = \{x\ |\ q(x) > 0  \}. \]
+		Тогда
+		\[0 = Q_0(A \cap B_0 ) = \int_{A \cap B_0} q_0(x) \mu(dx).\]
+		Так как на $q_0 > 0$ на $B_0$, мы получаем
+		\[ \mu(A \cap B_0) = 0 \]
+		и, как следствие,
+		\[ Q(A \cap B_0) = 0 \quad \forall Q \in \mathcal{J}. \]
+		Кроме того, в соответствии с определением $B$:
+		\[ Q(A \cap B_0^c \cap B^c ) = 0.\]
+		Если $Q(A \cap B_0^c \cap B ) > 0$, то $B_0$ и $A \cap B_0^c \cap B$ являются элементами $\mathcal{C}$. Тогда легко увидеть, что объединение $B_0$ и $A \cap B_0^c \cap B$ также принадлежит $\mathcal{C}$. Тогда
+		\[ \mu(B_0 \cup (A \cap B_0^c \cap B)) = \mu(B_0) + \mu(A \cap B_0^c \cap B) > \mu(B_0), \]
+		что противоречит максимальности $B_0$ в $\mathcal{C}$. Следовательно,
+		\[ Q(A \cap B_0^c \cap B ) = 0 \Longrightarrow Q(A) = 0. \]
+		\item ''$\Longrightarrow$'' Допустим, что $\mathcal{C}$ -- достаточная. Тогда $\forall B \in \mathcal{B}$ существует $\mathcal{C}$-измеримая функция $k_B$, независимая от $\vartheta$, такая что
+		\[ \int_C k_B dP_\vartheta = \int_C 1_B dP_\vartheta \quad \forall C \in \mathcal{C}\ \forall \vartheta \in \Theta. \]
+		Из (i) следует, что
+		\[ \int_C k_B d\nu = \int_C 1_B d\nu \quad \forall C \in \mathcal{C}. \]
+		Следовательно, $k_B = \ME_\nu[1_B|\mathcal{C}]$ и
+		\[ P_\vartheta(B) = \int_{\mathcal{X}} 1_B dP_\vartheta = \int_{\mathcal{X}} k_B dP_\vartheta = \int_{\mathcal{X}} \ME_\nu[1_B|\mathcal{C}]dP_\vartheta. \]
+		Пусть теперь 
+		\[f_\vartheta^\mathcal{C} = \frac{dP_\vartheta^\mathcal{C}}{d \nu}\]
+		-- $\nu$-плотность $P_\vartheta$, ограниченная $\sigma$-алгеброй $\mathcal{C}$. Тогда вследствие $\mathcal{C}$-измеримости $f_\vartheta^C$ (Теорема \ref{Radon Nikodym}) мы получаем по Теореме \ref{Factorization theorem}:
+		\[ P_\vartheta(B) = \int_{\mathcal{X}} \ME_\nu[1_B | \mathcal{C}]f_\vartheta^{\mathcal{C}} d\nu = \int_{\mathcal{X}}\ME_\nu[1_B f_\vartheta^\mathcal{C} | \mathcal{C} ] d\nu = \int_B f_\vartheta^\mathcal{C} d\nu. \]
+		Следовательно, $\frac{dP_\vartheta}{d \nu} = f_\vartheta^\mathcal{C}$ и $f_\vartheta^\mathcal{C}$ $\mathcal{C}$-измерима.\\
+		
+		''$\Longleftarrow$'' Пусть $B \in \mathcal{B}$ и $k_B$ -- версия $\ME_\nu[1_B|\mathcal{C}]$, где $\nu$ -- мера из (i). Тогда для $f_\vartheta = \frac{dP_\vartheta}{d\nu}$ имеет место
+		\[ \int_C 1_B dP_\vartheta = \int_{B \cap C} f_\vartheta d\nu = \int_C 1_B f_\vartheta d\nu = \int_C \ME_\nu[1_B f_\vartheta | \mathcal{C}]d\nu \quad \forall C \in \mathcal{C}. \]
+		$f_\vartheta$ $\mathcal{C}$-измерима по предположению. Таким образом,
+		\[ \int_C 1_B dP_\vartheta = \int_C f_\vartheta \ME_\nu[1_B | \mathcal{C}]d\nu = \int_C f_\vartheta k_B d\nu = \int_C k_B dP_\vartheta \]
+		и $\mathcal{C}$ -- достаточная по определению.
+		\item Следует из (ii) и Леммы о факторизации (Теорема \ref{Factorization lemma}).
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}[\textbf{Критерий Неймана}] \label{Neyman criterion} Пусть $\mu$ -- $\sigma$-конечная мера и $P \ll \mu$. Тогда:
+	\begin{enumerate}
+		\item $\sigma$-алгебра $\mathcal{C}$ является достаточной для $\vartheta \in \Theta$ тогда и только тогда, когда существуют $\mathcal{C}$-измеримые функции $f_\vartheta:\mathcal{X} \rightarrow \MR$ и $\mathcal{B}$-измеримая функция $r:\mathcal{X} \rightarrow \MR$, такие что
+		\[ \frac{dP_\vartheta}{d\mu}=r(x)f_\vartheta(x). \]
+		\item Статистика $T:(\mathcal{X},\mathcal{B}) \rightarrow (\mathcal{T},\mathcal{D})$ является достаточной тогда и только тогда, когда существуют $\mathcal{D}$-измеримые функции $g_\vartheta:\mathcal{T} \rightarrow \MR$ и $\mathcal{B}$-измеримая функция $r:\mathcal{X} \rightarrow \MR$, такие что
+		\[\frac{dP_\vartheta}{d\mu}=r(x)g_\vartheta(T(x)). \]
+	\end{enumerate}
+\end{thm}
+\begin{proof}
+	Мы покажем только (i), так как (ii) следует из \ref{Factorization lemma}. \\
+	$\Longrightarrow$ Пусть $r$ -- мера из Теоремы \ref{Halmos-Savage}, $P_\vartheta \ll r \ll \mu$. Из Теоремы \ref{Radon Nikodym} следует:
+	\[
+	\begin{aligned}
+	\frac{dP_\vartheta}{d \mu}(x) = & \underbrace{\frac{d P_\vartheta}{d \nu}(x)} & \underbrace{\frac{d \nu}{d \mu}(x)} \\
+    &\ f_\vartheta(x) & r(x) \
+	\end{aligned} \] 
+	$f_\vartheta(x)$ $\mathcal{C}$-измерима по Теореме \ref{Halmos-Savage}(ii). \\
+	$\Longleftarrow$
+	$f_\vartheta(x)$ $\mathcal{C}$-измерима по предположению. Возьмем $c_i$ и $f_{\vartheta_i}$ из $r$ из Теоремы \ref{Halmos-Savage} и определим:
+	\[ \widetilde{f_\vartheta}(x) =
+	\left \{
+	\begin{array}{cl}
+	f_\vartheta(x) / \sum_{i=1}^{\infty} c_i f_{\vartheta_i}(x) , & \exists\ i: f_{\vartheta_i}(x) > 0, \\
+	0, & \text{иначе}.
+	\end{array}
+	\right.
+	\]
+	Следовательно, $\widetilde{f_\vartheta}$ $\mathcal{C}$-измерима и
+	\[ \int_B  \widetilde{f_\vartheta}d\nu = \int_B \widetilde{f_\vartheta} \sum_{i=1}^{\infty} c_i dP_{\vartheta_i} = \int_B \widetilde{f_\vartheta} \sum_{i=1}^{\infty} c_i r f_{\vartheta_i}d\mu = \int_B f_\vartheta r d\mu \quad \forall B \in \mathcal{B},  \]
+	что не что иное, как $P_\vartheta(B)$. Следовательно, $\widetilde{f_\vartheta}$ $\mathcal{C}$-измеримая версия $\frac{dP_\vartheta}{dr}$. Следовательно, по Теореме \ref{Halmos-Savage} (ii) $\mathcal{C}$ достаточная для $\vartheta$.
+\end{proof}
+
+\begin{exmp} \label{exmp4.12} \
+	\begin{enumerate}
+		\item Пусть $P$ -- $k$-параметрическое экспоненциальное семейство с плотностями
+		\[ \frac{dP_\vartheta}{d \mu}(x) = c(\vartheta)h(x)\exp\Big\{\sum_{i=1}^k Q_j(\vartheta)T_j(x)\Big \}. \]
+		По Теореме \ref{Neyman criterion} $T = (T_1, \dots, T_n)^T$ достаточная для $\vartheta$.
+		\item Если $X_i \sim \mathcal{N}(\mu, \sigma^2)$, то
+		\[ T(X) = \Big(\sum_{i=1}^{n}X_i, \sum_{i = 1}^{n} X_i^2 \Big) \]
+		достаточная для $(\mu, \sigma^2)^T$.
+		\item Если $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{U}[0, \vartheta]$ ($\vartheta > 0$), то для $X$ плотность вероятности будет:
+		\[ f_\vartheta(X) = \bigg(\frac{1}{\vartheta} \bigg)^n \prod_{i = 1}^{n} 1_{[0, \vartheta]}(X_i) = \bigg(\frac{1}{\vartheta} \bigg)^n 1_{[0, \vartheta]} \big(\max_{1 \leq i \leq n} X_i \big). \]
+		Следовательно, $T(X) = \max_{1 \leq i \leq n} X_i$ достаточная для $\vartheta$ по Теореме \ref{Neyman criterion}.
+	\end{enumerate}
+\end{exmp}
+
+\begin{rmrk}\label{rmrk4.13}
+	Пусть $T:(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ и $\widetilde{T}:(\mathcal{X}, \mathcal{B}) \rightarrow (\widetilde{\mathcal{T}}, \widetilde{\mathcal{D}})$ -- статистики и, без ограничения общности, $\mathcal{T} = T(\mathcal{X})$ и $\widetilde{\mathcal{T}}=\widetilde{T}(\mathcal{X})$. Если $T$ -- достаточная для $\vartheta$ и существует биекция $b:\mathcal{T} \rightarrow \widetilde{\mathcal{T}}$, такая что $\widetilde{T} = b \circ T$ и $b(\mathcal{D}) = \widetilde{\mathcal{D}}$, то
+	\[ \widetilde{T}^{-1}(\widetilde{D}) = T^{-1}(b^{-1}(b(D))) = T^{-1}(D), \quad \widetilde{D} \in \widetilde{\mathcal{D}} \quad \text{и} \quad D = b^{-1}(\widetilde{D}) \in \mathcal{D}. \]
+	Следовательно, $\sigma(\widetilde{T}) = \sigma(T)$ и $\widetilde{T}$ -- достаточная. \\
+	Вкратце: биективное отображение сохраняет достаточность.
+\end{rmrk}
+
+\begin{exmp}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(\mu, \sigma^2)$. Мы знаем из Примера \ref{exmp4.12}, что 
+	\[ T(X) = \Big(\sum_{i=1}^{n}X_i, \sum_{i = 1}^{n} X_i^2 \Big) \]
+	достаточная для $(\mu, \sigma^2)^T$. Из Замечания \ref{rmrk4.13} следует, что $(\overline{X}_n, \hat{s}_n^2)$ достаточная, если взять
+	\[ b(x, y) = \bigg( \frac{x}{n}, \frac{y}{n}-\bigg(\frac{x}{n}\bigg)^2 \bigg), \quad \mathcal{T} = \bigg\{ (x, y) | x \in \MR, y \geq \frac{x^2}{n}\bigg \} \quad \text{и} \quad \widetilde{\mathcal{T}}=\MR \times \MR^+.
+	 \]
+	 Множество $\mathcal{T}$ может быть проверено с помощью неравенства Коши-Шварца.
+\end{exmp}
+
+\begin{thm}[\textbf{Теорема Рао-Блэквелла}] \label{Rao-Blackwell}
+	Пусть $\mathcal{P}=\{P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство распределений на $(\mathcal{X}, \mathcal{B})$, $T:(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ -- достаточная статистика для $\vartheta$, $\gamma : \Theta \rightarrow \Gamma \subset \MR^l$, $L: \Gamma \times \Gamma \rightarrow \MR^+$ -- функция потерь, такая что $y \mapsto L(\gamma(\vartheta), y)$ -- выпуклая $\forall \vartheta \in \Theta$. Если $g$ -- несмещенная оценка $\gamma(\vartheta)$ и $\ME[L(\gamma(\vartheta), g)] < \infty \ \forall \vartheta \in \Theta$, то:
+	\begin{enumerate}
+		\item Существует $\sigma(T)$-измеримая несмещенная оценка $k$, такая что
+		\[ R(\vartheta, k) \leq R(\vartheta, g) \quad \forall \vartheta \in \Theta, \]
+		точнее $k=\ME[g|T]$.
+		\item Если $y \mapsto L(\gamma(\vartheta), y)$ строго выпуклая $\forall \vartheta \in \Theta$, то 
+		\[ R(\vartheta, k) = R(\vartheta, g) \quad \forall \vartheta \in \Theta, \]
+		тогда и только тогда, когда $g = h \circ T $, где $h(t)=\ME[g|T=t]$.
+	\end{enumerate}
+\end{thm}
+\begin{proof}
+	Используем неравенство Йенсена для условного математического ожидания:
+	\[ f(\ME[g(X)|\mathcal{V}]) \leq \ME[f(g(X))|\mathcal{V}] \quad \mathbb{P}^{\mathcal{V}}\text{-п.н.} \]
+	Для строго выпуклой функции $f$ имеет место равенство в случае $g=\ME[g|\mathcal{V}]$.
+	\begin{enumerate}
+		\item По свойству итерированного ожидания:
+		\[ \ME_\vartheta[k]=\ME_\vartheta[\ME_\vartheta[g|T]]=\ME_\vartheta[g]=\gamma(\vartheta), \]
+		то есть оценка $k$ несмещенная $\forall \vartheta \in \Theta$.
+		\[ L(\gamma(\vartheta), k)=L(\gamma(\vartheta), \ME_\vartheta[g|T]) \leq \ME_\vartheta[L(\gamma(\vartheta), g)|T] \quad \forall \vartheta \in \Theta. \]
+		Интегрируя по $P_\vartheta$, получаем:
+		\[ R(\vartheta, k)= \ME_\vartheta[L(\gamma(\vartheta), k)] \leq \ME_\vartheta[\ME_\vartheta[L(\gamma(\vartheta), g)|T]]=\ME_\vartheta[L(\gamma(\vartheta), g)]=R(\vartheta, g).  \]
+		\item В случае строгой выпуклости равенство имеет место тогда и только тогда, когда $g=\ME[g|T]$.
+	\end{enumerate}
+\end{proof}
+
+\begin{crlr}
+	Пусть $\Theta \subset \MR$ и $L(x,y)=(x-y)^2$. Если $g$ -- несмещенная оценка, а $T$ -- достаточная стастистика, то для оценки $k=\ME[g|T]$ неравенство
+	\[ \Var_\vartheta(k) \leq \Var_\vartheta(g) \quad \forall \vartheta \in \Theta \]
+	превращается в равенство тогда и только тогда, когда $g=\ME[g|T]$.
+\end{crlr}
+
+\begin{exmp} \label{exmp4.17} \ 
+	\begin{enumerate}
+		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{U}(0, \vartheta)$, $\vartheta > 0$. Мы знаем, что статистика
+		\[ T(X)=X_{(n)}=\max_{1 \leq i \leq n}{X_i} \]
+		является достаточной для $\vartheta$. Оценка
+		$g(X)=\frac{2}{n}\sum_{i=1}^{n}X_i$
+		является несмещенной для $\vartheta$. Следовательно, оценка
+		\[k(X) = \ME[g(X)\ |\ X_{(n)} ] = \frac{2}{n} \sum_{i=1}^{n} \ME[X_{(i)}\ |\ X_{(n)}] =\frac{2}{n} \sum_{i=1}^{n} \frac{i}{n} X_{(n)} = \frac{n + 1}{n} X_{(n)} \]
+		также является несмещенной и имеет меньшую (или, по крайней мере, такую же) дисперсию. Проверим это, используя распределение $i$-го элемента в порядковой статистике из стандартного равномерного распределения $\mathcal{U}(0, 1)$:
+		\[ \MP(X_{(i)} \leq x) = \sum_{j=i}^{n} \binom{n}{j} x^j (1-x)^{n-j} = \frac{\int_{0}^{x} t^{i-1}(1-t)^{n-i} dt }{B(i, n-i+1)}. \]
+		Другими словами, $X_{(i)} \sim B(i, n - i + 1)$. Зная дисперсию бета-распределения (Пример \ref{exmp3.14}) и масштабируя на $\vartheta$, мы получаем
+		\[ \Var_\vartheta(g) = \frac{\vartheta^2}{3n} \quad \text{и} \quad \Var_\vartheta(k) = \frac{\vartheta^2}{n(n+2)}. \]
+		Таким образом, для $n \geq 2$ оценка $k$ имеет меньшую дисперсию.
+		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim F$ и
+		\[ \mathcal{P} =  \{ F \ | \ F \text{ -- функция распределения} \}. \]
+		Допустим, мы заинтересованы в оценке $\gamma: F \mapsto F(z)$, $z \in \MR$. Функция
+		\[ g(X) = 1_{\{ X_1 \leq z \}} \]
+		является несмещенной оценкой. Статистика
+		\[ X_{(\cdot)} = (X_{(1)}, \dots, X_{(n)})^T \]
+		является достаточной для $F$ (Замечание \ref{rmrk4.8}).
+		Заметив, что
+		\begin{equation} \label{eq4.7}
+		\ME[1_{\{X_n \leq z \}} | X_{(\cdot)} ] = \frac{1}{n} \sum_{i=1}^n 1_{\{X_i \leq z \}},
+		\end{equation}
+		мы увидим, что
+		$\hat{F}_n(z) =  \frac{1}{n} \sum_{i=1}^n 1_{\{X_i \leq z \}}$
+		-- несмещенная оценка $F(z)$, с дисперсией, не большей чем дисперсия $g$. Функция $\hat{F}_n(z)$ называется \textbf{\textit{эмпирической функцией распределения}}. \\
+		Чтобы увидеть, откуда берется \eqref{eq4.7}, вспомним из Замечания \ref{rmrk4.8}, что
+		\[ \sigma(X_{(\cdot)}) = \mathcal{C}(S_n). \]
+		Так как $\hat{F}_n(z)$ инвариантна по отношению к перестановкам, она $\sigma(X_{(\cdot)})$-измерима. Заметим далее, что
+		\[ \int_B 1_{\{X_1 \leq z\}} d\MP = \int_B 1_{\{X_j \leq z \}} d \MP \quad \forall B \in \sigma(X_{(\cdot)}) = \mathcal{C}(S_n) \]
+		и \eqref{eq4.7} следует из определения условного математического ожидания.
+	\end{enumerate}
+\end{exmp}
+
+\begin{rmrk}
+	Хорошие оценки факторизуются в общем над достаточными статистиками. Таким способом, уменьшаются данные, как в Примере \ref{exmp4.12}, где мы храним $(\overline{X}_n, \hat{s}_n^2(X))$, вместо целого вектора $(X_1, \dots, X_n)^T$. Оптимальным будет сокращение до минимальных достаточных статистик. 
+\end{rmrk}
+
+\begin{defn}
+	Достаточная статистика $T^*:(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ называется \textbf{\textit{минимальной достаточной}}, если для любой другой достаточной статистики $T$ существует функция $h$, такая что
+	\[T^*=h \circ T. \]
+\end{defn}
+
+\begin{exmp} \label{exmp4.20}
+	Пусть $\mathcal{P} = \{P_\vartheta\ |\ \vartheta \in \Theta\}$ -- семейство эквивалентных вероятностных мер, где $\Theta = \{\vartheta_0, \dots, \vartheta_k\}$ и $\mu$-плотности $f_{\vartheta_i}, i = 0, \dots, k$. Тогда статистика
+	\[ T^*(x) = \bigg(\frac{f_{\vartheta_1}(x)}{f_{\vartheta_0}(x)}, \dots, \frac{f_{\vartheta_k}(x)}{f_{\vartheta_0}(x)}\bigg)^T \]
+	минимальная достаточная для $\vartheta$.
+\end{exmp}
+\begin{proof}
+	Введем обозначения: $P_i = P_{\vartheta_i}$ и $f_i = f_{\vartheta_i}$. Выберем $P_0$ в качестве доминирующей меры в критерии Неймана (Теорема \ref{Neyman criterion}). Тогда
+	\[ \frac{dP_i}{dP_0} = \frac{dP_i / d\mu}{dP_0 / d\mu} = \frac{f_i}{f_0} = \pi_i \circ T^*, \quad i = 1, \dots, k \]
+	и
+	\[ P_i(A) = \int_A \frac{dP_i}{dP_0} dP_0 = \int_A \frac{dP_i}{dP_0} \frac{dP_0}{d\mu} d\mu = \int_A \frac{dP_i}{d\mu} d\mu \quad i = 1, \dots k, \]
+	где $\pi_i$ обозначает проекцию $i$-й компоненты. Также, так как $\frac{dP_0}{dP_0} = 1 = k \circ T^*$ для $k \equiv 1$, то $T^*$ -- достаточная по критерию Неймана. Допустим теперь, что $T$ -- другая достаточная статистика. Тогда
+	\[ f_i(x) = h(x) g_i(T(x)) \]
+	для определенных функций $h$ и $g$. Тогда
+	\[\frac{f_i(x)}{f_0(x)} = \frac{g_i(T(x))}{g_0(T(x))}. \]
+	Следовательно, $T^*(x)$ -- функция от $T(x)$.
+\end{proof}
+
+\begin{lmm} \label{lmm4.21}
+	Пусть $\mathcal{P}$ -- семейство эквивалентных мер и $\mathcal{P}_0 \subset \mathcal{P}$ -- конечное подсемейство. Тогда любая статистика $T$, достаточная для $\mathcal{P}$ и минимальная достаточная для $\mathcal{P}_0$ также минимальная достаточная для $\mathcal{P}$.
+\end{lmm}
+\begin{proof}
+	Пусть $S$ -- достаточная для $\mathcal{P}$. Тогда $S$ также достаточная для $\mathcal{P}_0$ и
+	\[ T = h \circ S \quad \mathcal{P}_0\text{-п.н.} \]
+	Так как все меры эквивалентны, 
+	\[ T = h \circ S \quad \mathcal{P}\text{-п.н.} \]
+\end{proof}
+
+\begin{thm} \label{thm4.22}
+	Пусть $\mathcal{P} = \{ P_\vartheta\ |\ \vartheta \in \Theta \}$ -- $k$-параметрическое экспоненциальное семейство с плотностями:
+	\[ \frac{dP_\vartheta}{d\mu}(x) = c(\vartheta) h(x) \exp \Big\{ \sum_{i=1}^{k}Q_i(\vartheta) T_i(x) \Big \}. \]
+	Если $Z = \{ (Q_1(\vartheta), \dots, Q_k(\vartheta))^T\ |\ \vartheta \in \Theta \}$ имеет непустую внутреннюю часть, то $(T_1(x), \dots, T_k(x))^T$ -- минимальная достаточная для $\vartheta$.
+\end{thm}
+\begin{proof}
+	Статистика $(T_1(x), \dots, T_k(x))^T$ -- достаточная по критерию Неймана. Пусть $\mathcal{P}_0 = \{P_{\vartheta_i}\ |\ i = 0, \dots, k \}$ -- конечное подсемейство. Из Примера \ref{exmp4.20} и Замечания \ref{rmrk4.13} мы знаем, что
+	\[ \widetilde{T}(x) = \bigg( \sum_{i=1}^{k} (Q_i(\vartheta_1) - Q_i(\vartheta_0))T_i(x), \dots, \sum_{i=1}^{k}(Q_i(\vartheta_k) - Q_i(\vartheta_0))T_i(x) \bigg)^T \]
+	минимальная достаточная для $\mathcal{P}_0$. Пусть $T(x) = (T_1(x), \dots, T_k(x))^T$, тогда имеет место равенство
+	\[ \widetilde{T} = \Delta Q \cdot T = (Q_i(\vartheta_j)-Q_i(\vartheta_0))_{i,j=1}^k \cdot T.  \]
+	Если мы выберем подсемейство так, что $\Delta Q$ обратима (это возможно, благодаря непустой части $Z$), то
+	\[ T = (\Delta Q)^{-1} \cdot \widetilde{T} \]
+	минимальная достаточная для $\mathcal{P}_0$. Тогда теорема следует из Леммы \ref{lmm4.21}.
+\end{proof}
+
+\begin{rmrk}
+	Используя Теорему \ref{Rao-Blackwell} все кандидаты на UMVU-оценку -- достаточные статистики. Мы будем искать условия, при которых класс этих статистик будет относительно небольшим.
+\end{rmrk}
+
+\begin{defn}\
+	\begin{enumerate}
+		\item Пусть $\mathcal{P}=\{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер на $(\mathcal{X},\mathcal{B})$. Тогда $\sigma$-алгебра $\mathcal{B}_0 \subset \mathcal{B}$ называется \textbf{\textit{полной}} для $\mathcal{P}$, если для любой $\mathcal{B}_0$-измеримой функции $g:\mathcal{X} \rightarrow \MR$:
+		\[ \ME_\vartheta[g(X)]=0 \quad \forall \vartheta \in \Theta \quad \Longleftrightarrow \quad g = 0 \; \; P_\vartheta \text{-п.н.} \quad \forall \vartheta \in \Theta. \]
+		\item Статистика $T:(\mathcal{X},\mathcal{B}) \rightarrow (\mathcal{T},\mathcal{D})$ называется \textbf{\textit{полной}} для $\vartheta$, если $\sigma(T)$ полная для $\vartheta$:
+		\[ \ME_\vartheta[g \circ T]=0 \quad \forall \vartheta \in \Theta \quad \Longleftrightarrow \quad g \circ T = 0 \; \; P_\vartheta \text{-п.н.} \quad \forall \vartheta \in \Theta. \]
+	\end{enumerate}
+\end{defn}
+
+\begin{thm} \label{thm4.25}
+	Пусть $\mathcal{P} = \{ P_\vartheta\ |\ \vartheta \in \Theta \}$ -- $k$-параметрическое экспоненциальное семейство с непустой внутренней частью и плотностями:
+	\[ \frac{dP_\vartheta}{d\mu}(x) = c(\vartheta) h(x) \exp\Big \{ \sum_{i=1}^{k}Q_i(\vartheta)T_i(x)  \Big\}. \]
+	Тогда $T(x) = (T_1(x), \dots, T_k(x))^T$ -- полная статистика для $\vartheta$.
+\end{thm}
+\begin{proof}
+	Естественное параметрическое пространство: $\vartheta_i = Q_i(\vartheta)$. Предположим, что $[-a, a]^k \subset \Theta^*$. Пусть $g$ измерима и
+	\[ 0 = \ME_\vartheta[g(T(X))] = \int c(\vartheta) g(t) \exp \Big\{ \sum_{i=1}^{k} \vartheta_i t_i  \Big \} \mu^T(dt) \quad \forall \vartheta \in [-a, a]^k. \]
+	Разложим $g = g^+ - g^-$ и получим:
+	\begin{equation} \label{eq4.3}
+		\int c(\vartheta) g^+(t) \exp \Big\{ \sum_{i=1}^{k} \vartheta_i t_i  \Big \} \mu^T(dt)  = \int c(\vartheta) g^-(t) \exp \Big\{ \sum_{i=1}^{k} \vartheta_i t_i  \Big \} \mu^T(dt) \quad \forall \vartheta \in [-a, a]^k.
+	\end{equation}
+	В частности мы получаем для $\vartheta = 0$:
+	\[ A = \int g^+ \mu^T(dt) = \int g^- \mu^T(dt). \]
+	Нам нужно показать, $g^+ = g^- = 0$ $\mu^T$-п.н. Если $A = 0$, то утверждение очевидно. Пусть $ A \neq 0$, тогда зададим
+	\[ P^\pm(B) = \frac{1}{A} \int_B g^\pm \mu^T(dt). \]
+	Тогда равенство \eqref{eq4.3} эквивалентно
+	\[ \int \exp \Big\{ \sum_{i=1}^{k} \vartheta_i t_i  \Big \} P^+(dt) = \int \exp \Big\{ \sum_{i=1}^{k} \vartheta_i t_i  \Big \} P^-(dt) \quad \forall \vartheta \in [-a, a]^k, \]
+	что несколько напоминает равенство характеристических функций, но без комплексной части в экспоненте. Зададим $\vartheta_i = \xi_i + i \eta_i$, где $|\xi_i| \leq a$ $\forall i = 1, \dots, k $. Рассмотрим функции
+	\[f_l^\pm:
+	\left \{
+	\begin{array}{ccl}
+	\{ z \in \mathbb{C}\ |\ |Re(z)| \leq a \} & \rightarrow & \mathbb{C} \\
+	z & \mapsto & \int \exp \Big\{ \sum\limits_{i \neq l} \vartheta_i t_i + z t_l \Big\} P^\pm(dt).
+	\end{array}
+	\right.
+	\]
+	Используя комплексную версию Теоремы \ref{thm2.38} мы заключаем, что эти функции аналитические (и таким образом голоморфные). На множестве $\mathbb{C} \cap [-a, a]$ имеет место равенство $f_l^+(z) = f_l^-(z)$. Используя тождественную теорему для голоморфных функций\footnote{
+		Пусть заданы функции $f$ и $g$ на связном открытом множестве $D$. Тогда, если $f = g$ на некотором непустом открытом подмножестве $D$, то $f = g$ на всем множестве $D$.},
+	мы получаем равенство
+	\[ f_l^+(z) = f_l^-(z) \quad \forall z \in \{z \in \mathbb{C}\ |\ |Re(z)| \leq a  \}. \]
+	Так как $l$ выбирается произвольно:
+	\[ \int \exp \Big\{ i \sum_{i=1}^{k} \eta_i t_i \Big \} P^+(dt) = \int \exp \Big\{ i \sum_{i=1}^{k} \eta_i t_i \Big \} P^-(dt) \quad \forall \eta = (\eta_1, \dots, \eta_k)^T.  \]
+	Следовательно, исходя из теоремы о единственности характеристических функций, имеет равенство мер $P^+$ и $P^-$ и
+	\[ g^+ = g^- \ \mu\text{-п.н.} \quad \Longrightarrow \quad g = 0 \ \mu\text{-п.н.} \]
+\end{proof}
+
+\begin{exmp} \
+	\begin{enumerate}
+		\item Пусть $X_1, \dots , X_n$ i.i.d. $\sim \mathcal{N}(0, \sigma^2)$ с плотностью
+		\[ f_{\sigma^2}(x) = \Big( \frac{1}{2 \pi \sigma^2} \Big)^{n/2} \exp \bigg \{  -\frac{\sum_{i=1}^{n}X_i^2}{2\sigma^2} \bigg \}. \]
+		Мы видим из Теоремы \ref{Neyman criterion}, что
+		\[ T_1(X) = (X_1, \dots, X_n)^T, \]
+		\[ T_2(X) = (X_1^2, \dots, X_n^2)^T, \]
+		\[ T_3(X) = \Big(\sum_{i=1}^{m}X_i^2, \sum_{i=m+1}^{n}X_i^2\Big)^T, \]
+		\[ T_4(X) = \sum_{i=1}^{n}X_i^2 \]
+		достаточные статистики в порядке убывания сложности.
+		\item Несложно увидеть, что можно подобрать набор функций $h_{ij}$, такой что
+		\[ T_j(X) = h_{ij}(T_i), \quad i < j. \]
+		Следовательно, $T_1, T_2, T_3$ не минимальные достаточные, в отличие от $T_4$ (по Теореме \ref{thm4.22}).
+		\item Статистики $T_1, T_2, T_3$ не полные, так как можно подобрать следующие функции:
+		\[ g_1(X) = X_1\ (\text{для } T_1), \]
+		\[ g_2(X) = X_2 - X_1\ (\text{для } T_2), \]
+		\[ g_3(X) = (n - m)X_1 - m X_2\ (\text{для } T_3). \]
+		Статистика $T_4$ является полной вследствие Теоремы \ref{thm4.25}.
+	\end{enumerate}
+\end{exmp}
+
+\begin{exmp} \
+	\begin{enumerate}
+		\item В Примере \ref{exmp4.17}(i) мы показали, что
+		\[ X_{(n)} = \max_{i=1}^n X_i \]
+		является достаточной для $\vartheta \in (0, \infty)$. Она также является полной, так как плотность $X_{(n)}$
+		\[ f_\vartheta(x) = \frac{n}{\vartheta^n}x^{n-1}1_{[0, \vartheta]}(x). \]
+		То есть, если
+		\[ \ME_\vartheta[g(X_{(n)})] = \frac{n}{\vartheta^n} \int_0^\vartheta g(x)x^{n-1}dx = 0 \quad \forall \vartheta > 0, \]
+		то $g(x) \equiv 0$ $\lambda$-п.н.
+		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim F \ll \lambda$ и 
+		\[ \mathcal{P} = \{ F\ |\ F \text{ -- функция распределения} \}. \]
+		Тогда порядковая статистика $X_{(\cdot)}$ является полной (см. Пример 4.34 в \cite{LehmannRomano}.).
+	\end{enumerate}
+\end{exmp}
+
+\begin{thm}[\textbf{Теорема Леманна-Шеффе}] \label{Lehmann-Scheffe}
+	Пусть $\mathcal{P}=\{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер на $(\mathcal{X},\mathcal{B})$, $T:(\mathcal{X},\mathcal{B}) \rightarrow (\mathcal{T},\mathcal{D})$ -- достаточная и полная статистика для $\vartheta$. Пусть также $\gamma:\Theta \rightarrow \Gamma$ -- функционал, для которого может быть получена несмещенная оценка и $L$ -- функция потерь, такая что $L(\gamma(\vartheta), \cdot)$ -- выпуклая $\forall \vartheta \in \Theta$. Тогда существует (почти наверное) единственная несмещенная оценка $\gamma(\vartheta)$ вида $h \circ T$. Она имеет равномерно наименьший риск среди всех несмещенных оценок.
+\end{thm}
+\begin{proof}
+	Существование следует из Теоремы \ref{Rao-Blackwell}. \\
+	Единственность: пусть $g \circ T$ -- другая несмещенная оценка $\gamma(\vartheta)$. Тогда:
+	\[ \ME_\vartheta[h(T)-g(T)]=0 \quad \forall \vartheta \in \Theta. \]
+	Так как $T$ -- полная статистика, то:
+	\[ h \circ T = g \circ T \quad \forall \vartheta \in \Theta. \]
+	Наконец, пусть $k$ -- некоторая несмещенная оценка $\gamma(\vartheta)$. Тогда
+	\[k \circ T = \ME[k|T]\]
+	также несмещенная и мы знаем из Теоремы Рао-Блэквелла, что
+	\[ R(\vartheta, k) \geq R(\vartheta, \ME[k|T])=R(\vartheta, h \circ T). \]
+\end{proof}
+
+\begin{crlr}
+	В случае, когда функция потерь $L(x,y)=(x-y)^2$ и $T$ -- достаточная и полная, любая несмещенная оценка вида $h \circ T$ единственная и UMVU.
+\end{crlr}
+
+\begin{exmp} \label{exmp4.30} \
+	\begin{enumerate}
+		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{U}[0,\vartheta]$. Тогда
+		\[ \frac{n+1}{n}X_{(n)} \]
+		является UMVU-оценкой.
+		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim F \ll \lambda$. Тогда эмпирическая функция распределения $\hat{F}(z)$ -- UMVU-оценка для $F(z)$.
+		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim Bin(1,\vartheta)$, $\vartheta \in [0, 1]$. Тогда
+		\[ T(X)=\sum_{i=1}^{j}X_j \]
+		является достаточной (Пример \ref{exmp4.2}). Она также является полной, что можно видеть из Примера \ref{exmp2.34} и Теоремы \ref{thm4.25} или же из того, что, если
+		\[ 0 = \ME_\vartheta[h \circ T]=\sum_{j=0}^{n}h(j)\binom{n}{j}\vartheta^j(1-\vartheta)^j \quad \forall \vartheta \in [0, 1], \]
+		то $h \equiv 0$. Следовательно, $\overline{X}_n$ -- UMVU-оценка.
+	\end{enumerate}
+\end{exmp}
+
+\begin{rmrk} \label{rmrk4.31}
+	В тех же условиях, что и в Замечании \ref{rmrk4.13} для статистик $T:(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{B})$ и $\widetilde{T} = b \circ T : (\mathcal{X}, \mathcal{B}) \rightarrow (\widetilde{\mathcal{T}}, \widetilde{\mathcal{D}})$ имеет место следующая импликация: если $T$ полная и достаточная, то $\widetilde{T}$ также полная и достаточная. Например, мы видим из Примера \ref{exmp4.30} (iii), что
+	\[ g(X) = \frac{n}{n-1}\overline{X}_n(1-\overline{X}_n) \]
+	UMVU-оценка для $\vartheta(1-\vartheta)$.
+\end{rmrk}
+
+\raggedbottom
+\pagebreak
+\section*{Упражнения}
+\begin{exc}
+	Пусть $X = (X_1, \dots, X_n)^T$ -- вектор i.i.d. случайных величин, имеющих
+	\begin{enumerate}
+		\item распределение Вейбулла:
+		\[ f_{\theta, \alpha}(x) = \theta \alpha(\theta x)^{\alpha - 1} \exp\{-(\theta x)^\alpha\} 1_{(0, \infty)}(x), \quad \theta, \alpha > 0.  \]
+		\item равномерное распределение:
+		\[ f_{\theta_1, \theta_2}(x)=  \frac{1_{(\theta_1, \theta_2)}(x)}{\theta_2 - \theta_1}, \quad (\theta_1, \theta_2) \in \{(x, y) \in \MR^2 \ |\ x < y \}.\]
+	\end{enumerate}
+	Найдите достаточную статистику для $X$, используя критерий Неймана.
+\end{exc}
+
+\begin{exc}
+	Пусть $X_1, \dots, X_n$ i.i.d. случайные величины, распределенные по Парето с параметром $(\theta, \alpha)$, т.е. имеющие плотность:
+	\[ f_{\theta,\alpha}(x) = \frac{\theta \alpha^\theta}{x^{\theta + 1}} 1_{(\alpha, \infty)}(x), \quad \theta, \alpha > 0.  \]
+	\begin{enumerate}
+		\item Найдите достаточную статистику для $(\theta, \alpha)$.
+		\item Найдите достаточную статистику для $\theta$ и для $\alpha$, если другой параметр известен.
+	\end{enumerate}
+\end{exc}
+
+\begin{exc}
+	Пусть $X$ -- случайная величина, принимающая значения в $\mathcal{X}$, и, имеющая распределение $P_\vartheta,\ \vartheta \in \Theta$. Статистика $S: \mathcal{X} \rightarrow \mathcal{T}$ называется \textbf{\textit{свободной от распределения}}, если её распределение не зависит от $\vartheta$. Статистика называется \textbf{\textit{свободной от распределения первого рода}}, если её математическое ожидание $\ME_\vartheta[S(X)]$ не зависит от $\vartheta$. Докажите, что статистика $T: \mathcal{X} \rightarrow \mathcal{T}$ является полной тогда и только тогда, когда существует неконстантная функция $f:\mathcal{T} \rightarrow \widetilde{\mathcal{T}}$, такая что $f(T)$ является свободной от распределения первого рода.
+\end{exc}
+
+\begin{exc}
+	Пусть $\mathcal{P}= \{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство распределений и $T:\mathcal{X} \rightarrow \MR^d$ -- достаточная и полная статистика для $\vartheta$. Докажите, что $T$ является минимальной достаточной статистикой, если таковая существует.
+\end{exc}
+
+\begin{exc}
+	Докажите следующее утверждение. Пусть $P_\vartheta,\ \vartheta \in \Theta$ -- семейство эквивалентных мер с $\mu$-плотностями $f_\vartheta$. Пусть $T: (\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ -- статистика, обладающая следующим свойством:
+	\[\frac{f_\vartheta(x)}{f_\vartheta(y)} \]
+	не зависит от $\vartheta$ тогда и только тогда, когда $T(x) = T(y)$. Тогда $T$ -- минимальная достаточная. \\
+	Используйте следующие шаги:
+	\begin{enumerate}
+		\item Покажите, что $T$ -- достаточная статистика. Для этого рассмотрите
+		\[f_\vartheta(x) = \frac{f_\vartheta(x)}{f_\vartheta(y)} f_\vartheta(y). \]
+		\item Докажите, что для любой достаточной статистики $S$ имеет место импликация
+		\[ S(x) = S(y) \Longrightarrow T(x) = T(y), \]
+		и тем самым завершите доказательство.
+	\end{enumerate}
+\end{exc}
+
+\begin{exc}
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim Cauchy(\vartheta, 1)$, т.е. плотность распределения $X_i$:
+	\[ f_\vartheta(x) = \frac{1}{\pi (1 + (x-\vartheta)^2)}. \]
+	Покажите, используя утверждение из предыдущего упражнения, что порядковая статистика $X_{(\cdot)}$ является минимальной достаточной для $\vartheta$.
+\end{exc}
