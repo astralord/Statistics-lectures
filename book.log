@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.8.4)  24 OCT 2016 09:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.8.4)  24 OCT 2016 11:21
 entering extended mode
 **book.tex
 (book.tex
@@ -1174,10 +1174,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 548--549
 (chapters/chapter03.aux) (chapters/chapter04.aux) (chapters/chapter05.aux)
 (chapters/chapter06.aux) (chapters/chapter07.aux) (chapters/chapter08.aux)) ) 
 Here is how much of TeX's memory you used:
- 7091 strings out of 493698
- 100617 string characters out of 3144404
+ 7090 strings out of 493698
+ 100602 string characters out of 3144404
  186299 words of memory out of 3000000
- 10163 multiletter control sequences out of 15000+200000
+ 10162 multiletter control sequences out of 15000+200000
  30169 words of font info for 73 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  39i,18n,77p,1148b,619s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1214,7 +1214,7 @@ es/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1095.pfb><C:/Program Files/MiKTeX
 s/type1/public/cm-super/sfrm1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
 ublic/cm-super/sfsl1095.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-
 super/sfti1095.pfb>
-Output written on book.pdf (91 pages, 991920 bytes).
+Output written on book.pdf (91 pages, 991858 bytes).
 PDF statistics:
  450 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
