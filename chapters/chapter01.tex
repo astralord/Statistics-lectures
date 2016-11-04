@@ -88,7 +88,7 @@
 	\begin{enumerate}
 		\item Если $\mathcal{F}= \{\emptyset, \Omega \}$, то $\ME[X|\mathcal{F}]$ по определению постоянная и с выбором $A=\Omega$ в (ii) следует:
 		\[\ME[X | \mathcal{F}]=\ME[X]. \]
-		Это соответствует ситуации, когда никакой дополнительной информации об итоге эксперимента неизвестно.
+		Это соответствует ситуации, когда никакой дополнительной информации об итоге эксперимента не известно.
 		\item Если $\sigma(X) \subset \mathcal{F}$, то $\ME[X|\mathcal{F}]=X$.
 		\item Пусть множество $A \in \mathcal{A}$, $\MP(A) \in (0, 1)$ и $\mathcal{F}=\sigma(A)=\{\Omega, A, A^c, \emptyset \}$. Вследствие $\mathcal{F}$-измеримости условное ожидание $\ME[X|A]$ является постоянной:
 		\[\ME[X|A]=\Big(\MP(A)^{-1} \int_A X d\MP\Big)1_A + \Big(\MP(A^c)^{-1} \int_{A^c} X d\MP\Big)1_{A^c}. \]
@@ -230,7 +230,7 @@
 \end{rmrk}
 
 \begin{thm} [\textbf{Лемма о факторизации}] \label{Factorization lemma}
-	Пусть $Y:\Omega \rightarrow \Omega'$ $\mathcal{A}$-$\mathcal{A}'$-измерима и $Z: \Omega \rightarrow \overline{\MR}$ $\mathcal{A}$-$\overline{\mathcal{B}}$-измерима. Тогда $Z$ $\sigma(Y)$-$\overline{\mathcal{B}}$-измерима тогда и только тогда, когда существует $\mathcal{A}'-\overline{\mathcal{B}}$-измеримая функция $g:\Omega' \rightarrow \overline{\MR}$, такая что $Z = g \circ Y$.
+	Пусть $Y:\Omega \rightarrow \Omega'$ $\mathcal{A}$-$\mathcal{A}'$-измерима и $Z: \Omega \rightarrow \overline{\MR}$ $\mathcal{A}$-$\overline{\mathcal{B}}$-измерима. Тогда $Z$ $\sigma(Y)$-$\overline{\mathcal{B}}$-измерима тогда и только тогда, когда существует $\mathcal{A}'$-$\overline{\mathcal{B}}$-измеримая функция $g:\Omega' \rightarrow \overline{\MR}$, такая что $Z = g \circ Y$.
 \end{thm}
 \begin{proof} \\
 	
