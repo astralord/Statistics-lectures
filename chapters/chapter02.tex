@@ -122,11 +122,11 @@
 
 \begin{defn} \
 	\begin{enumerate}
-		\item Оценка $g^* \in \mathcal{K}$ называется \textbf{\textit{допустимой}}, если не существует такой оценки $g \in \mathcal{K}$, что
+		\item Оценка $g^* \in \mathcal{K}$ называется \textbf{\textit{допустимой}}, если не существует оценки $g \in \mathcal{K}$, такой что
 		 \[R(\vartheta, g) \leq R(\vartheta, g^*) \quad \forall \vartheta \in \Theta \]
 		 и хотя бы для одного значения $\vartheta^* \in \Theta$
 		 \[ R(\vartheta^*, g) < R(\vartheta^*, g^*).\]
-		\item Класс $\tilde{\mathcal{K}} \subset \mathcal{K}$ называется \textbf{\textit{полным}}, если для любой оценки $g \in \mathcal{K} \backslash \tilde{\mathcal{K}}$ существует такая оценка $\tilde{g} \in \tilde{\mathcal{K}}$, что
+		\item Класс $\tilde{\mathcal{K}} \subset \mathcal{K}$ называется \textbf{\textit{полным}}, если для любой оценки $g \in \mathcal{K} \backslash \tilde{\mathcal{K}}$ существует оценка $\tilde{g} \in \tilde{\mathcal{K}}$, такая что
 		\[ R(\vartheta, \tilde{g}) \leq R(\vartheta, g) \quad \forall \vartheta \in \Theta. \]
 		Если класс $\tilde{\mathcal{K}}$ не содержит полного подкласса, то $\tilde{\mathcal{K}}$ называется \textbf{\textit{минимальным полным}} классом.
 	\end{enumerate}
@@ -296,7 +296,7 @@
 \begin{defn} \
 	\begin{enumerate}
 		\item $I(f(\cdot, \vartheta))$ называется \textbf{\textit{информацией Фишера}} семейства $\mathcal{P}= \{P_\vartheta \mid \vartheta \in \Theta \}$.
-		\item Если оценка $g$ такая, что неравенство \eqref{eq2.2} превращается в равенство, то такая оценка называется \textbf{\textit{эффективной}} для $\gamma(\vartheta)=\ME_\vartheta[g(X)]$.
+		\item Если оценка $g$ такая, что неравенство \eqref{eq2.2} вырождается в равенство, то она называется \textbf{\textit{эффективной}} для $\gamma(\vartheta)=\ME_\vartheta[g(X)]$.
 	\end{enumerate}
 \end{defn}
 
@@ -441,7 +441,7 @@
 
 \begin{defn} \
 	\begin{enumerate}
-		\item Семейство $\mathcal{P}= \{ P_\vartheta \mid \vartheta \in \Theta \}$ называется \textbf{\textit{экспоненциальным семейством}}, если существуют такие вещественнозначные $c, Q_1, \dots, Q_k : \Theta \rightarrow \MR$ и измеримые функции $h, T_1, \dots, T_k: \mathcal{X} \rightarrow \MR$, что $\mu$-плотность $P_\vartheta$:
+		\item Семейство $\mathcal{P}= \{ P_\vartheta \mid \vartheta \in \Theta \}$ называется \textbf{\textit{экспоненциальным семейством}}, если существуют вещественнозначные $c, Q_1, \dots, Q_k : \Theta \rightarrow \MR$ и измеримые функции $h, T_1, \dots, T_k: \mathcal{X} \rightarrow \MR$, такие что $\mu$-плотность $P_\vartheta$:
 		\[ f(x, \vartheta)=c(\vartheta)h(x)\exp \Big\{ \sum_{j=1}^{k}Q_j(\vartheta)T_j(x) \Big\} \]
 		для $\sigma$-конечной меры $\mu$.
 		\item $\mathcal{P}$ называется \textbf{\textit{$k$-параметрическим экспоненциальным семейством}}, если функции $1,Q_1, \dots, Q_k$ и $1,T_1, \dots, T_k$ линейно независимы ($\mu$-почти наверное).
