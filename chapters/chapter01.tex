@@ -2,7 +2,7 @@
 
 В этой главе мы рассмотрим понятие условного математического ожидания, которое представляет собой важную основу не только для анализа статистических методов, но и в общей сложности для стохастической теории.
 
-\begin{rmrk} Рассмотрим интегрируемую случайную величину: $ X: (\Omega, \mathcal{A}, \MP) \rightarrow (\MR, \mathcal{B})$. После проведения эксперимента и наблюдения результата информация о случайной величине полностью известна:
+\begin{rmrk} Рассмотрим измеримую случайную величину: $ X: (\Omega, \mathcal{A}, \MP) \rightarrow (\MR, \mathcal{B})$. После проведения эксперимента и наблюдения результата информация о случайной величине полностью известна:
 	\[ \omega \mapsto X(\omega). \]
 	Перед проведением эксперимента неизвестно ничего о его итоге. В такой ситуации лучший способ предсказать его -- это использование математического ожидания:
 	\[ 	\omega \mapsto \ME[X](\omega) \]
@@ -67,7 +67,7 @@
 \end{defn}
 
 \begin{lmm} \label{Properties of conditional expectation}
-	Пусть $(\Omega, \mathcal{A}, \MP)$ -- вероятностное пространство, $\mathcal{F} \subset \mathcal{A}$ -- $\sigma$-алгебра и $X$, $Y$ -- интегрируемые случайные величины, принимающие действительные значения. Тогда выполняются следующие свойства:
+	Пусть $(\Omega, \mathcal{A}, \MP)$ -- вероятностное пространство, $\mathcal{F} \subset \mathcal{A}$ -- $\sigma$-алгебра и $X$, $Y$ -- измеримые случайные величины, принимающие действительные значения. Тогда выполняются следующие свойства:
 	\begin{enumerate}
 		\item \textbf{Линейность}. Для любых $\alpha, \beta \in \MR$:
 		\[ \ME[\alpha X + \beta Y | \mathcal{F}]=\alpha \ME[X|\mathcal{F}]+\beta \ME[Y|\mathcal{F}]. \]
@@ -98,9 +98,9 @@
 \end{exmp}
 
 \begin{thm}[\textbf{Монотонная сходимость}] \label{Monotone convergence}
-	Пусть $X_n \geq 0$ -- последовательность интегрируемых случайных величин, такая что $X_n \nearrow X$. Тогда существует $\mathcal{F}$-измеримая случайная величина $Y$, такая что $\ME[X_n|\mathcal{F}] \nearrow Y$. В частности,
+	Пусть $X_n \geq 0$ -- последовательность измеримых случайных величин, такая что $X_n \nearrow X$. Тогда существует $\mathcal{F}$-измеримая случайная величина $Y$, такая что $\ME[X_n|\mathcal{F}] \nearrow Y$. В частности,
 	\[ \ME[X1_A]=\ME[Y1_a] \quad \forall A \in \mathcal{F}, \]
-	и это выполняется, если $X$ интегрируемая в понимании обычного условного математичесого ожидания.
+	и это выполняется, если $X$ измеримая в понимании обычного условного математичесого ожидания.
 \end{thm}
 
 \begin{proof}
@@ -135,7 +135,7 @@
 \end{proof}
 
 \begin{thm} [\textbf{Башенное свойство}] \label{Tower property}
-	Пусть $X$ -- интегрируемая случайная величина на $(\Omega, \mathcal{A}, \MP)$ и $\mathcal{F}_1, \mathcal{F}_2$ -- $\sigma$-алгебры, такие что $\mathcal{F}_1 \subset \mathcal{F}_2 \subset \mathcal{A}$. Тогда
+	Пусть $X$ -- измеримая случайная величина на $(\Omega, \mathcal{A}, \MP)$ и $\mathcal{F}_1, \mathcal{F}_2$ -- $\sigma$-алгебры, такие что $\mathcal{F}_1 \subset \mathcal{F}_2 \subset \mathcal{A}$. Тогда
 	\[ \ME[\ME[X|\mathcal{F}_2]|\mathcal{F}_1] = \ME[X|\mathcal{F}_1]=\ME[\ME[X|\mathcal{F}_1]\mathcal{F}_2]. \]
 \end{thm}
 	
@@ -146,7 +146,7 @@
 \end{proof}
 
 \begin{thm}[\textbf{Независимость}] \label{Independence}
-	Пусть $X$ -- интегрируемая случайная величина и $\mathcal{F}, \mathcal{G} \subset \mathcal{A}$ -- $\sigma$-алгебры, такие что $\mathcal{G}$ и $\sigma(\sigma(X), \mathcal{F})$ независимы. Тогда:
+	Пусть $X$ -- измеримая случайная величина и $\mathcal{F}, \mathcal{G} \subset \mathcal{A}$ -- $\sigma$-алгебры, такие что $\mathcal{G}$ и $\sigma(\sigma(X), \mathcal{F})$ независимы. Тогда:
 	\[ \ME[X|\sigma(\mathcal{F}, \mathcal{G})] = \ME[X|\mathcal{F}]. \]
 \end{thm}
 \begin{proof}
@@ -210,10 +210,10 @@
 		\[ \ME[g(Y)1_F]=\sum_{y \in B \cap I_y} \sum_{x \in I_x} x \frac{p_{xy}}{p_y}1_{\{p_y > 0\}}p_y = \sum_{x \in I_x} \sum_{y \in B \cap I_y} x p_{xy} = \ME[X1_F]. \]
 		
 		\item По теореме Фубини\footnote{
-			Пусть даны два пространства с $\sigma$-конечными мерами $(X_1, \mathcal{F}_1, \mu_1)$ и $(X_2, \mathcal{F}_2, \mu_2)$. Обозначим через  $(X_1 \times X_2, \mathcal{F}_1 \otimes \mathcal{F}_2, \mu_1 \otimes \mu_2)$ их произведение. Пусть функция $f \colon X_1 \times X_2 \to \MR$ интегрируема относительно меры $\mu_1 \otimes \mu_2$. Тогда
+			Пусть даны два пространства с $\sigma$-конечными мерами $(X_1, \mathcal{F}_1, \mu_1)$ и $(X_2, \mathcal{F}_2, \mu_2)$. Обозначим через  $(X_1 \times X_2, \mathcal{F}_1 \otimes \mathcal{F}_2, \mu_1 \otimes \mu_2)$ их произведение. Пусть функция $f \colon X_1 \times X_2 \to \MR$ измерима относительно меры $\mu_1 \otimes \mu_2$. Тогда
 			\begin{enumerate}
-				\item Функция $x_1 \mapsto \int \limits_{X_2} f(x_1, x_2) \mu_2 (dx_2)$ определена и интегрируема относительно $\mu_1$.
-				\item Функция $x_2 \mapsto \int \limits_{X_1} f(x_1, x_2) \mu_1 (dx_1)$ определена и интегрируема относительно $\mu_2$.
+				\item Функция $x_1 \mapsto \int \limits_{X_2} f(x_1, x_2) \mu_2 (dx_2)$ определена и измерима относительно $\mu_1$.
+				\item Функция $x_2 \mapsto \int \limits_{X_1} f(x_1, x_2) \mu_1 (dx_1)$ определена и измерима относительно $\mu_2$.
 				\item $\iint \limits_{X_1 \times X_2} f(x_1, x_2) \mu_1 \otimes \mu_2(dx_1, dx_2) = \int \limits_{X_1} \int \limits_{X_2} f(x_1, x_2) \mu_2(dx_2) \mu_1(dx_1) = \int \limits_{X_2} \int \limits_{X_1} f(x_1, x_2) \mu_1(dx_1) \mu_2(dx_2).$
 		    \end{enumerate}
 			} имеет место измеримость $y \mapsto \int x f(x, y) dx$ и $y \mapsto \int f(x, y)dx$. Следовательно, $g$ измерима. В заключение, пусть $F = \{Y \in B\} \in \sigma(Y)$. Тогда,
@@ -240,7 +240,7 @@
 \end{proof}
 
 \begin{thm}
-	Пусть $X:\Omega \rightarrow \MR$ и $Y:\Omega \rightarrow \Omega'$ -- случайные величины и $\ME[X] < \infty$. Тогда любая $\mathcal{A}$-$\mathcal{B}$-измеримая функция $g:\Omega' \rightarrow \MR$, такая что $\ME[X|Y]=g(Y)$ $\MP^Y$-интегрируема, удовлетворяет
+	Пусть $X:\Omega \rightarrow \MR$ и $Y:\Omega \rightarrow \Omega'$ -- случайные величины и $\ME[X] < \infty$. Тогда любая $\mathcal{A}$-$\mathcal{B}$-измеримая функция $g:\Omega' \rightarrow \MR$, такая что $\ME[X|Y]=g(Y)$ $\MP^Y$-измерима, удовлетворяет
 	\begin{equation} \label{1.1}
 		\int_{A'} g d\MP^Y = \int_{\{Y \in A' \}} X d\MP \quad  \forall A' \in \mathcal{A}'
 	\end{equation}
@@ -250,7 +250,7 @@
 	
 	''$\Longrightarrow$'' Для любого $A' \in \mathcal{A}'$ имеет место
 	\[ \int_{\{Y \in A'\}} X d\MP = \int_{\{Y \in A'\}} \ME[X|Y]d\MP = \int_{\{Y \in A'\}} g \circ Y d\MP = \int_{A'}gd\MP^Y. \]
-	$\MP^Y$-интегрируемость $g$ следует из (\ref{1.1}). Предположим, что $\ME[X|Y]=h(Y)$, тогда
+	$\MP^Y$-измеримость $g$ следует из (\ref{1.1}). Предположим, что $\ME[X|Y]=h(Y)$, тогда
 	\[ \int_{A'}gd\MP^Y = \int_{A'} h d\MP^Y \quad \forall A'\in \mathcal{A}', \]
 	вследствие (\ref{1.1}). Разложив функции на положительные и отрицательные части:
 	\[ g = g^+ - g^- \quad \text{и} \quad h = h^+ - h^-, \]
@@ -275,7 +275,7 @@
 \end{exmp}
 
 \begin{defn}
-	Пусть $X:\Omega \rightarrow \MR$ интегрируема и $Y:\Omega \rightarrow \Omega'$. Если $g$ удовлетворяет равенству (\ref{1.1}) и $\mathcal{A}'$-$\mathcal{B}$-измерима и $\MP^Y$-интегрируема, тогда
+	Пусть $X:\Omega \rightarrow \MR$ измерима и $Y:\Omega \rightarrow \Omega'$. Если $g$ удовлетворяет равенству (\ref{1.1}) и $\mathcal{A}'$-$\mathcal{B}$-измерима и $\MP^Y$-измерима, тогда
 	\[ g(y) := \ME[X|Y=y] \]
 	называется \textbf{\textit{математическим ожиданием $X$ при условии $Y=y$}}.
 \end{defn}
@@ -343,7 +343,7 @@
 
 \section*{Упражнения}
 \begin{exc}
-	Пусть $X$ -- конечная интегрируемая вещественнозначная случайная величина, заданная на вероятностном пространстве $(\Omega, \mathcal{A}, \MP)$ и $\mathcal{F} \subset \mathcal{A}$ -- $\sigma$-алгебра.
+	Пусть $X$ -- конечная измеримая вещественнозначная случайная величина, заданная на вероятностном пространстве $(\Omega, \mathcal{A}, \MP)$ и $\mathcal{F} \subset \mathcal{A}$ -- $\sigma$-алгебра.
 	\begin{enumerate}
 		\item Докажите \textbf{\textit{условное неравенство Йенсена}}: для любой выпуклой функции $\varphi: \MR \rightarrow \MR$
 		\[ \varphi(\ME[X|\mathcal{F}]) \leq \ME[\varphi(X)|\mathcal{F}] \quad \MP\text{-п.н.} \]
