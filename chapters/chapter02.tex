@@ -12,7 +12,7 @@
 \end{exmp}
 
 \begin{asmp}
-	Пусть $(\Omega, \mathcal{A}, \mathbb{P})$ -- вероятностное пространство, $(\mathcal{X}, \mathcal{B})$ -- измеримое пространство и $X:(\Omega, \mathcal{A}, \mathbb{P}) \rightarrow (\mathcal{X}, \mathcal{B})$ -- случайная величина. Зададим
+	Пусть $(\Omega, \mathcal{A}, \mathbb{P})$ -- вероятностное пространство, $(\mathcal{X}, \mathcal{B})$ -- измеримое пространство и $X\colon(\Omega, \mathcal{A}, \mathbb{P}) \rightarrow (\mathcal{X}, \mathcal{B})$ -- случайная величина. Зададим
 	\[P(B)=\mathbb{P}^X(B)=\mathbb{P}(X^{-1}(B)), \quad B \in \mathcal{B}.  \]
 	Тогда $(\mathcal{X}, \mathcal{B}, P)$ является вероятностным пространством, $\mathcal{X}$ называется \textbf{\textit{выборочным пространством}}, а $x=X(\omega)$ -- \textbf{\textit{выборкой}}. 
 \end{asmp}
@@ -22,7 +22,7 @@
 \end{defn}
 
 \begin{rmrk}
-	Интерпретация: мы заинтересованы в реальном распределении $P \in \mathcal{P}$ случайной величины $X:\Omega \rightarrow \mathcal{X}.$ На основе выборки $x=X(\omega)$ принимаем решение о неизвестном распределениии $P$. Идентифицируя $\mathcal{P}$ с параметрическим пространством $\Theta$, выбор $P$ эквивалентен выбору $\vartheta$.
+	Интерпретация: мы заинтересованы в реальном распределении $P \in \mathcal{P}$ случайной величины $X\colon\Omega \rightarrow \mathcal{X}.$ На основе выборки $x=X(\omega)$ принимаем решение о неизвестном распределениии $P$. Идентифицируя $\mathcal{P}$ с параметрическим пространством $\Theta$, выбор $P$ эквивалентен выбору $\vartheta$.
 	
 \end{rmrk}
 
@@ -34,8 +34,8 @@
 \end{exmp}
 
 \begin{defn}
-	Пусть $(\Gamma, \mathcal{A}_\Gamma)$ -- измеримое пространство и $\gamma: \Theta \rightarrow \Gamma$ -- отображение. Измеримая функция
-	\[g:(\mathcal{X}, \mathcal{B}) \rightarrow \Gamma(\mathcal{A}_\Gamma)  \]
+	Пусть $(\Gamma, \mathcal{A}_\Gamma)$ -- измеримое пространство и $\gamma\colon \Theta \rightarrow \Gamma$ -- отображение. Измеримая функция
+	\[g\colon(\mathcal{X}, \mathcal{B}) \rightarrow \Gamma(\mathcal{A}_\Gamma)  \]
 	называется \textbf{\textit{(точечной) оценкой}} $\gamma(\vartheta)$.
 \end{defn}
 
@@ -45,7 +45,7 @@
 		\item Пусть $X_1, \dots , X_n$ i.i.d. $\sim \mathcal{N}(\mu, \sigma^2)=P_{\mu, \sigma^2}$, $X=(X_1, \dots , X_n)^T$ и
 		\[\mathcal{X}=\MR^n, \quad \mathcal{B}=\mathcal{B}^n, \quad \mathcal{P}=\{\otimes_{i=1}^nP_{\mu, \sigma^2} \mid \mu \in \MR, \sigma^2>0 \}, \quad \Theta=\MR \times \left[0, \infty\right).\]
 		Типичная оценка для параметра $\gamma(\vartheta)=\vartheta=(\mu, \sigma^2)$:
-		\[ g :
+		\[ g \colon
 		\left \{
 		\begin{array}{ccl}
 		\MR^n & \rightarrow & \Theta \\
@@ -54,7 +54,7 @@
 		\right.
 		\]
 		\item Пусть $X_1, \dots , X_n$ i.i.d. $\sim F$, где $F(x)=\mathbb{P}(X_i \leq x)$ -- неизвестная функция распределения. В этом случае $\Theta$ -- бесконечномерное семейство всех функций распределения. Если мы заинтересованы в значении функции только в одной точке:
-		\[ \gamma :
+		\[ \gamma \colon
 		\left \{
 		\begin{array}{ccl}
 		\Theta & \rightarrow & \Gamma=\left[0,1\right] \\
@@ -63,7 +63,7 @@
 		\right.
 		\]
 		то точечная оценка будет:
-		\[ g :
+		\[ g \colon
 		\left \{
 		\begin{array}{ccl}
 		\MR^n & \rightarrow & \Gamma \\
@@ -75,12 +75,12 @@
 \end{exmp}
 
 \begin{rmrk}
-	Из предыдущего примера становится ясно, зачем нужно вводить отображение $\gamma: \Theta \rightarrow \Gamma$, поскольку мы не всегда заинтересованы в значении самого параметра $\vartheta$, но в подходящем функционале.
+	Из предыдущего примера становится ясно, зачем нужно вводить отображение $\gamma\colon \Theta \rightarrow \Gamma$, поскольку мы не всегда заинтересованы в значении самого параметра $\vartheta$, но в подходящем функционале.
 \end{rmrk}
 
 \begin{defn}
-	Измеримая функция $L: \Gamma \times \Gamma \rightarrow \left[0, \infty \right)$ называется \textbf{\textit{функцией потерь}}. Для точечной оценки $g:\mathcal{X} \rightarrow \Gamma$ функция
-	\[ R(\cdot, g) :
+	Измеримая функция $L\colon \Gamma \times \Gamma \rightarrow \left[0, \infty \right)$ называется \textbf{\textit{функцией потерь}}. Для точечной оценки $g\colon\mathcal{X} \rightarrow \Gamma$ функция
+	\[ R(\cdot, g) \colon
 	\left \{
 	\begin{array}{ccl}
 	\Theta & \rightarrow & \left[0, \infty\right) \\
@@ -138,7 +138,7 @@
 
 \begin{defn} \
 	\begin{enumerate}
-		\item Пусть $g$ -- оценка функции $\gamma: \Theta \rightarrow \Gamma$. Тогда,
+		\item Пусть $g$ -- оценка функции $\gamma\colon \Theta \rightarrow \Gamma$. Тогда,
 		\[ B_\vartheta(g)=\ME_\vartheta[g(X)]-\gamma(\vartheta) \]
 		называется \textbf{\textit{смещением}} $g$. Оценка $g$ называется \textbf{\textit{несмещенной}}, если
 		 \[B_\vartheta(g)=0 \quad  \forall \vartheta \in \Theta.\]
@@ -158,7 +158,7 @@
 		\[ MSE_\vartheta(g) = R(\vartheta, g)=\ME_\vartheta[(g(X)-\gamma(\vartheta))^2]=Var_\vartheta(g(X))+B_\vartheta^2(g) \]
 		называется \textbf{\textit{среднеквадратической ошибкой}}. Если $g$ несмещенная, то
 		\[MSE_\vartheta(g)=\Var_\vartheta(g(X)). \]
-		\item Аналогичное определение для несмещенных оценок $g$, если $\gamma: \Theta \rightarrow \MR^d$.
+		\item Аналогичное определение для несмещенных оценок $g$, если $\gamma\colon \Theta \rightarrow \MR^d$.
 	\end{enumerate}
 \end{rmrk}
 
@@ -254,7 +254,7 @@
 \end{exmp}
 
 \begin{thm}[\textbf{Неравенство Рао-Крамера}] \label{Cramer-Rao inequality} 
-	Пусть $\mu$ -- $\sigma$-конечная мера и $P_\vartheta \ll \mu$ с $\mu$-плотностью $f(\cdot, \vartheta)$. Пусть также $\Theta \subset \MR$ -- открытое пространство и $g:\mathcal{X} \rightarrow \MR$ -- оценка.
+	Пусть $\mu$ -- $\sigma$-конечная мера и $P_\vartheta \ll \mu$ с $\mu$-плотностью $f(\cdot, \vartheta)$. Пусть также $\Theta \subset \MR$ -- открытое пространство и $g\colon\mathcal{X} \rightarrow \MR$ -- оценка.
 	Дальнейшие предположения (условия регулярности):
 	\begin{enumerate}
 		\item Множество $M_f=\{ x \in \mathcal{X} \mid f(x, \vartheta) > 0 \}$ не зависит от параметра $\vartheta$.
@@ -340,7 +340,7 @@
 \end{defn}
 
 \begin{thm}[\textbf{Многомерное неравенство Рао-Крамера}]
-	Пусть $\mu$ -- $\sigma$-конечная мера и $P_\vartheta \ll \mu$ $\forall\vartheta \in \Theta \subset \MR$. Предположим, что $\Theta$ -- открытое множество и $g: \mathcal{X} \rightarrow \MR^k$ -- оценка. Зададим функцию
+	Пусть $\mu$ -- $\sigma$-конечная мера и $P_\vartheta \ll \mu$ $\forall\vartheta \in \Theta \subset \MR$. Предположим, что $\Theta$ -- открытое множество и $g\colon \mathcal{X} \rightarrow \MR^k$ -- оценка. Зададим функцию
 	\[ G(\vartheta)=\Big( \frac{\partial}{\partial \vartheta_j} \mathbb{E}_\vartheta[g_i(X)] \Big)_{i,j} \in \MR^{k \times d}. \]
 	Тогда при условиях регулярности, схожими с условиями в Теореме \ref{Cramer-Rao inequality} имеет место неравенство:
 	\[ \Cov_\vartheta(g(X)) \geq G(\vartheta) I^{-1}(f(\cdot, \vartheta))G^T(\vartheta) \in \MR^{k \times k} \]
@@ -441,7 +441,7 @@
 
 \begin{defn} \
 	\begin{enumerate}
-		\item Семейство $\mathcal{P}= \{ P_\vartheta \mid \vartheta \in \Theta \}$ называется \textbf{\textit{экспоненциальным семейством}}, если существуют вещественнозначные $c, Q_1, \dots, Q_k : \Theta \rightarrow \MR$ и измеримые функции $h, T_1, \dots, T_k: \mathcal{X} \rightarrow \MR$, такие что $\mu$-плотность $P_\vartheta$:
+		\item Семейство $\mathcal{P}= \{ P_\vartheta \mid \vartheta \in \Theta \}$ называется \textbf{\textit{экспоненциальным семейством}}, если существуют вещественнозначные $c, Q_1, \dots, Q_k \colon \Theta \rightarrow \MR$ и измеримые функции $h, T_1, \dots, T_k \colon \mathcal{X} \rightarrow \MR$, такие что $\mu$-плотность $P_\vartheta$:
 		\[ f(x, \vartheta)=c(\vartheta)h(x)\exp \Big\{ \sum_{j=1}^{k}Q_j(\vartheta)T_j(x) \Big\} \]
 		для $\sigma$-конечной меры $\mu$.
 		\item $\mathcal{P}$ называется \textbf{\textit{$k$-параметрическим экспоненциальным семейством}}, если функции $1,Q_1, \dots, Q_k$ и $1,T_1, \dots, T_k$ линейно независимы ($\mu$-почти наверное).
@@ -497,10 +497,14 @@
 \end{exmp}
 
 \begin{thm}
-	Естественное параметрическое пространство $\Theta^*$ $k$-параметрического экспоненциального семейства выпуклое и с непустой внутренней частью.
+	Естественное параметрическое пространство $\Theta^*$ $k$-параметрического экспоненциального семейства выпуклое и с непустой внутренностью\footnote{
+			 Точка $x$ называется \textbf{\textit{внутренней точкой}} множества $A$ тогда и только тогда, когда $A$ является окрестностью точки $x$. Подмножество, содержащее все внутренние точки:
+			 \[\mathrm{int}(A) = \{ x\ |\ x \text{ -- внутренняя точка } A\} \subset A \]
+			называется \textbf{\textit{внутренностью}} или \textbf{\textit{внутренней частью}} множества $A$.
+		}.
 \end{thm}
 \begin{proof}
-	Непустая внутренняя часть следует из линейной независимости. Выпуклость: пусть $\vartheta = (\vartheta_1, \dots, \vartheta_k)^T$ и $\vartheta' = (\vartheta_1', \dots, \vartheta_k')^T$ -- элементы $\Theta^*$. Тогда для $\alpha \in (0, 1)$ имеет место
+	Непустая внутренность следует из линейной независимости. Выпуклость: пусть $\vartheta = (\vartheta_1, \dots, \vartheta_k)^T$ и $\vartheta' = (\vartheta_1', \dots, \vartheta_k')^T$ -- элементы $\Theta^*$. Тогда для $\alpha \in (0, 1)$ имеет место
 	\[ \begin{aligned}
 	  \int \exp \Big \{ \sum_{j = 1}^{k} (\alpha \vartheta_j + (1-\alpha) & \vartheta_j') T_j(x) \Big\}\mu'(dx) = \int \Big(\exp \Big \{\sum_{j = 1}^{k} \vartheta_j T_j(x) \Big\}\Big)^\alpha \Big(\exp \Big \{\sum_{j = 1}^{k} \vartheta_j' T_j(x) \Big\}\Big)^{1-\alpha} \mu'(dx) \\
 	  \begin{aligned}\text{неравенство Гельдера} \\ \Big(p = \frac{1}{\alpha}, q = \frac{1}{1 - \alpha}\Big) \end{aligned}\longrightarrow & \leq  \Bigg(\int \exp \Big \{\sum_{j = 1}^{k} \vartheta_j T_j(x) \Big\}\mu'(dx)\Bigg)^\alpha \Bigg(\int\exp \Big \{\sum_{j = 1}^{k} \vartheta_j' T_j(x) \Big\}\mu'(dx) \Bigg)^{1-\alpha} < \infty.

@@ -27,21 +27,21 @@
 		\item $\sigma$-алгебра $\mathcal{C} \subset \mathcal{B}$ называется \textbf{\textit{достаточной}} для $\vartheta$, если
 		\[ k_B=P_\vartheta(B | \mathcal{C}) \quad \forall \vartheta \in \Theta,\ \forall B \in \mathcal{B}. \]
 		Это означает, что $\mathcal{C}$-условные вероятности не зависят от $\vartheta$.
-		\item Статистика $T:\mathcal{X} \rightarrow \mathcal{T}$ называется \textbf{\textit{достаточной}} для $\vartheta$, если $\sigma(T)$ достаточна для $\vartheta$.
+		\item Статистика $T\colon\mathcal{X} \rightarrow \mathcal{T}$ называется \textbf{\textit{достаточной}} для $\vartheta$, если $\sigma(T)$ достаточна для $\vartheta$.
 	\end{enumerate}
 \end{defn}
 
 \begin{rmrk} \
 	\begin{enumerate}
-		\item Из Леммы о факторизации (Теорема \ref{Factorization lemma}) мы знаем, что $T$ достаточная для $\vartheta$ тогда и только тогда, когда $\forall B \in \mathcal{B}$ существует функция $h_B:\mathcal{T} \rightarrow \MR$, такая что:
+		\item Из Леммы о факторизации (Теорема \ref{Factorization lemma}) мы знаем, что $T$ достаточная для $\vartheta$ тогда и только тогда, когда $\forall B \in \mathcal{B}$ существует функция $h_B\colon\mathcal{T} \rightarrow \MR$, такая что:
 		\[ h_B(t)=P_\vartheta(B \mid T=t). \]
 		\item В Примере \ref{exmp4.2} статистика $T(x)=\sum_{i=1}^{n}x_i$ достаточная для $\vartheta$.
-		\item Пусть $g:\mathcal{X} \rightarrow \MR$ из $L^1(\mathcal{P}) = \bigcap_{\vartheta \in \Theta}L^1(P_\vartheta)$.
+		\item Пусть $g\colon\mathcal{X} \rightarrow \MR$ из $L^1(\mathcal{P}) = \bigcap_{\vartheta \in \Theta}L^1(P_\vartheta)$.
 		\begin{enumerate}
 			\item Если $\mathcal{C}$ достаточная для $\vartheta$, то существует функция
 			\[ k = \ME_\vartheta[g | \mathcal{C}], \]
 			не зависящая от $\vartheta$.
-			\item Если $T: \mathcal{X} \rightarrow \mathcal{T}$ достаточная для $\vartheta$, то существует функция
+			\item Если $T\colon \mathcal{X} \rightarrow \mathcal{T}$ достаточная для $\vartheta$, то существует функция
 			\[h(t)=\ME_\vartheta[g \mid T=t],\]
 			не зависящая от $\vartheta$.
 		\end{enumerate}
@@ -49,7 +49,7 @@
 \end{rmrk}
 
 \begin{exmp}
-	Пусть $Q$ -- конечная группа отображений $\pi: (\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{X}, \mathcal{B})$. Система
+	Пусть $Q$ -- конечная группа отображений $\pi\colon (\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{X}, \mathcal{B})$. Система
 	\[ \mathcal{C}=\mathcal{C}(Q)=\{ B \in \mathcal{B} \mid \pi(B)=B \ \ \forall \pi \in Q \} \]
 	называется $\sigma$-алгеброй $Q$-инвариантных множеств. Если $\mathcal{P}$ инвариантна относительно $Q$, то есть:
 	\[P_\vartheta^\pi(B)=P_\vartheta(\pi^{-1}(B))=P_\vartheta(B) \quad \forall B \in \mathcal{B},\ \forall \pi \in Q,\ \forall \vartheta \in \Theta\]
@@ -74,13 +74,13 @@
 	Пусть $X_1, \dots, X_n$ i.i.d. $\sim F$ и 
 	\[ \mathcal{P}= \{ P \sim F^n \mid F \text{ -- функция распределения} \}, \quad F^n(x)=\prod_{i=1}^{n}F(x_i). \]
 	Также $\mathcal{X}=\mathbb{P}^n$ и $\mathcal{B}=\mathcal{B}^n$. Пусть
-	\[ Q=S_n=\{ \pi:\MR^n \rightarrow \MR^n \mid \pi \text{ -- перестановка} \}, \]
+	\[ Q=S_n=\{ \pi\colon\MR^n \rightarrow \MR^n \mid \pi \text{ -- перестановка} \}, \]
 	тогда $P^\pi = P  \quad \forall \pi \in S_n $ и таким образом $\mathcal{P}$ -- инвариантна относительно $S_n$. Следовательно, $\mathcal{C}=\mathcal{C}(S_n)$ -- достаточная.
 \end{exmp}
 
 \begin{defn}
 	Пусть $\MR_{\leq}^n = \{X \in \MR^n | X_1 \leq \dots \leq X_n \}$ и $X_{(j)}$ -- $j$-ое наименьшое число среди $X_1, \dots, X_n$. Тогда статистика
-	\[T:
+	\[T\colon
 	\left \{
 	\begin{array}{ccl}
 	\MR^n & \rightarrow & \MR_{\leq}^n \\
@@ -95,7 +95,7 @@
 	\begin{enumerate}
 		\item По определению $\sigma(T) = \mathcal{C}(S_n)$, поэтому $T$ -- достаточная статистика. Другими словами, всегда достаточно хранить упорядоченный вектор наблюдений.
 		\item Статистика
-		\[\widetilde T:
+		\[\widetilde T\colon
 		\left \{
 		\begin{array}{ccl}
 		\MR^n & \rightarrow & \MR^n \\
@@ -179,9 +179,9 @@
 
 \begin{thm}[\textbf{Критерий Неймана}] \label{Neyman criterion} Пусть $\mu$ -- $\sigma$-конечная мера и $P \ll \mu$. Тогда:
 	\begin{enumerate}
-		\item $\sigma$-алгебра $\mathcal{C}$ является достаточной для $\vartheta \in \Theta$ тогда и только тогда, когда существуют $\mathcal{C}$-измеримые функции $f_\vartheta:\mathcal{X} \rightarrow \MR$ и $\mathcal{B}$-измеримая функция $r:\mathcal{X} \rightarrow \MR$, такие что
+		\item $\sigma$-алгебра $\mathcal{C}$ является достаточной для $\vartheta \in \Theta$ тогда и только тогда, когда существуют $\mathcal{C}$-измеримые функции $f_\vartheta\colon\mathcal{X} \rightarrow \MR$ и $\mathcal{B}$-измеримая функция $r:\mathcal{X} \rightarrow \MR$, такие что
 		\[ \frac{dP_\vartheta}{d\mu}=r(x)f_\vartheta(x). \]
-		\item Статистика $T:(\mathcal{X},\mathcal{B}) \rightarrow (\mathcal{T},\mathcal{D})$ является достаточной тогда и только тогда, когда существуют $\mathcal{D}$-измеримые функции $g_\vartheta:\mathcal{T} \rightarrow \MR$ и $\mathcal{B}$-измеримая функция $r:\mathcal{X} \rightarrow \MR$, такие что
+		\item Статистика $T\colon(\mathcal{X},\mathcal{B}) \rightarrow (\mathcal{T},\mathcal{D})$ является достаточной тогда и только тогда, когда существуют $\mathcal{D}$-измеримые функции $g_\vartheta\colon\mathcal{T} \rightarrow \MR$ и $\mathcal{B}$-измеримая функция $r\colon\mathcal{X} \rightarrow \MR$, такие что
 		\[\frac{dP_\vartheta}{d\mu}=r(x)g_\vartheta(T(x)). \]
 	\end{enumerate}
 \end{thm}
@@ -224,7 +224,7 @@
 \end{exmp}
 
 \begin{rmrk}\label{rmrk4.13}
-	Пусть $T:(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ и $\widetilde{T}:(\mathcal{X}, \mathcal{B}) \rightarrow (\widetilde{\mathcal{T}}, \widetilde{\mathcal{D}})$ -- статистики и, без ограничения общности, $\mathcal{T} = T(\mathcal{X})$ и $\widetilde{\mathcal{T}}=\widetilde{T}(\mathcal{X})$. Если $T$ -- достаточная для $\vartheta$ и существует биекция $b:\mathcal{T} \rightarrow \widetilde{\mathcal{T}}$, такая что $\widetilde{T} = b \circ T$ и $b(\mathcal{D}) = \widetilde{\mathcal{D}}$, то
+	Пусть $T\colon(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ и $\widetilde{T}\colon(\mathcal{X}, \mathcal{B}) \rightarrow (\widetilde{\mathcal{T}}, \widetilde{\mathcal{D}})$ -- статистики и, без ограничения общности, $\mathcal{T} = T(\mathcal{X})$ и $\widetilde{\mathcal{T}}=\widetilde{T}(\mathcal{X})$. Если $T$ -- достаточная для $\vartheta$ и существует биекция $b\colon\mathcal{T} \rightarrow \widetilde{\mathcal{T}}$, такая что $\widetilde{T} = b \circ T$ и $b(\mathcal{D}) = \widetilde{\mathcal{D}}$, то
 	\[ \widetilde{T}^{-1}(\widetilde{D}) = T^{-1}(b^{-1}(b(D))) = T^{-1}(D), \quad \widetilde{D} \in \widetilde{\mathcal{D}} \quad \text{и} \quad D = b^{-1}(\widetilde{D}) \in \mathcal{D}. \]
 	Следовательно, $\sigma(\widetilde{T}) = \sigma(T)$ и $\widetilde{T}$ -- достаточная. \\
 	Вкратце: биективное отображение сохраняет достаточность.
@@ -240,7 +240,7 @@
 \end{exmp}
 
 \begin{thm}[\textbf{Теорема Рао-Блэквелла}] \label{Rao-Blackwell}
-	Пусть $\mathcal{P}=\{P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство распределений на $(\mathcal{X}, \mathcal{B})$, $T:(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ -- достаточная статистика для $\vartheta$, $\gamma : \Theta \rightarrow \Gamma \subset \MR^l$, $L: \Gamma \times \Gamma \rightarrow \MR^+$ -- функция потерь, такая что $y \mapsto L(\gamma(\vartheta), y)$ -- выпуклая $\forall \vartheta \in \Theta$. Если $g$ -- несмещенная оценка $\gamma(\vartheta)$ и $\ME[L(\gamma(\vartheta), g)] < \infty \ \forall \vartheta \in \Theta$, то:
+	Пусть $\mathcal{P}=\{P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство распределений на $(\mathcal{X}, \mathcal{B})$, $T\colon(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ -- достаточная статистика для $\vartheta$, $\gamma \colon \Theta \rightarrow \Gamma \subset \MR^l$, $L\colon \Gamma \times \Gamma \rightarrow \MR^+$ -- функция потерь, такая что $y \mapsto L(\gamma(\vartheta), y)$ -- выпуклая $\forall \vartheta \in \Theta$. Если $g$ -- несмещенная оценка $\gamma(\vartheta)$ и $\ME[L(\gamma(\vartheta), g)] < \infty \ \forall \vartheta \in \Theta$, то:
 	\begin{enumerate}
 		\item Существует $\sigma(T)$-измеримая несмещенная оценка $k$, такая что
 		\[ R(\vartheta, k) \leq R(\vartheta, g) \quad \forall \vartheta \in \Theta, \]
@@ -286,7 +286,7 @@
 		Таким образом, для $n \geq 2$ оценка $k$ имеет меньшую дисперсию.
 		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim F$ и
 		\[ \mathcal{P} =  \{ F \ | \ F \text{ -- функция распределения} \}. \]
-		Допустим, мы заинтересованы в оценке $\gamma: F \mapsto F(z)$, $z \in \MR$. Функция
+		Допустим, мы заинтересованы в оценке $\gamma\colon F \mapsto F(z)$, $z \in \MR$. Функция
 		\[ g(X) = 1_{\{ X_1 \leq z \}} \]
 		является несмещенной оценкой. Статистика
 		\[ X_{(\cdot)} = (X_{(1)}, \dots, X_{(n)})^T \]
@@ -311,7 +311,7 @@
 \end{rmrk}
 
 \begin{defn}
-	Достаточная статистика $T^*:(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ называется \textbf{\textit{минимальной достаточной}}, если для любой другой достаточной статистики $T$ существует функция $h$, такая что
+	Достаточная статистика $T^*\colon(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ называется \textbf{\textit{минимальной достаточной}}, если для любой другой достаточной статистики $T$ существует функция $h$, такая что
 	\[T^*=h \circ T. \]
 \end{defn}
 
@@ -345,7 +345,7 @@
 \begin{thm} \label{thm4.22}
 	Пусть $\mathcal{P} = \{ P_\vartheta\ |\ \vartheta \in \Theta \}$ -- $k$-параметрическое экспоненциальное семейство с плотностями:
 	\[ \frac{dP_\vartheta}{d\mu}(x) = c(\vartheta) h(x) \exp \Big\{ \sum_{i=1}^{k}Q_i(\vartheta) T_i(x) \Big \}. \]
-	Если $Z = \{ (Q_1(\vartheta), \dots, Q_k(\vartheta))^T\ |\ \vartheta \in \Theta \}$ имеет непустую внутреннюю часть, то $(T_1(x), \dots, T_k(x))^T$ -- минимальная достаточная для $\vartheta$.
+	Если $Z = \{ (Q_1(\vartheta), \dots, Q_k(\vartheta))^T\ |\ \vartheta \in \Theta \}$ имеет непустую внутренность, то $(T_1(x), \dots, T_k(x))^T$ -- минимальная достаточная для $\vartheta$.
 \end{thm}
 \begin{proof}
 	Статистика $(T_1(x), \dots, T_k(x))^T$ -- достаточная по критерию Неймана. Пусть $\mathcal{P}_0 = \{P_{\vartheta_i}\ |\ i = 0, \dots, k \}$ -- конечное подсемейство. Из Примера \ref{exmp4.20} и Замечания \ref{rmrk4.13} мы знаем, что
@@ -363,15 +363,15 @@
 
 \begin{defn}\
 	\begin{enumerate}
-		\item Пусть $\mathcal{P}=\{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер на $(\mathcal{X},\mathcal{B})$. Тогда $\sigma$-алгебра $\mathcal{B}_0 \subset \mathcal{B}$ называется \textbf{\textit{полной}} для $\mathcal{P}$, если для любой $\mathcal{B}_0$-измеримой функции $g:\mathcal{X} \rightarrow \MR$:
+		\item Пусть $\mathcal{P}=\{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер на $(\mathcal{X},\mathcal{B})$. Тогда $\sigma$-алгебра $\mathcal{B}_0 \subset \mathcal{B}$ называется \textbf{\textit{полной}} для $\mathcal{P}$, если для любой $\mathcal{B}_0$-измеримой функции $g\colon\mathcal{X} \rightarrow \MR$:
 		\[ \ME_\vartheta[g(X)]=0 \quad \forall \vartheta \in \Theta \quad \Longleftrightarrow \quad g = 0 \; \; P_\vartheta \text{-п.н.} \quad \forall \vartheta \in \Theta. \]
-		\item Статистика $T:(\mathcal{X},\mathcal{B}) \rightarrow (\mathcal{T},\mathcal{D})$ называется \textbf{\textit{полной}} для $\vartheta$, если $\sigma(T)$ полная для $\vartheta$:
+		\item Статистика $T\colon(\mathcal{X},\mathcal{B}) \rightarrow (\mathcal{T},\mathcal{D})$ называется \textbf{\textit{полной}} для $\vartheta$, если $\sigma(T)$ полная для $\vartheta$:
 		\[ \ME_\vartheta[g \circ T]=0 \quad \forall \vartheta \in \Theta \quad \Longleftrightarrow \quad g \circ T = 0 \; \; P_\vartheta \text{-п.н.} \quad \forall \vartheta \in \Theta. \]
 	\end{enumerate}
 \end{defn}
 
 \begin{thm} \label{thm4.25}
-	Пусть $\mathcal{P} = \{ P_\vartheta\ |\ \vartheta \in \Theta \}$ -- $k$-параметрическое экспоненциальное семейство с непустой внутренней частью и плотностями:
+	Пусть $\mathcal{P} = \{ P_\vartheta\ |\ \vartheta \in \Theta \}$ -- $k$-параметрическое экспоненциальное семейство с непустой внутренностью и плотностями:
 	\[ \frac{dP_\vartheta}{d\mu}(x) = c(\vartheta) h(x) \exp\Big \{ \sum_{i=1}^{k}Q_i(\vartheta)T_i(x)  \Big\}. \]
 	Тогда $T(x) = (T_1(x), \dots, T_k(x))^T$ -- полная статистика для $\vartheta$.
 \end{thm}
@@ -389,7 +389,7 @@
 	Тогда равенство \eqref{eq4.3} эквивалентно
 	\[ \int \exp \Big\{ \sum_{i=1}^{k} \vartheta_i t_i  \Big \} P^+(dt) = \int \exp \Big\{ \sum_{i=1}^{k} \vartheta_i t_i  \Big \} P^-(dt) \quad \forall \vartheta \in [-a, a]^k, \]
 	что несколько напоминает равенство характеристических функций, но без комплексной части в экспоненте. Зададим $\vartheta_i = \xi_i + i \eta_i$, где $|\xi_i| \leq a$ $\forall i = 1, \dots, k $. Рассмотрим функции
-	\[f_l^\pm:
+	\[f_l^\pm \colon
 	\left \{
 	\begin{array}{ccl}
 	\{ z \in \mathbb{C}\ |\ |Re(z)| \leq a \} & \rightarrow & \mathbb{C} \\
@@ -444,7 +444,7 @@
 \end{exmp}
 
 \begin{thm}[\textbf{Теорема Леманна-Шеффе}] \label{Lehmann-Scheffe}
-	Пусть $\mathcal{P}=\{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер на $(\mathcal{X},\mathcal{B})$, $T:(\mathcal{X},\mathcal{B}) \rightarrow (\mathcal{T},\mathcal{D})$ -- достаточная и полная статистика для $\vartheta$. Пусть также $\gamma:\Theta \rightarrow \Gamma$ -- функционал, для которого может быть получена несмещенная оценка и $L$ -- функция потерь, такая что $L(\gamma(\vartheta), \cdot)$ -- выпуклая $\forall \vartheta \in \Theta$. Тогда существует (почти наверное) единственная несмещенная оценка $\gamma(\vartheta)$ вида $h \circ T$. Она имеет равномерно наименьший риск среди всех несмещенных оценок.
+	Пусть $\mathcal{P}=\{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер на $(\mathcal{X},\mathcal{B})$, $T\colon(\mathcal{X},\mathcal{B}) \rightarrow (\mathcal{T},\mathcal{D})$ -- достаточная и полная статистика для $\vartheta$. Пусть также $\gamma\colon\Theta \rightarrow \Gamma$ -- функционал, для которого может быть получена несмещенная оценка и $L$ -- функция потерь, такая что $L(\gamma(\vartheta), \cdot)$ -- выпуклая $\forall \vartheta \in \Theta$. Тогда существует (почти наверное) единственная несмещенная оценка $\gamma(\vartheta)$ вида $h \circ T$. Она имеет равномерно наименьший риск среди всех несмещенных оценок.
 \end{thm}
 \begin{proof}
 	Существование следует из Теоремы \ref{Rao-Blackwell}. \\
@@ -477,7 +477,7 @@
 \end{exmp}
 
 \begin{rmrk} \label{rmrk4.31}
-	В тех же условиях, что и в Замечании \ref{rmrk4.13} для статистик $T:(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{B})$ и $\widetilde{T} = b \circ T : (\mathcal{X}, \mathcal{B}) \rightarrow (\widetilde{\mathcal{T}}, \widetilde{\mathcal{D}})$ имеет место следующая импликация: если $T$ полная и достаточная, то $\widetilde{T}$ также полная и достаточная. Например, мы видим из Примера \ref{exmp4.30} (iii), что
+	В тех же условиях, что и в Замечании \ref{rmrk4.13} для статистик $T\colon(\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{B})$ и $\widetilde{T} = b \circ T \colon (\mathcal{X}, \mathcal{B}) \rightarrow (\widetilde{\mathcal{T}}, \widetilde{\mathcal{D}})$ имеет место следующая импликация: если $T$ полная и достаточная, то $\widetilde{T}$ также полная и достаточная. Например, мы видим из Примера \ref{exmp4.30} (iii), что
 	\[ g(X) = \frac{n}{n-1}\overline{X}_n(1-\overline{X}_n) \]
 	UMVU-оценка для $\vartheta(1-\vartheta)$.
 \end{rmrk}
@@ -506,15 +506,15 @@
 \end{exc}
 
 \begin{exc}
-	Пусть $X$ -- случайная величина, принимающая значения в $\mathcal{X}$, и, имеющая распределение $P_\vartheta,\ \vartheta \in \Theta$. Статистика $S: \mathcal{X} \rightarrow \mathcal{T}$ называется \textbf{\textit{свободной от распределения}}, если её распределение не зависит от $\vartheta$. Статистика называется \textbf{\textit{свободной от распределения первого рода}}, если её математическое ожидание $\ME_\vartheta[S(X)]$ не зависит от $\vartheta$. Докажите, что статистика $T: \mathcal{X} \rightarrow \mathcal{T}$ является полной тогда и только тогда, когда существует неконстантная функция $f:\mathcal{T} \rightarrow \widetilde{\mathcal{T}}$, такая что $f(T)$ является свободной от распределения первого рода.
+	Пусть $X$ -- случайная величина, принимающая значения в $\mathcal{X}$, и, имеющая распределение $P_\vartheta,\ \vartheta \in \Theta$. Статистика $S\colon \mathcal{X} \rightarrow \mathcal{T}$ называется \textbf{\textit{свободной от распределения}}, если её распределение не зависит от $\vartheta$. Статистика называется \textbf{\textit{свободной от распределения первого рода}}, если её математическое ожидание $\ME_\vartheta[S(X)]$ не зависит от $\vartheta$. Докажите, что статистика $T\colon \mathcal{X} \rightarrow \mathcal{T}$ является полной тогда и только тогда, когда существует неконстантная функция $f\colon\mathcal{T} \rightarrow \widetilde{\mathcal{T}}$, такая что $f(T)$ является свободной от распределения первого рода.
 \end{exc}
 
 \begin{exc}
-	Пусть $\mathcal{P}= \{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство распределений и $T:\mathcal{X} \rightarrow \MR^d$ -- достаточная и полная статистика для $\vartheta$. Докажите, что $T$ является минимальной достаточной статистикой, если таковая существует.
+	Пусть $\mathcal{P}= \{ P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство распределений и $T\colon\mathcal{X} \rightarrow \MR^d$ -- достаточная и полная статистика для $\vartheta$. Докажите, что $T$ является минимальной достаточной статистикой, если таковая существует.
 \end{exc}
 
 \begin{exc}
-	Докажите следующее утверждение. Пусть $P_\vartheta,\ \vartheta \in \Theta$ -- семейство эквивалентных мер с $\mu$-плотностями $f_\vartheta$. Пусть $T: (\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ -- статистика, обладающая следующим свойством:
+	Докажите следующее утверждение. Пусть $P_\vartheta,\ \vartheta \in \Theta$ -- семейство эквивалентных мер с $\mu$-плотностями $f_\vartheta$. Пусть $T\colon (\mathcal{X}, \mathcal{B}) \rightarrow (\mathcal{T}, \mathcal{D})$ -- статистика, обладающая следующим свойством:
 	\[\frac{f_\vartheta(x)}{f_\vartheta(y)} \]
 	не зависит от $\vartheta$ тогда и только тогда, когда $T(x) = T(y)$. Тогда $T$ -- минимальная достаточная. \\
 	Используйте следующие шаги:
