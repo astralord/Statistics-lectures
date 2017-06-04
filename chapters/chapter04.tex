@@ -7,7 +7,7 @@
 \end{defn}
 
 \begin{exmp} \label{exmp4.2}
-	Пусть $X_1, \dots, X_n$ i.i.d. $\sim Bin(1, \vartheta)$ с совместным распределением:
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathrm{Bin}(1, \vartheta)$ с совместным распределением:
 	\[ f(x, \vartheta) = \vartheta^{\sum_{i=1}^{n}x_i}(1-\vartheta)^{n-\sum_{i=1}^{n}x_i}=\vartheta^{T(x)}(1-\vartheta)^{n-T(x)}, \]
 	где $T(x)=\sum_{i=1}^{n}x_i$ -- статистика.
 	Если мы выбираем $u_1, \dots, u_n \in \{0,1\}$, то
@@ -468,7 +468,7 @@
 		\[ \frac{n+1}{n}X_{(n)} \]
 		является UMVU-оценкой.
 		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim F \ll \lambda$. Тогда эмпирическая функция распределения $\hat{F}(z)$ -- UMVU-оценка для $F(z)$.
-		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim Bin(1,\vartheta)$, $\vartheta \in [0, 1]$. Тогда
+		\item Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathrm{Bin}(1,\vartheta)$, $\vartheta \in [0, 1]$. Тогда
 		\[ T(X)=\sum_{i=1}^{j}X_j \]
 		является достаточной (Пример \ref{exmp4.2}). Она также является полной, что можно видеть из Примера \ref{exmp2.34} и Теоремы \ref{thm4.25} или же из того, что, если
 		\[ 0 = \ME_\vartheta[h \circ T]=\sum_{j=0}^{n}h(j)\binom{n}{j}\vartheta^j(1-\vartheta)^j \quad \forall \vartheta \in [0, 1], \]
@@ -528,7 +528,7 @@
 \end{exc}
 
 \begin{exc}
-	Пусть $X_1, \dots, X_n$ i.i.d. $\sim Cauchy(\vartheta, 1)$, т.е. плотность распределения $X_i$:
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathrm{Cauchy}(\vartheta, 1)$, т.е. плотность распределения $X_i$:
 	\[ f_\vartheta(x) = \frac{1}{\pi (1 + (x-\vartheta)^2)}. \]
 	Покажите, используя утверждение из предыдущего упражнения, что порядковая статистика $X_{(\cdot)}$ является минимальной достаточной для $\vartheta$.
 \end{exc}
