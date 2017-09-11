@@ -80,7 +80,7 @@ x^{(n)} & \mapsto & T_n(x^{(n)})
 \end{proof}
 
 \begin{exmp}
-	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathrm{Bin}(1,p)$, $p \in (0,1)$. Тогда оценка $p$ $T_n=\overline{X}_n$ является несмещенной. Из центральной предельной теоремы мы знаем, что:
+	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \operatorname{Bin}(1,p)$, $p \in (0,1)$. Тогда оценка $p$ $T_n=\overline{X}_n$ является несмещенной. Из центральной предельной теоремы мы знаем, что:
 	\[ \frac{\sqrt{n}(\overline{X}_n-p)}{\sqrt{p(1-p)}} \convdistr \mathcal{N}(0,1). \]
 	Но так как $X_n \convprob p$, то имеет место:
 	\[ \sqrt{\overline{X}_n(1-\overline{X}_n)} \convprob \sqrt{p(1-p)}. \]
@@ -221,7 +221,7 @@ x^{(n)} & \mapsto & T_n(x^{(n)})
 	\[ KL(\mathbb{P}|\mathbb{Q}) =
 	\left \{
 	\begin{array}{cl}
-	\int_{\mathcal{X}} \log\Big(\frac{d\mathbb{P}}{d\mathbb{Q}}(x) d\mathbb{P}(x) \Big), & \text{если } \mathbb{P} \ll \mathbb{Q}, \\
+	\int_{\mathcal{X}} \log\Big(\frac{d\mathbb{P}}{d\mathbb{Q}}\Big)(x)  d\mathbb{P}(x), & \text{если } \mathbb{P} \ll \mathbb{Q}, \\
 	\infty, & \text{иначе}  
 	\end{array}
 	\right.
@@ -300,7 +300,7 @@ x^{(n)} & \mapsto & T_n(x^{(n)})
 \begin{thm}[\textbf{Асимптотическая эффективность оценок МП}] \label{Asymptotic efficiency ML estimators}
 	Пусть $X_1, \dots, X_n$ i.i.d. $\sim P_\vartheta$, $\vartheta \in \Theta$, $\ell(\cdot, \vartheta)$ -- функция правдоподобия. Также:
 	\begin{enumerate}
-		\item $\Theta \subset \MR^k$ -- компактное пространство и $\vartheta \subset \mathrm{int}(\Theta)$.
+		\item $\Theta \subset \MR^k$ -- компактное пространство и $\vartheta \subset \operatorname{int}(\Theta)$.
 		\item $\eta \mapsto \ell(x, \eta) $ непрерывна на $\Theta$ и дважды непрерывно дифференцируема по $\vartheta$ для почти всех $x \in \mathcal{X}$.
 		\item Существуют функции $H_0, H_2 \in L^1(P_\vartheta)$ и $H_1 \in L^2(P_\vartheta)$, такие что:
 		\[ \sup_{\eta \in \Theta} |\ell(x, \eta)| \leq H_0(x), \quad \sup_{\eta \in \Theta} \|\dot{\ell}(x, \eta)\| \leq H_1(x), \quad \sup_{\eta \in \Theta} \|\ddot{\ell}(x, \eta)\| \leq H_2(x) \quad \forall x \in \mathcal{X}. \]
@@ -328,8 +328,8 @@ x^{(n)} & \mapsto & T_n(x^{(n)})
 		Так как $\Theta$ компакт, то $\eta \mapsto \ell(X, \eta)$ (п.н.) равномерно непрерывная. Как следствие, последнее выражение сходится к нулю при $\delta \rightarrow 0$ (используя снова мажорируемую сходимость).
 	\end{enumerate}	
 
-	\textit{Шаг 2:} пусть $A_n$ -- $k$-мерный прямоугольник с вершинами $\hat{\theta}_n$ и $\vartheta$. Поскольку $\hat{\theta}_n \xrightarrow{Q_\vartheta} \vartheta$ и $\vartheta \in \mathrm{int}(\Theta)$, то
-	\[ Q_\vartheta(A_n \subset \mathrm{int}(\Theta)) \rightarrow 1. \]
+	\textit{Шаг 2:} пусть $A_n$ -- $k$-мерный прямоугольник с вершинами $\hat{\theta}_n$ и $\vartheta$. Поскольку $\hat{\theta}_n \xrightarrow{Q_\vartheta} \vartheta$ и $\vartheta \in \operatorname{int}(\Theta)$, то
+	\[ Q_\vartheta(A_n \subset \operatorname{int}(\Theta)) \rightarrow 1. \]
 	Также
 	\[ \dot{L}_n(\hat{\theta}_n) = \frac{1}{n} \sum_{i=1}^{n} \dot{\ell}(X_i, \hat{\theta}_n) = 0 \]
 	по определению $\hat{\theta}_n$.
@@ -357,7 +357,7 @@ x^{(n)} & \mapsto & T_n(x^{(n)})
 	Тогда, используя лемму Слуцкого, получаем
 	\[
 	\begin{aligned}
-	\sqrt{n}(\hat{\theta}_n - \vartheta) & = -\ddot{L}_n(\widetilde{\theta}_n)^{-1} \dot{L}_n(\vartheta) 1_{ \{ A_n \subset \mathrm{int}(\Theta)
+	\sqrt{n}(\hat{\theta}_n - \vartheta) & = -\ddot{L}_n(\widetilde{\theta}_n)^{-1} \dot{L}_n(\vartheta) 1_{ \{ A_n \subset \operatorname{int}(\Theta)
 	 \} \cap \{ \ddot{L}_n(\widetilde{\theta}_n) \text{ обратима} \}} + B_n \\
 	& \rightarrow I(f(\cdot, \vartheta))^{-1} \mathcal{N}(0, I(f(\cdot, \vartheta))) = \mathcal{N}(0, I(f(\cdot, \vartheta))^{-1}),
 	\end{aligned}

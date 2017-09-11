@@ -3,10 +3,10 @@
 
 \begin{exmp}
 	Перед введением лекарства в производство проводятся опыты на животных для оценки его качества в зависимости от дозирования. Обследуется животное и проверяется, выздоровело ли оно или нет, приняв дозу $X$. Модель:
-	\[Y \sim \mathrm{Bin}(1, p(X)),\]
+	\[Y \sim \operatorname{Bin}(1, p(X)),\]
 	где $p(X)$ - вероятность выздоровления животного, принявшего дозу $X$.
 	Как правило, обследуется несколько животных: $Y_1, \dots, Y_n$. Предположим, что эти случайные величины независимы. Подбираем различные дозы $X_1, \dots, X_n$ таким образом, что:
-	\[Y_i \sim \mathrm{Bin}(1,p(X_i)). \]
+	\[Y_i \sim \operatorname{Bin}(1,p(X_i)). \]
 	Цель: оценить функцию $p: \left[0, \infty \right) \rightarrow [0, 1]$. Упростим до параметрической модели, например: \[p(x)=1-e^{-\beta x}, \quad \beta>0 .\]
 	Тогда оценка функции $p(x)$ эквивалентна оценке параметра $\beta$.
 \end{exmp}
@@ -28,7 +28,7 @@
 
 \begin{exmp}
 	Пусть $Y_1, \dots, Y_n$ независимы и имеют распределение:
-	\[Y_i \sim \mathrm{Bin}(1, p(X_i))=\mathrm{Bin}(1, 1-\exp(-\beta X_i))=P_i^{\beta}.\]
+	\[Y_i \sim \operatorname{Bin}(1, p(X_i))=\operatorname{Bin}(1, 1-\exp(-\beta X_i))=P_i^{\beta}.\]
 	Формально, составляющие статистического эксперимента:
 	\[ \mathcal{X}=\{ 0, 1 \}^n, \quad \mathcal{B}=\mathcal{P(X)}, \quad \mathcal{P}=\{\otimes_{i=1}^nP_i^{\beta} \mid \beta>0 \}, \quad \Theta=\left[0, \infty\right).  \]
 \end{exmp}
@@ -92,7 +92,7 @@
 \end{defn}
 
 \begin{rmrk}
-	Если $\vartheta$ -- истинный параметр, а $g(x)$ -- оценка, то функция $L(\gamma(\vartheta), g(x))$ измеряет соответствующие потери. Если $\Gamma$ -- измеримое пространство, то, как правило, функции потерь зависят от дистанции между $\gamma(\vartheta)$ и $g(x)$, например квадратичная функция потерь $L(x, y) = (x-y)^2$ для $\Gamma = \MR$. Тогда риск -- это ожидаемые потери.
+	Если $\vartheta$ -- истинный параметр, а $g(x)$ -- оценка, то функция $L(\gamma(\vartheta), g(x))$ измеряет соответствующие потери. Если $\Gamma$ -- измеримое пространство, то, как правило, функции потерь зависят от расстояния между $\gamma(\vartheta)$ и $g(x)$, например квадратичная функция потерь $L(x, y) = (x-y)^2$ для $\Gamma = \MR$. Тогда риск -- это ожидаемые потери.
 \end{rmrk}
 
 \begin{defn}
@@ -459,19 +459,18 @@
 
 \begin{exmp}\label{exmp2.34} \
 	\begin{enumerate}
-		\item Если $X \sim \mathrm{Bin}(n, \vartheta)$, то плотность по счетной мере:
-		\[ f(k, \vartheta)=\binom{n}{x} \vartheta^x(1-\vartheta)^{n-x}=(1-\vartheta)^n \binom{n}{x} \exp\Big\{x \log\Big(\frac{\vartheta}{1-\vartheta}\Big) \Big\},  \]
-		где $c(\vartheta) = (1 - \vartheta)^n$, $h(x)=\binom{n}{x}$, $T_1(x) = x$ и $Q_1(\vartheta) = \log\Big(\frac{\vartheta}{1-\vartheta}\Big)$.
+		\item Если $X \sim \operatorname{Bin}(n, \vartheta)$, то плотность по счетной мере:
+		\[ f(k, \vartheta)=\binom{n}{x} \vartheta^x(1-\vartheta)^{n-x}=(1-\vartheta)^n \binom{n}{x} \exp\Big\{x \log\Big(\frac{\vartheta}{1-\vartheta}\Big) \Big\}.  \]
+		Здесь $c(\vartheta) = (1 - \vartheta)^n$, $h(x)=\binom{n}{x}$, $T_1(x) = x$ и $Q_1(\vartheta) = \log\Big(\frac{\vartheta}{1-\vartheta}\Big)$.
 		\item Если $X \sim \mathcal{N}(\mu, \sigma^2)$, то $\vartheta=(\mu, \sigma^2)^T$ и плотность:
 		\[ 
 		\begin{aligned}
 		f(x,\vartheta)&=\frac{1}{\sqrt{2 \pi \sigma^2}} \exp\Big\{ \frac{(x-\mu)^2}{2\sigma^2} \Big\} \\
 		& = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \Big \{ -\frac{\mu^2}{2\sigma^2} \Big\}  \exp\Big \{ -\frac{x^2}{2\sigma^2} +\frac{\mu x}{\sigma^2} \Big\} \\
-		& = c(\vartheta) \exp \Big\{ Q_1(\vartheta) T_1(x) + Q_2(\vartheta) T_2(x)  \Big \} .
+		& = c(\vartheta) \exp \Big\{ Q_1(\vartheta) T_1(x) + Q_2(\vartheta) T_2(x)  \Big \},
 		\end{aligned}  \]
-		
+		где $c(\vartheta) = \frac{1}{\sqrt{2\pi \sigma^2 }} \exp\{ -\frac{\mu}{2\sigma^2} \} $, $ Q_1(\vartheta) = -\frac{1}{2\sigma^2} $,$\Theta_2(\vartheta) = \frac{\mu}{\sigma^2}$, $T_1(x) = x^2$ и $T_2(x) = x$.
 		\item Если $X \sim Po(\lambda)$, то
-
 		\[ f(x, \lambda) = \frac{\lambda^x e^{-\lambda}}{x!}=e^{-\lambda} \frac{1}{x!} \exp\{x \log \lambda \}. \]
     \end{enumerate}
 \end{exmp}
@@ -490,8 +489,8 @@
 \begin{exmp}
 	В предыдущем примере естественное параметрическое пространство:
 	\begin{enumerate}
-		\item $X \sim \mathrm{Bin}(n, \vartheta): \Theta^* = \{\log\big(\frac{\vartheta}{1-\vartheta}\big) \mid \vartheta \in (0, 1) \} = \MR.$
-		\item $X \sim \mathcal{N}(\mu, \sigma^2): \Theta^* = \{\big(\frac{\mu}{\sigma^2}, -\frac{1}{2\sigma^2}\big) \mid \mu \in \MR, \sigma^2 \in \MR^+ \} = \MR \times \MR^+.$
+		\item $X \sim \operatorname{Bin}(n, \vartheta): \Theta^* = \{\log\big(\frac{\vartheta}{1-\vartheta}\big) \mid \vartheta \in (0, 1) \} = \MR.$
+		\item $X \sim \mathcal{N}(\mu, \sigma^2): \Theta^* = \{\big(\frac{\mu}{\sigma^2}, -\frac{1}{2\sigma^2}\big) \mid \mu \in \MR, \sigma^2 \in \MR^+ \} = \MR \times \MR^-.$
 		\item $X \sim Po(\lambda): \Theta^* = \{\log \lambda \mid \lambda \in \MR^+ \} = \MR.$
 	\end{enumerate}
 \end{exmp}
@@ -499,7 +498,7 @@
 \begin{thm}
 	Естественное параметрическое пространство $\Theta^*$ $k$-параметрического экспоненциального семейства выпуклое и с непустой внутренностью\footnote{
 			 Точка $x$ называется \textbf{\textit{внутренней точкой}} множества $A$ тогда и только тогда, когда $A$ является окрестностью точки $x$. Подмножество, содержащее все внутренние точки:
-			 \[\mathrm{int}(A) = \{ x\ |\ x \text{ -- внутренняя точка } A\} \subset A \]
+			 \[\operatorname{int}(A) = \{ x\ |\ x \text{ -- внутренняя точка } A\} \subset A \]
 			называется \textbf{\textit{внутренностью}} или \textbf{\textit{внутренней частью}} множества $A$.
 		}.
 \end{thm}
