@@ -235,11 +235,11 @@
 
 \begin{crlr} \label{crlr2.21}
 	Пусть $X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(\mu,\sigma^2)$. Тогда
-	\[ T=\frac{\sqrt{n}(\overline{X}_n-\mu)}{\hat{s}_n(X)} \sim t_{n-1}. \]
+	\[ T=\frac{(n-1)(\overline{X}_n-\mu)}{\sqrt{n} \hat{s}_n(X)} \sim t_{n-1}. \]
 \end{crlr}
 \begin{proof}
 	Представим $T$ в виде:
-	\[ T= \frac{\sqrt{n}(\overline{X}_n-\mu)}{\sigma} \sqrt{\frac{\sigma^2 n}{n \hat{s}_n(X)}}\]
+	\[ T= \frac{\sqrt{n}(\overline{X}_n-\mu)}{\sigma} \sqrt{\frac{\sigma^2 (n-1)}{n \hat{s}_n(X)}}\]
 	и используем предыдущую лемму.
 \end{proof}
 
