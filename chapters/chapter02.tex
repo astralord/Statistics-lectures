@@ -18,7 +18,7 @@
 \end{asmp}
 
 \begin{defn}
-	Пусть $X \neq \emptyset$, $\mathcal{B}$ -- $\sigma$-алгебра на $\mathcal{X}$ и $\mathcal{P}=\{P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер на $(\mathcal{X}, \mathcal{B})$, в котором $|\Theta| \geq 2$ и $P_\vartheta \neq P_{\vartheta'}$ для любых $\vartheta \neq \vartheta'$. Тогда $\Theta$ называется \textbf{\textit{вероятностным пространством}} и $(\mathcal{X}, \mathcal{B}, \mathcal{P})$ называется \textbf{\textit{статистическим экспериментом}}.
+	Пусть $X \neq \emptyset$, $\mathcal{B}$ -- $\sigma$-алгебра на $\mathcal{X}$ и $\mathcal{P}=\{P_\vartheta \mid \vartheta \in \Theta \}$ -- семейство вероятностных мер на $(\mathcal{X}, \mathcal{B})$, в котором $|\Theta| \geq 2$ и $P_\vartheta \neq P_{\vartheta'}$ для любых $\vartheta \neq \vartheta'$. Тогда $\Theta$ называется \textbf{\textit{параметрическим пространством}} и $(\mathcal{X}, \mathcal{B}, \mathcal{P})$ называется \textbf{\textit{статистическим экспериментом}}.
 \end{defn}
 
 \begin{rmrk}
@@ -155,7 +155,7 @@
 	\begin{enumerate}
 		\item Оценки, удовлетворяющие равенству \eqref{eq2.1} лишь для одного значения $\vartheta \in \Theta$ называются локально оптимальными. Так как истинное значение $\vartheta$ неизвестно, то на практике это неприменимо. 
 		\item Если в качестве функции потерь мы выбираем $L(x,y)=(x-y)^2$, то для любой оценки $g \in L^2(P_\vartheta)$ величина
-		\[ MSE_\vartheta(g) = R(\vartheta, g)=\ME_\vartheta[(g(X)-\gamma(\vartheta))^2]=Var_\vartheta(g(X))+B_\vartheta^2(g) \]
+		\[ MSE_\vartheta(g) = R(\vartheta, g)=\ME_\vartheta[(g(X)-\gamma(\vartheta))^2]=\Var_\vartheta(g(X))+B_\vartheta^2(g) \]
 		называется \textbf{\textit{среднеквадратической ошибкой}}. Если $g$ несмещенная, то
 		\[MSE_\vartheta(g)=\Var_\vartheta(g(X)). \]
 		\item Аналогичное определение для несмещенных оценок $g$, если $\gamma\colon \Theta \rightarrow \MR^d$.
@@ -544,7 +544,7 @@
 \end{exmp}
 
 \begin{rmrk} \label{rmrk2.41}
-	Если распределение не принадлежит параметрическому семейству, то для такого случая существуют два классических метода оценивания:
+	Если распределение не принадлежит экспоненциальному семейству, то для такого случая существуют два классических метода оценивания:
 	\begin{enumerate}
 		\item \textbf{\textit{Метод моментов}}: \\
 		Пусть, $X_1, \dots, X_n$ i.i.d. $\sim P_\vartheta$. Пусть также
